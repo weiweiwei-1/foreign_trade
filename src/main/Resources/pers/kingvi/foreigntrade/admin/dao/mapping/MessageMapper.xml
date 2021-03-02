@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kingvi.foreigntrade.admin.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.Message" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="senderId" property="senderId" jdbcType="BIGINT" />
+    <result column="receiverId" property="receiverId" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, senderId, receiverId, content, send_time, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List"/>
+    from message where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="message" resultMap="BaseResultMap">
+    select * from message where senderId = #{senderId,jdbcType=BIGINT} and receiverId = #{receiverId,jdbcType=BIGINT}
+    union all
+    select * from message where senderId = #{receiverId,jdbcType=BIGINT} and receiverId = #{senderId,jdbcType=BIGINT}
+    order by id
+  </select>
+  <select id="selectLastAmount" resultMap="BaseResultMap">
+    select * from
+    (select * from message where senderId = #{message.senderId,jdbcType=BIGINT} and receiverId = #{message.receiverId,jdbcType=BIGINT}
+    union all
+    select * from message where senderId = #{message.receiverId,jdbcType=BIGINT} and receiverId = #{message.senderId,jdbcType=BIGINT}
+    order by id desc limit #{amount,jdbcType=INTEGER}) as message order by id
+  </select>
+  <select id="selectUnReadMessage" parameterType="long" resultType="UnReadMessageVo">
+    select id,count(id) as unReadMessageCount,senderId as friendId,receiverId,content,send_time from message where receiverId=#{userId} and status=0 group by senderId order by senderId
+  </select>
+  <select id="selectReadAndUnReadMessage" parameterType="long" resultType="ReadAndUnReadMessageVo" >
+    select id, senderId as friendId, content,send_time from message where id in (
+        select max(id) from message where receiverId = #{userId} group by senderId) order by senderId
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.Message" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message (senderId, receiverId, content,
+      send_time, status)
+    values (#{senderId,jdbcType=BIGINT}, #{receiverId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR},
+      #{sendTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.Message" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="senderId != null" >
+        senderId,
+      </if>
+      <if test="receiverId != null" >
+        receiverId,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="senderId != null" >
+        #{senderId,jdbcType=BIGINT},
+      </if>
+      <if test="receiverId != null" >
+        #{receiverId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderId != null" >
+        senderId = #{record.senderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.receiverId != null" >
+        receiverId = #{record.receiverId,jdbcType=BIGINT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set id = #{record.id,jdbcType=INTEGER},
+      senderId = #{record.senderId,jdbcType=BIGINT},
+      receiverId = #{record.receiverId,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=VARCHAR},
+      send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.Message" >
+    update message
+    <set >
+      <if test="senderId != null" >
+        senderId = #{senderId,jdbcType=BIGINT},
+      </if>
+      <if test="receiverId != null" >
+        receiverId = #{receiverId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.Message" >
+    update message
+    set senderId = #{senderId,jdbcType=BIGINT},
+      receiverId = #{receiverId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateMessages" parameterType="Message">
+    update message set status=1 where senderId=#{senderId} and receiverId=#{receiverId} and status=0
+  </update>
+  <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.MessageExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

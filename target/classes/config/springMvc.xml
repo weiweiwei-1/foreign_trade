@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                       http://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+
+    <!--支持对静态资源html，Js等的访问conversion-service="conversionService"-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <mvc:annotation-driven ></mvc:annotation-driven>
+
+    <!--在Controller包中，实现对Controller包内的类的注解扫描-->
+    <context:component-scan base-package="pers.kingvi.foreigntrade.admin.api;pers.kingvi.foreigntrade.foreigntradesaleman.api;pers.kingvi.foreigntrade.freightagency.api"></context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/**/jsp/">
+
+            <!--<array>
+                <value>/admin/jsp/</value>
+                <value>/foreign_trade_saleman/jsp/</value>
+                <value>/freight_agency/jsp/</value>
+            </array>-->
+        </property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--添加对其他数据类型的支持例如图片上传等-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置最大上传的数据大小，这里最大的数据是5M-->
+        <property name="maxUploadSize" value="5242880">
+        </property>
+    </bean>
+
+</beans>

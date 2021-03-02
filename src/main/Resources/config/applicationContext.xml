@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--确保spring能扫描到注解配置的bean-->
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="pers.kingvi.foreigntrade">
+    </context:component-scan>
+
+    <!--加载数据库配置文件-->
+    <context:property-placeholder location="classpath:properties/db.properties"></context:property-placeholder>
+
+    <!--配置阿里巴巴的德鲁伊数据源，并设置数据源的属性等-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="5" />
+        <property name="minIdle" value="10" />
+        <property name="maxActive" value="20" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!-- 连接泄漏处理。Druid提供了RemoveAbandanded相关配置，用来关闭长时间不使用的连接（例如忘记关闭连接）。 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true" />
+    </bean>
+
+    <!--会话工程配置，跟sqlmap的配置功能相似-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations">
+            <array>
+                <value>
+                    classpath*:pers/kingvi/foreigntrade/**/dao/mapping/*.xml
+                </value>
+            </array>
+        </property>
+        <property name="configLocation" value="classpath:config/sqlmap-config.xml"></property>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+
+    <!--mapper接口的扫描，包含包和beanname,一旦被扫描，说明接口类已经注入到了bean容器中，
+       因此类上面就可以不加注解标志了,如果没有basePackage-->
+    <bean id="mapperScannerConfigure" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="pers.kingvi.foreigntrade.freightagency.dao,pers.kingvi.foreigntrade.foreigntradesaleman.dao,pers.kingvi.foreigntrade.admin.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!--对mybatis操作数据库事务控制,spring使用jdbc的事务控制类-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg ref="dataSource"></constructor-arg>
+    </bean>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+    <aop:config>
+        <aop:pointcut id="txPointCut" expression="execution(* pers.kingvi.foreigntrade.*.service.serviceImpl.*.*(..))"/>
+        <aop:advisor advice-ref="myTx" pointcut-ref="txPointCut"></aop:advisor>
+    </aop:config>
+
+    <tx:advice id="myTx" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="select*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="REQUIRED"></tx:method>
+            <tx:method name="delete*" propagation="REQUIRED"></tx:method>
+            <tx:method name="update*" propagation="REQUIRED"></tx:method>
+            <tx:method name="search*" propagation="REQUIRED"></tx:method>
+            <tx:method name="decrease*" propagation="REQUIRED"></tx:method>
+        </tx:attributes>
+
+    </tx:advice>
+</beans>

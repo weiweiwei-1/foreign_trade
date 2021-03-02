@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kingvi.foreigntrade.admin.dao.FreightAgencyRecommendVerifyMapper" >
+  <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fa_id" property="faId" jdbcType="INTEGER" />
+    <result column="fa_name" property="faName" jdbcType="VARCHAR" />
+    <result column="fa_company" property="faCompany" jdbcType="VARCHAR" />
+    <result column="company_link" property="companyLink" jdbcType="VARCHAR" />
+    <result column="fa_city" property="faCity" jdbcType="VARCHAR" />
+    <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+    <result column="main_business" property="mainBusiness" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="activity_photo" property="activityPhoto" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="wechat" property="weChat" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
+
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, fa_id, fa_name, fa_company,
+    company_link, fa_city, key_words,
+    main_business, description, activity_photo,
+    phone, wechat, email,
+    send_time, verify_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerifyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fa_recommend_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fa_recommend_verify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByFaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend_verify where fa_id = #{faId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKeyAndFaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend_verify where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fa_recommend_verify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryKeyAndFaId">
+    delete from fa_recommend_verify
+    where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerifyExample" >
+    delete from fa_recommend_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fa_recommend_verify (fa_id, fa_name, fa_company,
+      company_link, fa_city, key_words,
+      main_business, description, activity_photo,
+      phone, wechat, email,
+      send_time, verify_status)
+    values (#{faId,jdbcType=BIGINT}, #{faName,jdbcType=VARCHAR}, #{faCompany,jdbcType=VARCHAR},
+      #{companyLink,jdbcType=VARCHAR}, #{faCity,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR},
+      #{mainBusiness,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{activityPhoto,jdbcType=CHAR},
+      #{phone,jdbcType=CHAR}, #{weChat,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{sendTime,jdbcType=TIMESTAMP}, #{verifyStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fa_recommend_verify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="faId != null" >
+        fa_id,
+      </if>
+      <if test="faName != null" >
+        fa_name,
+      </if>
+      <if test="faCompany != null" >
+        fa_company,
+      </if>
+      <if test="companyLink != null" >
+        company_link,
+      </if>
+      <if test="faCity != null" >
+        fa_city,
+      </if>
+      <if test="keyWords != null" >
+        key_words,
+      </if>
+      <if test="mainBusiness != null" >
+        main_business,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="activityPhoto != null" >
+        activity_photo,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="weChat != null" >
+        wechat,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="faId != null" >
+        #{faId,jdbcType=BIGINT},
+      </if>
+      <if test="faName != null" >
+        #{faName,jdbcType=VARCHAR},
+      </if>
+      <if test="faCompany != null" >
+        #{faCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLink != null" >
+        #{companyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="faCity != null" >
+        #{faCity,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null" >
+        #{mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="activityPhoto != null" >
+        #{activityPhoto,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="weChat != null" >
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerifyExample" resultType="java.lang.Integer" >
+    select count(*) from fa_recommend_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fa_recommend_verify
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.faId != null" >
+        fa_id = #{record.faId,jdbcType=BIGINT},
+      </if>
+      <if test="record.faName != null" >
+        fa_name = #{record.faName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faCompany != null" >
+        fa_company = #{record.faCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyLink != null" >
+        company_link = #{record.companyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faCity != null" >
+        fa_city = #{record.faCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWords != null" >
+        key_words = #{record.keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainBusiness != null" >
+          main_business = #{record.mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityPhoto != null" >
+        activity_photo = #{record.activityPhoto,jdbcType=CHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.weChat != null" >
+        wechat = #{record.weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.verifyStatus != null" >
+        verify_status = #{record.verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fa_recommend_verify
+
+      set id = #{record.id,jdbcType=INTEGER},
+      fa_id = #{record.faId,jdbcType=BIGINT},
+      fa_name = #{record.faName,jdbcType=VARCHAR},
+      fa_company = #{record.faCompany,jdbcType=VARCHAR},
+      company_link = #{record.companyLink,jdbcType=VARCHAR},
+      fa_city = #{record.faCity,jdbcType=VARCHAR},
+      key_words = #{record.keyWords,jdbcType=VARCHAR},
+      main_business = #{record.mainBusiness,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      activity_photo = #{record.activityPhoto,jdbcType=CHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      wechat = #{record.weChat,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      verify_status = #{record.verifyStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
+    update fa_recommend_verify
+    <set >
+      <if test="faId != null" >
+        fa_id = #{faId,jdbcType=BIGINT},
+      </if>
+      <if test="faName != null" >
+        fa_name = #{faName,jdbcType=VARCHAR},
+      </if>
+      <if test="faCompany != null" >
+        fa_company = #{faCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLink != null" >
+        company_link = #{companyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="faCity != null" >
+        fa_city = #{faCity,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        key_words = #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null" >
+        main_business = #{mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="activityPhoto != null" >
+        activity_photo = #{activityPhoto,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="weChat != null" >
+        wechat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
+    update fa_recommend_verify
+    set fa_id = #{faId,jdbcType=BIGINT},
+      fa_name = #{faName,jdbcType=VARCHAR},
+      fa_company = #{faCompany,jdbcType=VARCHAR},
+      company_link = #{companyLink,jdbcType=VARCHAR},
+      fa_city = #{faCity,jdbcType=VARCHAR},
+      key_words = #{keyWords,jdbcType=VARCHAR},
+      main_business = #{mainBusiness,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      activity_photo = #{activityPhoto,jdbcType=CHAR},
+      phone = #{phone,jdbcType=CHAR},
+      wechat = #{weChat,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      verify_status = #{verifyStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerifyExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fa_recommend_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

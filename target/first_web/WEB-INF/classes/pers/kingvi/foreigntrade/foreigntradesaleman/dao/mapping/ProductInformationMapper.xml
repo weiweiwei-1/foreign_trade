@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper" >
+  <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.ProductInformation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fts_id" property="ftsId" jdbcType="INTEGER" />
+    <result column="fts_name" property="ftsName" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="CHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DECIMAL" />
+    <result column="volumn" property="volumn" jdbcType="VARCHAR" />
+    <result column="time_requirement" property="timeRequirement" jdbcType="CHAR" />
+    <result column="charger" property="charger" jdbcType="CHAR" />
+    <result column="certificate" property="certificate" jdbcType="CHAR" />
+    <result column="real_order" property="realOrder" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="quote_count" property="quoteCount" jdbcType="TINYINT" />
+    <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, fts_id, fts_name, photo, product_name, origin, destination, postcode, weight,
+    volumn, time_requirement, charger, certificate, real_order, remark, send_time, quote_count,
+    verify_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" >
+    delete from product_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.ProductInformation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_information (fts_id, fts_name, photo,
+      product_name, origin, destination,
+      postcode, weight, volumn,
+      time_requirement, charger, certificate,
+      real_order, remark, send_time,
+      quote_count, verify_status)
+    values (#{ftsId,jdbcType=INTEGER}, #{ftsName,jdbcType=VARCHAR}, #{photo,jdbcType=CHAR},
+      #{productName,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
+      #{postcode,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{volumn,jdbcType=VARCHAR}, 
+      #{timeRequirement,jdbcType=CHAR}, #{charger,jdbcType=CHAR}, #{certificate,jdbcType=CHAR},
+      #{realOrder,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},
+      #{quoteCount,jdbcType=TINYINT}, #{verifyStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.ProductInformation" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into product_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ftsId != null" >
+        fts_id,
+      </if>
+      <if test="ftsName != null" >
+        fts_name,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="volumn != null" >
+        volumn,
+      </if>
+      <if test="timeRequirement != null" >
+        time_requirement,
+      </if>
+      <if test="charger != null" >
+        charger,
+      </if>
+      <if test="certificate != null" >
+        certificate,
+      </if>
+      <if test="realOrder != null" >
+        real_order,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="quoteCount != null" >
+        quote_count,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ftsId != null" >
+        #{ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="ftsName != null" >
+        #{ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=CHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volumn != null" >
+        #{volumn,jdbcType=VARCHAR},
+      </if>
+      <if test="timeRequirement != null" >
+        #{timeRequirement,jdbcType=CHAR},
+      </if>
+      <if test="charger != null" >
+        #{charger,jdbcType=CHAR},
+      </if>
+      <if test="certificate != null" >
+        #{certificate,jdbcType=CHAR},
+      </if>
+      <if test="realOrder != null" >
+        #{realOrder,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quoteCount != null" >
+        #{quoteCount,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" resultType="java.lang.Integer" >
+    select count(*) from product_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product_information
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftsId != null" >
+        fts_id = #{record.ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftsName != null" >
+        fts_name = #{record.ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=CHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null" >
+        origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destination != null" >
+        destination = #{record.destination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null" >
+        postcode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.volumn != null" >
+        volumn = #{record.volumn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeRequirement != null" >
+        time_requirement = #{record.timeRequirement,jdbcType=CHAR},
+      </if>
+      <if test="record.charger != null" >
+        charger = #{record.charger,jdbcType=CHAR},
+      </if>
+      <if test="record.certificate != null" >
+        certificate = #{record.certificate,jdbcType=CHAR},
+      </if>
+      <if test="record.realOrder != null" >
+        real_order = #{record.realOrder,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.quoteCount != null" >
+        quote_count = #{record.quoteCount,jdbcType=TINYINT},
+      </if>
+      <if test="record.verifyStatus != null" >
+        verify_status = #{record.verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product_information
+    set id = #{record.id,jdbcType=INTEGER},
+      fts_id = #{record.ftsId,jdbcType=INTEGER},
+      fts_name = #{record.ftsName,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=CHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      destination = #{record.destination,jdbcType=VARCHAR},
+      postcode = #{record.postcode,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=DECIMAL},
+      volumn = #{record.volumn,jdbcType=VARCHAR},
+      time_requirement = #{record.timeRequirement,jdbcType=CHAR},
+      charger = #{record.charger,jdbcType=CHAR},
+      certificate = #{record.certificate,jdbcType=CHAR},
+      real_order = #{record.realOrder,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      quote_count = #{record.quoteCount,jdbcType=TINYINT},
+      verify_status = #{record.verifyStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.ProductInformation" >
+    update product_information
+    <set >
+      <if test="ftsId != null" >
+        fts_id = #{ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="ftsName != null" >
+        fts_name = #{ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=CHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volumn != null" >
+        volumn = #{volumn,jdbcType=VARCHAR},
+      </if>
+      <if test="timeRequirement != null" >
+        time_requirement = #{timeRequirement,jdbcType=CHAR},
+      </if>
+      <if test="charger != null" >
+        charger = #{charger,jdbcType=CHAR},
+      </if>
+      <if test="certificate != null" >
+        certificate = #{certificate,jdbcType=CHAR},
+      </if>
+      <if test="realOrder != null" >
+        real_order = #{realOrder,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quoteCount != null" >
+        quote_count = #{quoteCount,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.ProductInformation" >
+    update product_information
+    set fts_id = #{ftsId,jdbcType=INTEGER},
+      fts_name = #{ftsName,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=CHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      destination = #{destination,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DECIMAL},
+      volumn = #{volumn,jdbcType=VARCHAR},
+      time_requirement = #{timeRequirement,jdbcType=CHAR},
+      charger = #{charger,jdbcType=CHAR},
+      certificate = #{certificate,jdbcType=CHAR},
+      real_order = #{realOrder,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      quote_count = #{quoteCount,jdbcType=TINYINT},
+      verify_status = #{verifyStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_information
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

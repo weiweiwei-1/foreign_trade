@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kingvi.foreigntrade.admin.dao.ForeignTradeSalemanDemandVerifyMapper" >
+  <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fts_id" property="ftsId" jdbcType="INTEGER" />
+    <result column="fts_name" property="ftsName" jdbcType="VARCHAR" />
+    <result column="fts_company" property="ftsCompany" jdbcType="VARCHAR" />
+    <result column="fts_city" property="ftsCity" jdbcType="VARCHAR" />
+    <result column="main_business" property="company" jdbcType="VARCHAR" />
+    <result column="requirement" property="requirement" jdbcType="VARCHAR" />
+    <result column="demand_description" property="demandDescription" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="wechat" property="weChat" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
+
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, fts_id, fts_name, fts_company,
+    fts_city, main_business, requirement,
+    demand_description, phone, wechat,
+    email, send_time, verify_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fts_demand_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fts_demand_verify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fts_demand_verify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" >
+    delete from fts_demand_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fts_demand_verify (id, fts_id, fts_name, fts_company,
+      fts_city, main_business, requirement,
+      demand_description, phone, wechat,
+      email, send_time, verify_status
+      )
+    values (#{ftsId,jdbcType=INTEGER}, #{ftsName,jdbcType=VARCHAR}, #{ftsCompany,jdbcType=VARCHAR},
+      #{ftsCity,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR},
+      #{demandDescription,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{weChat,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{verifyStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fts_demand_verify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ftsId != null" >
+        fts_id,
+      </if>
+      <if test="ftsName != null" >
+        fts_name,
+      </if>
+      <if test="ftsCompany != null" >
+        fts_company,
+      </if>
+      <if test="ftsCity != null" >
+        fts_city,
+      </if>
+      <if test="company != null" >
+        main_business,
+      </if>
+      <if test="requirement != null" >
+        requirement,
+      </if>
+      <if test="demandDescription != null" >
+        demand_description,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="weChat != null" >
+        wechat,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ftsId != null" >
+        #{ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="ftsName != null" >
+        #{ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="ftsCompany != null" >
+        #{ftsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="ftsCity != null" >
+        #{ftsCity,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="demandDescription != null" >
+        #{demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="weChat != null" >
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" resultType="java.lang.Integer" >
+    select count(*) from fts_demand_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fts_demand_verify
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftsId != null" >
+        fts_id = #{record.ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftsName != null" >
+        fts_name = #{record.ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftsCompany != null" >
+        fts_company = #{record.ftsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftsCity != null" >
+        fts_city = #{record.ftsCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        main_business = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requirement != null" >
+        requirement = #{record.requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.demandDescription != null" >
+        demand_description = #{record.demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.weChat != null" >
+        wechat = #{record.weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.verifyStatus != null" >
+        verify_status = #{record.verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fts_demand_verify
+    set id = #{record.id,jdbcType=INTEGER},
+      fts_id = #{record.ftsId,jdbcType=INTEGER},
+      fts_name = #{record.ftsName,jdbcType=VARCHAR},
+      fts_company = #{record.ftsCompany,jdbcType=VARCHAR},
+      fts_city = #{record.ftsCity,jdbcType=VARCHAR},
+      main_business = #{record.company,jdbcType=VARCHAR},
+      requirement = #{record.requirement,jdbcType=VARCHAR},
+      demand_description = #{record.demandDescription,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      wechat = #{record.weChat,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      verify_status = #{record.verifyStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
+    update fts_demand_verify
+    <set >
+      <if test="ftsId != null" >
+        fts_id = #{ftsId,jdbcType=INTEGER},
+      </if>
+      <if test="ftsName != null" >
+        fts_name = #{ftsName,jdbcType=VARCHAR},
+      </if>
+      <if test="ftsCompany != null" >
+        fts_company = #{ftsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="ftsCity != null" >
+        fts_city = #{ftsCity,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        main_business = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="demandDescription != null" >
+        demand_description = #{demandDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="weChat != null" >
+        wechat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
+    update fts_demand_verify
+    set fts_id = #{ftsId,jdbcType=INTEGER},
+      fts_name = #{ftsName,jdbcType=VARCHAR},
+      fts_company = #{ftsCompany,jdbcType=VARCHAR},
+      fts_city = #{ftsCity,jdbcType=VARCHAR},
+      main_business = #{company,jdbcType=VARCHAR},
+      requirement = #{requirement,jdbcType=VARCHAR},
+      demand_description = #{demandDescription,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      wechat = #{weChat,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      verify_status = #{verifyStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fts_demand_verify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

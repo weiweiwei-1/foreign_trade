@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <properties resource="properties/db.properties"/>
+
+    <!--<classPathEntry location="libs/mysql-connector-java-5.1.18.jar" />-->
+
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <property name="mergeable" value="false"></property>
+
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+
+        <!-- 注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}" >
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="pers.kingvi.foreigntrade.po" targetProject="src/main/java">
+            <!-- <property name="rootClass" value="BaseModel"/> -->
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="pers.kingvi.foreigntrade.admin.dao.mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="pers.kingvi.foreigntrade.admin.dao" targetProject="src/main/java" >
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="%">
+            <property name="useActualColumnNames" value="true" />
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+
+</generatorConfiguration>
