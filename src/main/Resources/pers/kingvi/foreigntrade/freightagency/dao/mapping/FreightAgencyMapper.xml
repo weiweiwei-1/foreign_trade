@@ -516,7 +516,7 @@
   from freight_agency
   <where>
     <if test="account != null and account != ''">
-      account like #{fa.account,jdbcType=VARCHAR}
+      account = #{fa.account,jdbcType=VARCHAR}
     </if>
     <if test="company != null and company != ''">
       company like concat('%',#{fa.company,jdbcType=VARCHAR},'%')
@@ -547,7 +547,7 @@
         from freight_agency
         <where>
             <if test="account != null and account != ''">
-                account like #{fa.account,jdbcType=VARCHAR}
+                account = #{fa.account,jdbcType=VARCHAR}
             </if>
             <if test="company != null and company != ''">
                 company like concat('%',#{fa.company,jdbcType=VARCHAR},'%')

@@ -18,6 +18,7 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
 
     @Autowired
     private UserMapper userMapper;
+
     @Override
     public int insertSelective(ForeignTradeSaleman fts) {
         try {
@@ -151,6 +152,13 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
                 foreignTradeSaleman.setEmail(text);
                 count = foreignTradeSalemanMapper.selectCountByCriteria(foreignTradeSaleman);
                 foreignTradeSalemanList = foreignTradeSalemanMapper.selectByCriteria(foreignTradeSaleman, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(foreignTradeSalemanList);
+                return pageBeanVo;
+            case "全文索引":
+                foreignTradeSalemanList = foreignTradeSalemanMapper.selectByParam(text,start,end);
+                count = foreignTradeSalemanMapper.selectCountByParam(text);
                 pageBeanVo.setTotalRecord(count);
                 pageBeanVo.setPageCount(perPageRecord, count);
                 pageBeanVo.setBeanList(foreignTradeSalemanList);

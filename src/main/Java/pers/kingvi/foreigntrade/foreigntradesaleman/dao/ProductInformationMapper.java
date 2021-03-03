@@ -3,8 +3,11 @@ package pers.kingvi.foreigntrade.foreigntradesaleman.dao;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
+import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationExample;
+import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 public interface ProductInformationMapper {
     int countByExample(ProductInformationExample example);
@@ -35,6 +38,16 @@ public interface ProductInformationMapper {
 
     ProductInformation selectByProductInformation(ProductInformation productInformation);
 
+    List<ProductInformation> selectByCriteria(@Param("pi") ProductInformation pi, @Param("start") Integer start, @Param("end") Integer end);     //根据条件查询页面结果
+
+    int selectCountByCriteria(@Param("pi") ProductInformation pi);     //根据条件查询页面结果数量
+
+    List<ProductInformation> selectFullIndex(@Param("text") String text, @Param("start") Integer start, @Param("end") Integer end);    //全文索引某一页结果
+
+    int selectCountByFullIndex(@Param("text") String text);    //全文索引某一页结果数量
+
+    List<ProductInformation> selectByList(@Param("idList") List<Integer> idList, @Param("start") Integer start, @Param("end") Integer end);   //随机选择某一页，系统随机匹配
+
     int updateByExampleSelective(@Param("record") ProductInformation record, @Param("example") ProductInformationExample example);
 
     int updateByExample(@Param("record") ProductInformation record, @Param("example") ProductInformationExample example);
@@ -42,4 +55,6 @@ public interface ProductInformationMapper {
     int updateByPrimaryKeySelective(ProductInformation record);      //选择更新记录
 
     int updateByPrimaryKey(ProductInformation record);          //直接更新记录
+
+
 }
