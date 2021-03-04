@@ -36,7 +36,7 @@ public interface ProductInformationMapper {
 
     ProductInformation selectByPrimaryKeyAndFtsId(@Param("id") Integer id, @Param("ftsId") Long ftsId);       //根据id和货代id查询具体的货物记录
 
-    ProductInformation selectByProductInformation(ProductInformation productInformation);
+    ProductInformation selectByProductInformation(ProductInformation productInformation);        //同上
 
     List<ProductInformation> selectByCriteria(@Param("pi") ProductInformation pi, @Param("start") Integer start, @Param("end") Integer end);     //根据条件查询页面结果
 

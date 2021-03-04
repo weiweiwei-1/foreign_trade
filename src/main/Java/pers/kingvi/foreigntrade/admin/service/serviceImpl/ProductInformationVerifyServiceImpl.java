@@ -33,22 +33,100 @@ public class ProductInformationVerifyServiceImpl implements ProductInformationVe
 
     @Override
     public List<ProductInformationVerify> selectByFtsId(Long ftsId) {
-        return null;
+        return productInformationVerifyMapper.selectByFtsId(ftsId);
     }
 
     @Override
     public PageBeanVo<ProductInformationVerify> selectByCriteria(String condition, String text, Integer currentPage, Integer perPageRecord) {
+        ProductInformationVerify productInformationVerify = new ProductInformationVerify();
+        List<ProductInformationVerify> productInformationVerifyList;
+        int count;
+        int start = (currentPage-1)*perPageRecord;
+        int end = perPageRecord;
+        PageBeanVo<ProductInformationVerify> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setCurrentPage(currentPage);
+        pageBeanVo.setPerPageRecord(perPageRecord);
+        switch (condition) {
+            case "外贸名":
+                productInformationVerify.setFtsName(text);
+                count =  productInformationVerifyMapper.selectCountByCriteria(productInformationVerify);
+                productInformationVerifyList = productInformationVerifyMapper.selectByCriteria(productInformationVerify, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            case "产品名":
+                productInformationVerify.setProductName(text);
+                count =  productInformationVerifyMapper.selectCountByCriteria(productInformationVerify);
+                productInformationVerifyList = productInformationVerifyMapper.selectByCriteria(productInformationVerify, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            case "发货城市":
+                productInformationVerify.setOrigin(text);
+                count =  productInformationVerifyMapper.selectCountByCriteria(productInformationVerify);
+                productInformationVerifyList = productInformationVerifyMapper.selectByCriteria(productInformationVerify, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            case "客户地址":
+                productInformationVerify.setDestination(text);
+                count =  productInformationVerifyMapper.selectCountByCriteria(productInformationVerify);
+                productInformationVerifyList = productInformationVerifyMapper.selectByCriteria(productInformationVerify, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            case "备注":
+                productInformationVerify.setRemark(text);
+                count = productInformationVerifyMapper.selectCountByCriteria(productInformationVerify);
+                productInformationVerifyList = productInformationVerifyMapper.selectByCriteria(productInformationVerify, start, end);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            case "全文索引":
+                productInformationVerifyList = productInformationVerifyMapper.selectFullIndex(text,start,end);
+                count = productInformationVerifyMapper.selectCountByFullIndex(text);
+                pageBeanVo.setTotalRecord(count);
+                pageBeanVo.setPageCount(perPageRecord, count);
+                pageBeanVo.setBeanList(productInformationVerifyList);
+                return pageBeanVo;
+            default:break;
+        }
         return null;
     }
 
     @Override
     public PageBeanVo<ProductInformationVerify> selectByFullIndex(String text, Integer currentPage, Integer perPageRecord) {
-        return null;
+        int count = productInformationVerifyMapper.selectCountByFullIndex(text);
+        int start = (currentPage-1)*perPageRecord;
+        int end = perPageRecord;
+        List<ProductInformationVerify> productInformationVerifyList = productInformationVerifyMapper.selectFullIndex(text, start, end);
+        PageBeanVo<ProductInformationVerify> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setBeanList(productInformationVerifyList);
+        pageBeanVo.setCurrentPage(currentPage);
+        pageBeanVo.setPerPageRecord(perPageRecord);
+        pageBeanVo.setTotalRecord(count);
+        pageBeanVo.setPageCount(perPageRecord, count);
+        return pageBeanVo;
     }
 
     @Override
     public PageBeanVo<ProductInformationVerify> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord) {
-        return null;
+        int count = idList.size();
+        int start = (currentPage-1)*perPageRecord;
+        int end = perPageRecord;
+        List<ProductInformationVerify> productInformationVerifyList = productInformationVerifyMapper.selectByList(idList, start, end);
+        PageBeanVo<ProductInformationVerify> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setBeanList(productInformationVerifyList);
+        pageBeanVo.setCurrentPage(currentPage);
+        pageBeanVo.setPerPageRecord(perPageRecord);
+        pageBeanVo.setTotalRecord(count);
+        pageBeanVo.setPageCount(perPageRecord, count);
+        return pageBeanVo;
     }
 
     @Override
@@ -57,22 +135,22 @@ public class ProductInformationVerifyServiceImpl implements ProductInformationVe
     }
 
     @Override
-    public ProductInformationVerify selectByProductInformationVerify(ProductInformationVerify ProductInformationVerify) {
-        return null;
+    public ProductInformationVerify selectByProductInformationVerify(ProductInformationVerify productInformationVerify) {
+        return productInformationVerifyMapper.selectByProductInformationVerify(productInformationVerify);
     }
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        return 0;
+        return productInformationVerifyMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int deleteByIdAndFtsId(Integer id, Long ftsId) {
-        return 0;
+        return productInformationVerifyMapper.deleteByPrimaryKeyAndFtsId(id, ftsId);
     }
 
     @Override
-    public int deleteByProductInformationVerify(ProductInformationVerify ProductInformationVerify) {
-        return 0;
+    public int deleteByProductInformationVerify(ProductInformationVerify productInformationVerify) {
+        return productInformationVerifyMapper.deleteByProductInformationVerify(productInformationVerify);
     }
 }
