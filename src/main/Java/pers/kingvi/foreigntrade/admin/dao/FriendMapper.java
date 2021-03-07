@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.FriendExample;
+import pers.kingvi.foreigntrade.vo.FriendVo;
 
 public interface FriendMapper {
     int countByExample(FriendExample example);
@@ -25,7 +26,7 @@ public interface FriendMapper {
 
     Friend selectByPrimaryKey(Integer id);      //根据主键查询
 
-    List<Friend> selectFriendListByUserId(Long userId);    //根据用户id查询好友信息列表
+    List<FriendVo> selectFriendListByUserId(Long userId);    //根据用户id查询好友信息列表
 
     Friend selectFriendMarkAndAddTime(Friend friend);       //根据用户和好友id查询好友备注和添加时间
 

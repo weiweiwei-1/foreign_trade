@@ -107,6 +107,12 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from freight_agency
+    where id = #{id,jdbcType=BIGINT}
+  </select>
     <select id="selectByAccount" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

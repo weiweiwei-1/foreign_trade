@@ -2,25 +2,31 @@ package pers.kingvi.foreigntrade.admin.service;
 
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgency;
+import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.vo.FriendVo;
+import pers.kingvi.foreigntrade.vo.UserDetailVo;
+
+import java.util.List;
 
 public interface FriendService {
-    FriendVo selectByPrimaryKey(Integer id);
+    Friend selectByPrimaryKey(Integer id);
 
-    ForeignTradeSaleman showFtsDetailByFriendId(Integer id, Integer ftsId);
+    List<FriendVo> selectById(Long id);       //好友列表显示
 
-    FreightAgency showFaDetailByFriendId(Integer id, Integer faId);   //判断类型，如果是外贸员，使用该方法，显示货代的信息
+    ForeignTradeSaleman showFtsDetailByFriendId(Long ftsId);      //判断类型，如果是货代，使用该方法，显示外贸员的信息
 
-    ForeignTradeSaleman showDetailByFriendId(Integer id, Integer ftsId);   //判断类型，如果是货代，使用该方法，显示外贸员的信息
+    FreightAgency showFaDetailByFriendId(Long faId);      //判断类型，如果是外贸员，使用该方法，显示货代的信息
 
-    int updateFriendMark(Integer userId, Integer friendId, String mark);
+    UserDetailVo showUserDetailByFriendId(Long fId);
 
-    int updateFtsMark(Integer faId, Integer ftsId, String mark);   //从货代的角度出发，修改好友外贸员的备注，如果判断自身是货代类型，使用该接口
+    int updateFriendMark(Friend friend);
 
-    int updateFaMark(Integer ftsId, Integer faId, String mark);
+    int updateFtsMark(Friend friend);       //从货代的角度出发，修改好友外贸员的备注，如果判断自身是货代类型，使用该接口
 
-    int deleteFaFriend(Integer ftsId, Integer faId); //判断自身类型，如果是外贸员，那么执行该方法，删除货代。
+    int updateFaMark(Friend friend);
 
-    int deleteFtsFriend(Integer faId, Integer ftsId);  //判断自身类型，如果是货代，执行该方法，删除外贸员
+    int deleteFaFriend(Friend friend);       //判断自身类型，如果是外贸员，那么执行该方法，删除货代。
+
+    int deleteFtsFriend(Friend friend);       //判断自身类型，如果是货代，执行该方法，删除外贸员
 
 }

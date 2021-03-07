@@ -110,11 +110,11 @@
         from fa_recommend
         where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
     </select>
-  <select id="selectByBean" resultMap="BaseResultMap" parameterType="ForeignTradeSalemanDemand">
+  <select id="selectByBean" resultMap="BaseResultMap" parameterType="FreightAgencyRecommend">
     select
     <include refid="Base_Column_List"/>
-    from fts_demand
-    where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+    from fa_recommend
+    where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
   </select>
     <select id="selectByFaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -122,77 +122,83 @@
         from fa_recommend
         where fa_id = #{faId,jdbcType=BIGINT}
     </select>
-  <select id="selectCountByFtsId" parameterType="integer" resultType="integer">
+  <select id="selectCountByFaId" parameterType="integer" resultType="integer">
         select count(*)
-        from fts_demand
-        where fts_id = #{ftsId,jdbcType=BIGINT}
+        from fa_recommend
+        where fa_id = #{faId,jdbcType=BIGINT}
     </select>
-  <select id="selectByCriteria" parameterType="ForeignTradeSalemanDemand" resultMap="BaseResultMap">
+  <select id="selectByCriteria" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from fts_demand
+    from fa_recommend
     <where>
-      <if test="ftsName != null and ftsName != ''">
-        fts_name = #{ftsd.ftsName,jdbcType=VARCHAR}
+      <if test="record.faName != null and record.faName != ''">
+        fa_name = #{record.faName,jdbcType=VARCHAR}
       </if>
-      <if test="ftsCompany != null and ftsCompany != ''">
-        fts_company like concat('%',#{ftsd.ftsCompany,jdbcType=VARCHAR},'%')
+      <if test="record.faCompany != null and record.faCompany != ''">
+        fa_company like concat('%',#{record.faCompany,jdbcType=VARCHAR},'%')
       </if>
-      <if test="ftsCity != null and ftsCity != ''">
-        fts_city like concat('%',#{ftsd.ftsCity,jdbcType=VARCHAR},'%')
+      <if test="record.faCity != null and record.faCity != ''">
+        fa_city like concat('%',#{record.faCity,jdbcType=VARCHAR},'%')
       </if>
-      <if test="mainBusiness != null and mainBusiness != ''">
-        main_business like concat('%',#{ftsd.mainBusiness,jdbcType=VARCHAR},'%')
+      <if test="record.mainBusiness != null and record.mainBusiness != ''">
+        main_business like concat('%',#{record.mainBusiness,jdbcType=VARCHAR},'%')
       </if>
+        <if test="record.keyWords != null and record.keyWords != ''">
+            key_words like concat('%',#{record.keyWords,jdbcType=VARCHAR},'%')
+        </if>
     </where>
     order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
   </select>
-    <select id="selectCountByCriteria" parameterType="ForeignTradeSalemanDemand" resultType="integer">
+    <select id="selectCountByCriteria" parameterType="FreightAgencyRecommend" resultType="integer">
         select count(*)
-        from fts_demand
+        from fa_recommend
         <where>
-            <if test="ftsName != null and ftsName != ''">
-                fts_name = #{ftsName,jdbcType=VARCHAR}
+            <if test="faName != null and faName != ''">
+                fa_name = #{faName,jdbcType=VARCHAR}
             </if>
-            <if test="ftsCompany != null and ftsCompany != ''">
-                fts_company like concat('%',#{ftsCompany,jdbcType=VARCHAR},'%')
+            <if test="faCompany != null and faCompany != ''">
+                fa_company like concat('%',#{faCompany,jdbcType=VARCHAR},'%')
             </if>
-            <if test="ftsCity != null and ftsCity != ''">
-                fts_city like concat('%',#{ftsCity,jdbcType=VARCHAR},'%')
+            <if test="faCity != null and faCity != ''">
+                fa_city like concat('%',#{faCity,jdbcType=VARCHAR},'%')
             </if>
             <if test="mainBusiness != null and mainBusiness != ''">
                 main_business like concat('%',#{mainBusiness,jdbcType=VARCHAR},'%')
             </if>
+            <if test="record.keyWords != null and record.keyWords != ''">
+                key_words like concat('%',#{record.keyWords,jdbcType=VARCHAR},'%')
+            </if>
         </where>
     </select>
-    <select id="selectFullIndex" parameterType="string" resultMap="BaseResultMap">
+    <select id="selectFullIndex" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fts_demand
+        from fa_recommend
         <where>
-            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_city like concat('%',#{text,jdbcType=VARCHAR},'%')
             or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or fts_name = #{text,jdbcType=VARCHAR}
-            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_name = #{text,jdbcType=VARCHAR}
+            or key_words like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
     <select id="selectCountByFullIndex" resultType="integer">
         select count(*)
-        from fts_demand
+        from fa_recommend
         <where>
-            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_city like concat('%',#{text,jdbcType=VARCHAR},'%')
             or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or fts_name = #{text,jdbcType=VARCHAR}
-            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fa_name = #{text,jdbcType=VARCHAR}
+            or key_words like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
     </select>
     <select id="selectByList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fts_demand
+        from fa_recommend
         where id in
         <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
             #{item,jdbcType=INTEGER}
@@ -205,6 +211,10 @@
   </delete>
 
   <delete id="deleteByIdAndFaId">
+    delete from fa_recommend
+    where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByBean" parameterType="FreightAgencyRecommend">
     delete from fa_recommend
     where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
   </delete>

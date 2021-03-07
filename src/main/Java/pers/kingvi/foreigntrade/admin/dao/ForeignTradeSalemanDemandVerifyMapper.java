@@ -46,6 +46,8 @@ public interface ForeignTradeSalemanDemandVerifyMapper {
 
     int selectCountByFullIndex(@Param("text") String text);
 
+    List<ForeignTradeSalemanDemandVerify> selectByList(@Param("idList") List<Integer> idList, @Param("start") Integer start, @Param("end") Integer end);   //随机选择某一页数量，系统随机匹配
+
     int updateByExampleSelective(@Param("record") ForeignTradeSalemanDemandVerify record, @Param("example") ForeignTradeSalemanDemandVerifyExample example);
 
     int updateByExample(@Param("record") ForeignTradeSalemanDemandVerify record, @Param("example") ForeignTradeSalemanDemandVerifyExample example);

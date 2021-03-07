@@ -3,13 +3,15 @@ package pers.kingvi.foreigntrade.vo;
 public class FriendVo {
     private String photo;
 
-    private Integer friendId;
+    private Long friendId;
 
     private String friendMark;
 
     private String company;
 
     private String address;
+
+    private String mainBusiness;
 
     public String getPhoto() {
         return photo;
@@ -19,11 +21,11 @@ public class FriendVo {
         this.photo = photo;
     }
 
-    public Integer getFriendId() {
+    public Long getFriendId() {
         return friendId;
     }
 
-    public void setFriendId(Integer friendId) {
+    public void setFriendId(Long friendId) {
         this.friendId = friendId;
     }
 
@@ -51,13 +53,23 @@ public class FriendVo {
         this.address = address;
     }
 
+    public String getMainBusiness() {
+        return mainBusiness;
+    }
+
+    public void setMainBusiness(String mainBusiness) {
+        this.mainBusiness = mainBusiness;
+    }
+
     @Override
     public String toString() {
         return "FriendVo{" +
-                "friendId=" + friendId +
+                "photo='" + photo + '\'' +
+                ", friendId=" + friendId +
                 ", friendMark='" + friendMark + '\'' +
                 ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
+                ", mainBusiness='" + mainBusiness + '\'' +
                 '}';
     }
 }

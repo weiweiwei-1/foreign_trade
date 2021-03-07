@@ -24,6 +24,8 @@ public interface ForeignTradeSalemanMapper {
 
     ForeignTradeSaleman selectByPrimaryKey(Long id);     //主键查询
 
+    List<ForeignTradeSaleman> selectById(Long id);
+
     List<ForeignTradeSaleman> selectByFtsIdList(List<Long> ftsList);    //根据主键列表查询外贸员信息
 
     List<ForeignTradeSaleman> selectByCriteria(@Param("fts") ForeignTradeSaleman fts, @Param("start") Integer start, @Param("end") Integer end);   //根据条件查询某一页信息

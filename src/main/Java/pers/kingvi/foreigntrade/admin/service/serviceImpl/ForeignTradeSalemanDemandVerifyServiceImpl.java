@@ -132,11 +132,31 @@ public class ForeignTradeSalemanDemandVerifyServiceImpl implements ForeignTradeS
 
     @Override
     public PageBeanVo<ForeignTradeSalemanDemandVerify> selectFullIndex(String text, Integer currentPage, Integer perPageRecord) {
-        return null;
+        int count = foreignTradeSalemanDemandVerifyMapper.selectCountByFullIndex(text);
+        int start = (currentPage-1)*perPageRecord;
+        int end = perPageRecord;
+        List<ForeignTradeSalemanDemandVerify> foreignTradeSalemanDemandVerifyList = foreignTradeSalemanDemandVerifyMapper.selectFullIndex(text, start, end);
+        PageBeanVo<ForeignTradeSalemanDemandVerify> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setBeanList(foreignTradeSalemanDemandVerifyList);
+        pageBeanVo.setCurrentPage(currentPage);
+        pageBeanVo.setPerPageRecord(perPageRecord);
+        pageBeanVo.setTotalRecord(count);
+        pageBeanVo.setPageCount(perPageRecord, count);
+        return pageBeanVo;
     }
 
     @Override
     public PageBeanVo<ForeignTradeSalemanDemandVerify> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord) {
-        return null;
+        int count = idList.size();
+        int start = (currentPage-1)*perPageRecord;
+        int end = perPageRecord;
+        List<ForeignTradeSalemanDemandVerify> foreignTradeSalemanDemandVerifyList = foreignTradeSalemanDemandVerifyMapper.selectByList(idList, start, end);
+        PageBeanVo<ForeignTradeSalemanDemandVerify> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setBeanList(foreignTradeSalemanDemandVerifyList);
+        pageBeanVo.setCurrentPage(currentPage);
+        pageBeanVo.setPerPageRecord(perPageRecord);
+        pageBeanVo.setTotalRecord(count);
+        pageBeanVo.setPageCount(perPageRecord, count);
+        return pageBeanVo;
     }
 }

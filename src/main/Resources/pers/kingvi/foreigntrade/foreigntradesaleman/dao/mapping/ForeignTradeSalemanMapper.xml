@@ -106,6 +106,13 @@
     from foreign_trade_saleman
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from foreign_trade_saleman
+        where id = #{id,jdbcType=BIGINT}
+    </select>
   <select id="selectByFtsIdList" parameterType="list" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

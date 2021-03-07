@@ -191,6 +191,16 @@
             or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
     </select>
+  <select id="selectByList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    where id in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item,jdbcType=BIGINT}
+    </foreach>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fts_demand_verify
     where id = #{id,jdbcType=INTEGER}

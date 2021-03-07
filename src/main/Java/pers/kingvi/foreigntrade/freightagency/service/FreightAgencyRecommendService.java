@@ -11,21 +11,21 @@ import pers.kingvi.foreigntrade.vo.PageBeanVo;
 import java.util.List;
 
 public interface FreightAgencyRecommendService {
-    int insertSelective(FreightAgencyRecommendVerify ftsd);    //发布需求，插入审核表中
+    int insertSelective(FreightAgencyRecommendVerify farv);    //发布需求，插入审核表中
 
     FreightAgencyRecommend selectByPrimaryKey(Integer id);      //根据主键查询
 
-    List<FreightAgencyRecommend> selectByFtsId(Long ftsId);     //根据外贸员id查询需求列表
+    List<FreightAgencyRecommend> selectByFaId(Long faId);     //根据外贸员id查询需求列表
 
-    PageBeanVo<FreightAgencyRecommend> selectPageByFtsId(Long ftsId, Integer currentPage, Integer perPageRecord);    //获取外贸员需求页面
+    PageBeanVo<FreightAgencyRecommend> selectPageByFaId(Long faId, Integer currentPage, Integer perPageRecord);    //获取外贸员需求页面
 
-    FreightAgencyRecommend selectByPrimaryKeyAndFtsId(Integer id, Long ftsId);     //根据id和外贸id查询具体需求信息
+    FreightAgencyRecommend selectByPrimaryKeyAndFaId(Integer id, Long faId);     //根据id和外贸id查询具体需求信息
 
-    FreightAgencyRecommend selectByBean(FreightAgencyRecommend freightAgencyRecommend);     //同上，只有id和ftsId非空
+    FreightAgencyRecommend selectByBean(FreightAgencyRecommend freightAgencyRecommend);     //同上，只有id和faId非空
 
     int deleteByPrimaryKey(Integer id);        //根据id删除信息
 
-    int deleteByPrimaryKeyAndFtsId(Integer id, Long ftsId);        //根据id和外贸id删除信息
+    int deleteByPrimaryKeyAndFaId(Integer id, Long faId);        //根据id和外贸id删除信息
 
     int deleteByBean(FreightAgencyRecommend freightAgencyRecommend);          //同上，id和外贸id不为空
 

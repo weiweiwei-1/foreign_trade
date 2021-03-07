@@ -87,10 +87,11 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List"/>
-      where id = #{id,jdbcType=INTEGER}
+    from friend
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectFriendListByUserId" parameterType="long" resultMap="BaseResultMap">
-    select id, friend_id, friend_mark as friendMark from friend where user_id = #{userId,jdbcType=BIGINT}
+  <select id="selectFriendListByUserId" parameterType="long" resultType="FriendVo">
+    select id, friend_id as friendId, friend_mark as friendMark from friend where user_id = #{userId,jdbcType=BIGINT}
     union all
     select id, user_id as friendId, user_mark as friendMark from friend where friend_id = #{userId,jdbcType=BIGINT}
     order by friend_id

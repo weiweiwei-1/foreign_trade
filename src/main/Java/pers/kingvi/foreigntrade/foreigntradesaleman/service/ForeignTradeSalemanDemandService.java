@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface ForeignTradeSalemanDemandService {
-    int insertSelective(ForeignTradeSalemanDemandVerify ftsd);    //发布需求，插入审核表中
+    int insertSelective(ForeignTradeSalemanDemandVerify ftsd);       //发布需求，插入审核表中
 
     ForeignTradeSalemanDemand selectByPrimaryKey(Integer id);      //根据主键查询
 
     List<ForeignTradeSalemanDemand> selectByFtsId(Long ftsId);     //根据外贸员id查询需求列表
 
-    PageBeanVo<ForeignTradeSalemanDemand> selectPageByFtsId(Long ftsId, Integer currentPage, Integer perPageRecord);    //获取外贸员需求页面
+    PageBeanVo<ForeignTradeSalemanDemand> selectPageByFtsId(Long ftsId, Integer currentPage, Integer perPageRecord);      //获取外贸员需求页面
 
-    ForeignTradeSalemanDemand selectByPrimaryKeyAndFtsId(Integer id, Long ftsId);     //根据id和外贸id查询具体需求信息
+    ForeignTradeSalemanDemand selectByPrimaryKeyAndFtsId(Integer id, Long ftsId);      //根据id和外贸id查询具体需求信息
 
     ForeignTradeSalemanDemand selectByBean(ForeignTradeSalemanDemand foreignTradeSalemanDemand);     //同上，只有id和ftsId非空
 

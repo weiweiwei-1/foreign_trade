@@ -34,9 +34,10 @@ public class FriendApplyServiceImpl implements FriendApplyService {
 
     @Override
     public int insert(FriendApply friendApply) {
-        return 0;
+        return friendApplyMapper.insert(friendApply);
     }
 
+    //发送好友申请
     @Override
     public int insertSelective(FriendApply friendApply) {
         User user = userMapper.selectByPrimaryKey(friendApply.getReceiverId());
@@ -46,10 +47,83 @@ public class FriendApplyServiceImpl implements FriendApplyService {
         friend = friendMapper.selectFriend(friend);
         FriendApply friendApply1 = friendApplyMapper.selectFriendApply(friendApply);
         if (user != null && friend == null && friendApply1 == null) {
-            friendApplyMapper.insert(friendApply);
-            return friendApply.getId();
+            if ("fts".equals(user.getUserType())) {
+                ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(user.getUserId());
+                if (foreignTradeSaleman != null) {
+                    friendApplyMapper.insert(friendApply);
+                    return friendApply.getId();
+                }
+            } else if ("fa".equals(user.getUserType())){
+                FreightAgency freightAgency = freightAgencyMapper.selectByPrimaryKey(user.getUserId());
+                if (freightAgency != null) {
+                    friendApplyMapper.insert(friendApply);
+                }
+            }
+
         }
         return 0;
+    }
+
+    @Override
+    public int permitApply(FriendApply friendApply) {
+        Friend friend = new Friend();
+        User sender = userMapper.selectByPrimaryKey(friendApply.getSenderId());
+        friendApply = friendApplyMapper.selectFriendApply(friendApply);
+        if (friendApply != null && sender != null) {
+            User receiver = userMapper.selectByPrimaryKey(friendApply.getReceiverId());
+            if ("fts".equals(receiver.getUserType())) {
+                ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(receiver.getUserId());
+                friend.setUserId(receiver.getUserId());
+                friend.setUserMark(foreignTradeSaleman.getName());
+                friend.setFriendId(friendApply.getSenderId());
+                friend.setFriendMark(friendApply.getSenderName());
+                friendMapper.insertSelective(friend);
+                return friendApplyMapper.deleteFriend(friendApply);
+            } else if ("fa".equals(receiver.getUserType())) {
+                FreightAgency freightAgency = freightAgencyMapper.selectByPrimaryKey(receiver.getUserId());
+                friend.setUserId(friendApply.getSenderId());
+                friend.setUserMark(friendApply.getSenderName());
+                friend.setFriendId(receiver.getUserId());
+                friend.setFriendMark(freightAgency.getName());
+                friendMapper.insertSelective(friend);
+                return friendApplyMapper.deleteFriend(friendApply);
+            }
+        }
+        return 0;
+    }
+
+    //查看好友申请信息
+    @Override
+    public FriendApplyVo selectBySenderId(FriendApply friendApply) {
+        User sender = userMapper.selectByPrimaryKey(friendApply.getSenderId());
+        FriendApplyVo friendApplyVo =  new FriendApplyVo();
+        friendApply = friendApplyMapper.selectFriendApply(friendApply);
+        if (friendApply != null && sender != null) {
+            if ("fts".equals(sender.getUserType())) {
+                ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(sender.getUserId());
+                friendApplyVo.setSenderId(sender.getUserId());
+                friendApplyVo.setSenderName(friendApply.getSenderName());
+                friendApplyVo.setSendTime(friendApplyVo.getSendTime());
+                friendApplyVo.setPhoto(foreignTradeSaleman.getPhoto());
+                friendApplyVo.setCity(foreignTradeSaleman.getCity());
+                friendApplyVo.setCompany(foreignTradeSaleman.getCompany());
+                friendApplyVo.setCompanyLink(foreignTradeSaleman.getStoreLink());
+                friendApplyVo.setMainBusiness(foreignTradeSaleman.getIndustry());
+            } else if ("fa".equals(sender.getUserType())) {
+                FreightAgency freightAgency = freightAgencyMapper.selectByPrimaryKey(sender.getUserId());
+                friendApplyVo.setSenderId(sender.getUserId());
+                friendApplyVo.setSenderName(friendApply.getSenderName());
+                friendApplyVo.setSendTime(friendApplyVo.getSendTime());
+                friendApplyVo.setPhoto(freightAgency.getPhoto());
+                friendApplyVo.setCity(freightAgency.getCity());
+                friendApplyVo.setCompany(freightAgency.getCompany());
+                friendApplyVo.setCompanyLink(freightAgency.getCompanyLink());
+                friendApplyVo.setMainBusiness(freightAgency.getMainBussinessScope());
+            }
+            friendApplyVo.setSenderId(friendApply.getSenderId());
+//            friendApplyVo.set
+        }
+        return null;
     }
 
     @Override
@@ -57,6 +131,8 @@ public class FriendApplyServiceImpl implements FriendApplyService {
         return friendApplyMapper.selectFriendApply(friendApply);
     }
 
+
+    //查询好友申请列表
     @Override
     public List<FriendApplyVo> selectByReceiverId(Long receiverId) {
         List<FriendApply> friendApplyList = friendApplyMapper.selectByReceiverId(receiverId);
@@ -72,7 +148,7 @@ public class FriendApplyServiceImpl implements FriendApplyService {
                 friendApplyVoList.add(friendApplyVo);
             }
             User user = userMapper.selectByPrimaryKey(receiverId);
-            if ("货代".equals(user.getUserType())) {
+            if ("fa".equals(user.getUserType())) {
                 List<ForeignTradeSaleman> foreignTradeSalemanList = foreignTradeSalemanMapper.selectByFtsIdList(idList);
                 for (int i = 0; i < friendApplyList.size(); i++) {
                     friendApplyVoList.get(i).setPhoto(foreignTradeSalemanList.get(i).getPhoto());
@@ -88,6 +164,9 @@ public class FriendApplyServiceImpl implements FriendApplyService {
         return null;
     }
 
+
+
+    //拒绝好友申请
     @Override
     public int deleteFriendApply(FriendApply friendApply) {
         friendApply = friendApplyMapper.selectFriendApply(friendApply);

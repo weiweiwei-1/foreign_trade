@@ -6,7 +6,6 @@ import pers.kingvi.foreigntrade.admin.dao.FriendApplyMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.freightagency.service.FaFriendApplyService;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
-import pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemand;
 import pers.kingvi.foreigntrade.po.FriendApply;
 import pers.kingvi.foreigntrade.vo.FriendApplyVo;
 
@@ -24,12 +23,12 @@ public class FaFriendApplyServiceImpl implements FaFriendApplyService {
 
     @Override
     public List<FriendApplyVo> selectByFaId(Long receiverId) {
-        /*List<FriendApply> friendApplyList = friendApplyMapper.selectByReceiverId(receiverId);
+        List<FriendApply> friendApplyList = friendApplyMapper.selectByReceiverId(receiverId);
         List<FriendApplyVo> friendApplyVoList = new ArrayList<>();
         List<Long> ftsIdList = new ArrayList<>();
+        FriendApplyVo friendApplyVo = new FriendApplyVo();
         if (friendApplyList.size() > 0) {
             for (FriendApply friendApply : friendApplyList) {
-                FriendApplyVo friendApplyVo = new FriendApplyVo();
                 friendApplyVo.setSendTime(friendApply.getSendTime());
                 friendApplyVo.setSenderId(friendApply.getSenderId());
                 friendApplyVo.setSenderName(friendApplyVo.getSenderName());
@@ -41,7 +40,7 @@ public class FaFriendApplyServiceImpl implements FaFriendApplyService {
                 friendApplyVoList.get(i).setPhoto(foreignTradeSalemanList.get(i).getPhoto());
             }
             return  friendApplyVoList;
-        }*/
+        }
         return null;
     }
 }

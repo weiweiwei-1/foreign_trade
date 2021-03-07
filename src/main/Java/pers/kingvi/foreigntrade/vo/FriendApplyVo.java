@@ -9,6 +9,14 @@ public class FriendApplyVo {
 
     private String sendTime;
 
+    private String company;
+
+    private String companyLink;
+
+    private String city;
+
+    private String mainBusiness;
+
     public String getPhoto() {
         return photo;
     }
@@ -41,6 +49,38 @@ public class FriendApplyVo {
         this.sendTime = sendTime;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getCompanyLink() {
+        return companyLink;
+    }
+
+    public void setCompanyLink(String companyLink) {
+        this.companyLink = companyLink;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getMainBusiness() {
+        return mainBusiness;
+    }
+
+    public void setMainBusiness(String mainBusiness) {
+        this.mainBusiness = mainBusiness;
+    }
+
     @Override
     public String toString() {
         return "FriendApplyVo{" +
@@ -48,6 +88,10 @@ public class FriendApplyVo {
                 ", senderId=" + senderId +
                 ", senderName='" + senderName + '\'' +
                 ", sendTime='" + sendTime + '\'' +
+                ", company='" + company + '\'' +
+                ", companyLink='" + companyLink + '\'' +
+                ", city='" + city + '\'' +
+                ", mainBusiness='" + mainBusiness + '\'' +
                 '}';
     }
 }

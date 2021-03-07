@@ -24,6 +24,8 @@ public interface FreightAgencyMapper {
 
     FreightAgency selectByPrimaryKey(Long id);         //根据主键id查询信息
 
+    List<FreightAgency> selectById(Long id);
+
     FreightAgency selectByAccount(String account);      //根据账号查询
 
     List<FreightAgency> selectByFaIdList(List<Long> ftsIdList);    //根据主键id列表查询货代信息
