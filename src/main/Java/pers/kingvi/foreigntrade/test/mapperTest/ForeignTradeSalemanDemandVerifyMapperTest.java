@@ -73,7 +73,7 @@ public class ForeignTradeSalemanDemandVerifyMapperTest {
 
     @Test
     public void selectAll() {
-        List<ForeignTradeSalemanDemandVerify> foreignTradeSalemanDemandVerifyList = foreignTradeSalemanDemandVerifyMapper.selectAll();
+        List<ForeignTradeSalemanDemandVerify> foreignTradeSalemanDemandVerifyList = foreignTradeSalemanDemandVerifyMapper.selectAll(1,2);
         System.out.println(foreignTradeSalemanDemandVerifyList);
         sqlSession.commit();
         sqlSession.close();

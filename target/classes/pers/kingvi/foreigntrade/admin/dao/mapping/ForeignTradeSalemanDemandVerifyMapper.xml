@@ -110,22 +110,110 @@
     <select id="selectByPrimaryKeyAndFtsId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fts_demand
+        from fts_demand_verify
         where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByBean" parameterType="ForeignTradeSalemanDemandVerify" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
     </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from fts_demand_verify
+    order by id desc limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+    <select id="selectCountByAll" resultType="integer">
+        select count(*)
+        from fts_demand_verify
+        order by id desc limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+    </select>
+  <select id="selectByCriteria" parameterType="ForeignTradeSalemanDemandVerify" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    <where>
+      <if test="ftsName != null and ftsName != ''">
+        fts_name = #{ftsd.ftsName,jdbcType=VARCHAR}
+      </if>
+      <if test="ftsCompany != null and ftsCompany != ''">
+        fts_company like concat('%',#{ftsd.ftsCompany,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="ftsCity != null and ftsCity != ''">
+        fts_city like concat('%',#{ftsd.ftsCity,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mainBusiness != null and mainBusiness != ''">
+        main_business like concat('%',#{ftsd.mainBusiness,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountByCriteria" parameterType="ForeignTradeSalemanDemandVerify" resultType="integer">
+    select count(*)
+    from fts_demand_verify
+    <where>
+      <if test="ftsName != null and ftsName != ''">
+        fts_name = #{ftsName,jdbcType=VARCHAR}
+      </if>
+      <if test="ftsCompany != null and ftsCompany != ''">
+        fts_company like concat('%',#{ftsCompany,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="ftsCity != null and ftsCity != ''">
+        fts_city like concat('%',#{ftsCity,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mainBusiness != null and mainBusiness != ''">
+        main_business like concat('%',#{mainBusiness,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+    <select id="selectFullIndex" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fts_demand_verify
+        <where>
+            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_name = #{text,jdbcType=VARCHAR}
+            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByFullIndex" resultType="integer" parameterType="string">
+        select count(*)
+        from fts_demand_verify
+        <where>
+            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_name = #{text,jdbcType=VARCHAR}
+            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+    </select>
+  <select id="selectByList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    where id in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item,jdbcType=BIGINT}
+    </foreach>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fts_demand_verify
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByPrimaryKeyAndFtsId">
+  <delete id="deleteByPrimaryKeyAndFtsId">
       delete from fts_demand_verify
       where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
   </delete>
+    <delete id="deleteByBean" parameterType="ForeignTradeSalemanDemandVerify">
+      delete from fts_demand_verify
+      where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+  </delete>
+
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" >
     delete from fts_demand_verify
     <if test="_parameter != null" >

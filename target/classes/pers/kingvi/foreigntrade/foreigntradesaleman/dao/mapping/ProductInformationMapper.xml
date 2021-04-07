@@ -110,6 +110,92 @@
       from product_information
       where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByProductInformation" parameterType="ProductInformation" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from product_information
+      where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByCriteria" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product_information
+    <where>
+      <if test="pi.ftsName != null and pi.ftsName != ''">
+        fts_name like concat('%',#{pi.ftsName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pi.productName != null and pi.productName != ''">
+        product_name like concat('%',#{pi.productName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pi.origin != null and pi.origin != ''">
+        origin = #{pi.origin,jdbcType=VARCHAR}
+      </if>
+      <if test="pi.destination != null and pi.destination != ''">
+        destination like concat('%',#{pi.destination,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pi.remark != null and pi.remark != ''">
+        remark like concat('%',#{pi.remark,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+    <select id="selectCountByCriteria" resultType="integer">
+        select count(*)
+        from product_information
+        <where>
+            <if test="pi.ftsName != null and pi.ftsName != ''">
+                fts_name like concat('%',#{pi.ftsName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pi.productName != null and pi.productName != ''">
+                product_name like concat('%',#{pi.productName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pi.origin != null and pi.origin != ''">
+                origin = #{pi.origin,jdbcType=VARCHAR}
+            </if>
+            <if test="pi.destination != null and pi.destination != ''">
+                destination like concat('%',#{pi.destination,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pi.remark != null and pi.remark != ''">
+                remark like concat('%',#{pi.remark,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectFullIndex" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_information
+        <where>
+            or fts_name like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or product_name like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or origin = #{text,jdbcType=VARCHAR}
+            or destination like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or remark like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByFullIndex" resultMap="BaseResultMap">
+        select count(*)
+        from product_information
+        <where>
+            or fts_name like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or product_name like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or origin = #{text,jdbcType=VARCHAR}
+            or destination like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or remark like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+    </select>
+    <select id="selectByList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_information
+        where id in
+        <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=INTEGER}
+        </foreach>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
     <select id="selectByFtsId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -125,7 +211,10 @@
     delete from product_information
     where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId, jdbcType=BIGINT}
     </delete>
-
+    <delete id="deleteByProductInformation">
+        delete from product_information
+        where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId, jdbcType=BIGINT}
+    </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" >
     delete from product_information
     <if test="_parameter != null" >
@@ -430,6 +519,10 @@
       quote_count = #{quoteCount,jdbcType=TINYINT},
       verify_status = #{verifyStatus,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="decreaseQuoteCount" parameterType="integer">
+    update product_information set quote_count = quote_count - 1
+    where id = id and quote_count >= 1
   </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" id="selectByExampleWithRowbounds" >
     select

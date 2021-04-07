@@ -28,7 +28,7 @@ public interface QuoteRecordMapper {
 
     QuoteRecord selectByPrimaryKey(Integer id);       //根据主键查询
 
-    QuoteRecord selectByProductIdAndFaId(QuoteRecord quoteRecord);
+    QuoteRecord selectByProductIdAndFaId(QuoteRecord quoteRecord);    //查看货代是否已经对货物进行报价
 
     int updateByExampleSelective(@Param("record") QuoteRecord record, @Param("example") QuoteRecordExample example);
 

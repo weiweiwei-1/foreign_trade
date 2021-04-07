@@ -56,5 +56,7 @@ public interface ProductInformationMapper {
 
     int updateByPrimaryKey(ProductInformation record);          //直接更新记录
 
+    int decreaseQuoteCount(Integer id);
+
 
 }

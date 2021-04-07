@@ -15,6 +15,8 @@ public interface MessageMapper {
 
     int deleteByPrimaryKey(Integer id);   //根据主键删除具体的消息记录
 
+    int deleteAll(Message message);
+
     int insert(Message record);     //直接插入消息
 
     int insertSelective(Message record);   //选择插入消息

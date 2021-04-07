@@ -32,6 +32,8 @@ public interface FriendMapper {
 
     Friend selectFriend(Friend friend);       //根据用户id和好友id查询是否有好友联系
 
+    Friend selectByKey(Friend friend);
+
     int updateByExampleSelective(@Param("record") Friend record, @Param("example") FriendExample example);
 
     int updateByExample(@Param("record") Friend record, @Param("example") FriendExample example);
@@ -39,6 +41,8 @@ public interface FriendMapper {
     int updateByPrimaryKeySelective(Friend record);      //根据主键选择更新
 
     int updateByPrimaryKey(Friend record);             //直接更新
+
+    int updateFriend(Friend friend);
 
     int updateFriendMark(Friend friend);            //更新数据库中friendMark字段,用户id为user_id字段
 

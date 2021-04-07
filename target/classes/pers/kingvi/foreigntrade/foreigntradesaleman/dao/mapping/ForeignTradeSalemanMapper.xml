@@ -106,6 +106,13 @@
     from foreign_trade_saleman
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from foreign_trade_saleman
+        where id = #{id,jdbcType=BIGINT}
+    </select>
   <select id="selectByFtsIdList" parameterType="list" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -122,13 +129,13 @@
         from foreign_trade_saleman
         <where>
             <if test="account != null and account != ''">
-                account like #{fts.account,jdbcType=VARCHAR}
+                account = #{fts.account,jdbcType=VARCHAR}
             </if>
             <if test="company != null and company != ''">
                 company like concat('%',#{fts.company,jdbcType=VARCHAR},'%')
             </if>
             <if test="city != null and city != ''">
-                city like concat('%',#{fts.city,jdbcType=VARCHAR},'%')
+                city = #{fts.city,jdbcType=VARCHAR}
             </if>
             <if test="name != null and name != ''">
                 name like concat('%',#{fts.name,jdbcType=VARCHAR},'%')
@@ -151,23 +158,56 @@
         </where>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
-
+    <select id="selectByParam" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        foreign_trade_saleman
+        <where>
+        or account = #{param,jdbcType=VARCHAR}
+        or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or city = #{param,jdbcType=VARCHAR}
+        or name = #{param,jdbcType=VARCHAR}
+        or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or wechat = #{text,jdbcType=VARCHAR}
+        or phone = #{text,jdbcType=VARCHAR}
+        or email = #{text,jdbcType=VARCHAR}
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByParam" parameterType="string" resultType="integer">
+        select count(*)
+        from
+        foreign_trade_saleman
+        <where>
+            or account = #{param,jdbcType=VARCHAR}
+            or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or city = #{param,jdbcType=VARCHAR}
+            or name = #{param,jdbcType=VARCHAR}
+            or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+    </select>
     <select id="selectCountByCriteria" parameterType="ForeignTradeSaleman" resultType="integer">
         select count(*)
         from
         foreign_trade_saleman
         <where>
             <if test="account != null and account != ''">
-                account like #{fts.account,jdbcType=VARCHAR}
+                account = #{fts.account,jdbcType=VARCHAR}
             </if>
             <if test="company != null and company != ''">
                 company like concat('%',#{fts.company,jdbcType=VARCHAR},'%')
             </if>
             <if test="city != null and city != ''">
-                city like concat('%',#{fts.city,jdbcType=VARCHAR},'%')
+                city = #{fts.city,jdbcType=VARCHAR}
             </if>
             <if test="name != null and name != ''">
-                name = #{fts.name,jdbcType=VARCHAR}
+                name like concat('%',#{fts.name,jdbcType=VARCHAR},'%')
             </if>
             <if test="industry != null and industry != ''">
                 industry like concat('%',#{fts.industry,jdbcType=VARCHAR},'%')

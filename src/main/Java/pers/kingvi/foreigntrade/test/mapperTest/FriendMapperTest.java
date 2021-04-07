@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pers.kingvi.foreigntrade.admin.dao.FriendMapper;
 import pers.kingvi.foreigntrade.po.Friend;
+import pers.kingvi.foreigntrade.vo.FriendVo;
 
 
 import java.io.InputStream;
@@ -59,7 +60,7 @@ public class FriendMapperTest {
 
     @Test
     public void selectFriendListByUserId() {
-        List<Friend> friendList = friendMapper.selectFriendListByUserId(3L);
+        List<FriendVo> friendList = friendMapper.selectFriendListByUserId(3L);
         System.out.println(friendList);
     }
 

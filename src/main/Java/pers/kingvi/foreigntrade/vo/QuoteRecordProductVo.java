@@ -3,7 +3,9 @@ package pers.kingvi.foreigntrade.vo;
 public class QuoteRecordProductVo {
     private Integer productId;   //产品id
 
-    private Integer ftsId;       //外贸id
+    private Long ftsId;       //外贸id
+
+    private Long faId;         //货代id
 
     private String ftsName;      //外贸名字
 
@@ -33,12 +35,20 @@ public class QuoteRecordProductVo {
         this.productId = productId;
     }
 
-    public Integer getFtsId() {
+    public Long getFtsId() {
         return ftsId;
     }
 
-    public void setFtsId(Integer ftsId) {
+    public void setFtsId(Long ftsId) {
         this.ftsId = ftsId;
+    }
+
+    public Long getFaId() {
+        return faId;
+    }
+
+    public void setFaId(Long faId) {
+        this.faId = faId;
     }
 
     public String getFtsName() {

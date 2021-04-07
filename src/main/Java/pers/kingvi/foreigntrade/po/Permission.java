@@ -15,7 +15,7 @@ public class Permission {
 
     private String createTime;
 
-    private String upStringTime;
+    private String updateTime;
 
     public Integer getId() {
         return id;
@@ -74,10 +74,10 @@ public class Permission {
     }
 
     public String getUpStringTime() {
-        return upStringTime;
+        return updateTime;
     }
 
-    public void setUpStringTime(String upStringTime) {
-        this.upStringTime = upStringTime;
+    public void setUpStringTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 }

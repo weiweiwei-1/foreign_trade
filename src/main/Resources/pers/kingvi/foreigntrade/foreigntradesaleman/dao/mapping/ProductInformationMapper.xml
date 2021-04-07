@@ -520,6 +520,10 @@
       verify_status = #{verifyStatus,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="decreaseQuoteCount" parameterType="integer">
+    update product_information set quote_count = quote_count - 1
+    where id = id and quote_count >= 1
+  </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >

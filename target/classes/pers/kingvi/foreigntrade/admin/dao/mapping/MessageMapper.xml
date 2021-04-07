@@ -113,6 +113,11 @@
     delete from message
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteAll" parameterType="Message">
+    delete from message
+    where senderId = #{senderId,jdbcType=BIGINT} and receiverId = #{receiverId,jdbcType=BIGINT}
+    or senderId = #{receiverId,jdbcType=BIGINT} and receiverId = #{senderId,jdbcType=BIGINT}
+  </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.MessageExample" >
     delete from message
     <if test="_parameter != null" >

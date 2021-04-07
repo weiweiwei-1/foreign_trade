@@ -84,12 +84,12 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public ForeignTradeSaleman showFtsDetailByFriendId(Long ftsId) {
-        return null;
+        return foreignTradeSalemanMapper.selectByPrimaryKey(ftsId);
     }
 
     @Override
     public FreightAgency showFaDetailByFriendId(Long faId) {
-        return null;
+        return freightAgencyMapper.selectByPrimaryKey(faId);
     }
 
     @Override
@@ -110,27 +110,60 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
-    public int updateFriendMark(Friend friend) {
+    public int updateFriendMark(Long id, Long friendId, String friendMark) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if (user != null) {
+            Friend friend = new Friend();
+            friend.setUserId(id);
+            friend.setFriendId(friendId);
+            friend = friendMapper.selectFriend(friend);
+            if (friend != null) {
+                //如果用户是货代，那么更改外贸的信息,id为faId也即friendId,friendId为ftsId也即userId
+                if ("fa".equals(user.getUserType())) {
+                    friend.setUserId(friendId);
+                    friend.setFriendId(id);
+                    friend.setUserMark(friendMark);
+                    return friendMapper.updateFriend(friend);
+                    //如果用户是外贸，那么更改货代的信息，id为ftsId也即userId,friendId为faId也即friendId
+                } else if ("fts".equals(user.getUserType())) {
+                    friend.setUserId(id);
+                    friend.setFriendId(friendId);
+                    friend.setFriendMark(friendMark);
+                    return friendMapper.updateFriend(friend);
+                } else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        }
         return 0;
     }
 
     @Override
     public int updateFtsMark(Friend friend) {
+        friend = friendMapper.selectFriend(friend);
+        if (friend != null) {
+            friendMapper.updateUserMark(friend);
+        }
         return 0;
     }
 
     @Override
     public int updateFaMark(Friend friend) {
+        friend = friendMapper.selectFriend(friend);
+        if (friend != null) {
+            return friendMapper.updateFriendMark(friend);
+        }
         return 0;
     }
 
     @Override
-    public int deleteFaFriend(Friend friend) {
-        return 0;
-    }
-
-    @Override
-    public int deleteFtsFriend(Friend friend) {
+    public int deleteFriend(Friend friend) {
+        friend = friendMapper.selectFriend(friend);
+        if (friend != null) {
+            return friendMapper.deleteFriend(friend);
+        }
         return 0;
     }
 }

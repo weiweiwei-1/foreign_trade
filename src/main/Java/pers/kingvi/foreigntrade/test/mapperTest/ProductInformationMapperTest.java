@@ -83,7 +83,7 @@ public class ProductInformationMapperTest {
         productInformation.setId(2);
         productInformation.setFtsId(10L);
 //        ProductInformation productInformation1 =  new ProductInformation();
-        productInformation = productInformationMapper.selectByPrimaryKeyAndFtsId(productInformation);
+        productInformation = productInformationMapper.selectByPrimaryKeyAndFtsId(2,10L);
         System.out.println(productInformation);
     }
 

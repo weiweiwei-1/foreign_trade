@@ -110,6 +110,11 @@
         <include refid="Base_Column_List"/>
         from friend where user_id = #{friendId,jdbcType=BIGINT} and friend_id = #{userId,jdbcType=BIGINT}
     </select>
+  <select id="selectByKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from friend where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from friend
     where id = #{id,jdbcType=INTEGER}
@@ -239,11 +244,23 @@
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.Friend" >
     update friend
     set user_id = #{userId,jdbcType=BIGINT},
-      friend_id = #{friendId,jdbcType=BIGINT},
+      friend_id = #{friendId,c},
       user_mark = #{userMark,jdbcType=VARCHAR},
       friend_mark = #{friendMark,jdbcType=VARCHAR}
       add_time = #{addTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateFriend" parameterType="Friend">
+    update friend
+    <set>
+      <if test="userMark != null" >
+        user_mark = #{userMark,jdbcType=VARCHAR},
+      </if>
+      <if test="friendMark != null" >
+        friend_mark = #{friendMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+      where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
   </update>
     <update id="updateFriendMark" parameterType="pers.kingvi.foreigntrade.po.Friend">
         update friend
