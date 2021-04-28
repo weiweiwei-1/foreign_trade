@@ -52,11 +52,11 @@ public interface ProductInformationMapper {
 
     int updateByExample(@Param("record") ProductInformation record, @Param("example") ProductInformationExample example);
 
-    int updateByPrimaryKeySelective(ProductInformation record);      //选择更新记录
+    int updateByPrimaryKeySelective(ProductInformation record);       //选择更新记录
 
-    int updateByPrimaryKey(ProductInformation record);          //直接更新记录
+    int updateByPrimaryKey(ProductInformation record);           //直接更新记录
 
-    int decreaseQuoteCount(Integer id);
+    int decreaseQuoteCount(Integer id);          //减少报价数量
 
 
 }

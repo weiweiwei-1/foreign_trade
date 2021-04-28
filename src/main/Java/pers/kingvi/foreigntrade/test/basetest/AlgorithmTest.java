@@ -116,4 +116,5 @@ public class AlgorithmTest {
      FutuTest test = new FutuTest();
      System.out.println(FutuTest.getSecondMin(a));
  }
+
 }
