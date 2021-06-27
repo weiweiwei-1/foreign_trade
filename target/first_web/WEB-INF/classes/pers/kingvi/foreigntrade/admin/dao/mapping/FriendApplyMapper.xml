@@ -3,8 +3,8 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.FriendApplyMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.FriendApply" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="sender_id" property="senderId" jdbcType="INTEGER" />
-    <result column="receiver_id" property="receiverId" jdbcType="INTEGER" />
+    <result column="sender_id" property="senderId" jdbcType="BIGINT" />
+    <result column="receiver_id" property="receiverId" jdbcType="BIGINT" />
     <result column="sender_name" property="senderName" jdbcType="VARCHAR" />
     <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -89,9 +89,26 @@
     from friend_apply
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectFriendApply" parameterType="FriendApply" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from friend_apply
+        where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
+--         or sender_id = #{receiverId,jdbcType=BIGINT} and receiver_id = #{senderId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByReceiverId" parameterType="long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from friend_apply
+        where receiver_id = #{receiverId,jdbcType=BIGINT} order by sender_id
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from friend_apply
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteFriend">
+    delete from friend_apply
+    where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.FriendApplyExample" >
     delete from friend_apply
@@ -104,7 +121,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into friend_apply (sender_id, receiver_id, sender_name, send_time)
-    values (#{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{senderName,jdbcType=VARCHAR},
+    values (#{senderId,jdbcType=BIGINT}, #{receiverId,jdbcType=BIGINT}, #{senderName,jdbcType=VARCHAR},
       #{sendTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.FriendApply" >
@@ -128,10 +145,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="senderId != null" >
-        #{senderId,jdbcType=INTEGER},
+        #{senderId,jdbcType=BIGINT},
       </if>
       <if test="receiverId != null" >
-        #{receiverId,jdbcType=INTEGER},
+        #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="senderName != null" >
         #{senderName,jdbcType=VARCHAR},
@@ -154,10 +171,10 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.senderId != null" >
-        sender_id = #{record.senderId,jdbcType=INTEGER},
+        sender_id = #{record.senderId,jdbcType=BIGINT},
       </if>
       <if test="record.receiverId != null" >
-        receiver_id = #{record.receiverId,jdbcType=INTEGER},
+        receiver_id = #{record.receiverId,jdbcType=BIGINT},
       </if>
       <if test="record.senderName != null" >
         sender_name = #{record.senderName,jdbcType=VARCHAR},
@@ -173,8 +190,8 @@
   <update id="updateByExample" parameterType="map" >
     update friend_apply
     set id = #{record.id,jdbcType=INTEGER},
-        sender_id = #{record.senderId,jdbcType=INTEGER},
-        receiver_id = #{record.receiverId,jdbcType=INTEGER},
+        sender_id = #{record.senderId,jdbcType=BIGINT},
+        receiver_id = #{record.receiverId,jdbcType=BIGINT},
         sender_name = #{record.senderName,jdbcType=VARCHAR},
         send_time = #{record.sendTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -185,10 +202,10 @@
     update friend_apply
     <set >
       <if test="senderId != null" >
-        sender_id = #{senderId,jdbcType=INTEGER},
+        sender_id = #{senderId,jdbcType=BIGINT},
       </if>
       <if test="receiverId != null" >
-        receiver_id = #{receiverId,jdbcType=INTEGER},
+        receiver_id = #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="senderName != null" >
         sender_name = #{senderName,jdbcType=VARCHAR},
@@ -201,8 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.FriendApply" >
     update friend_apply
-    set sender_id = #{senderId,jdbcType=INTEGER},
-      receiver_id = #{receiverId,jdbcType=INTEGER},
+    set sender_id = #{senderId,jdbcType=BIGINT},
+      receiver_id = #{receiverId,jdbcType=BIGINT},
       sender_name = #{senderName,jdbcType=VARCHAR},
       send_time = #{sendTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

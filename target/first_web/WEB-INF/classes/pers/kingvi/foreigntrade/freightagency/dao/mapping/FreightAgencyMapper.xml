@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.kingvi.foreigntrade.freightagency.dao.FreightAgencyMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.FreightAgency" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="company" property="company" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     <result column="age" property="age" jdbcType="TINYINT" />
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="service_advantage" property="serviceAdvantage" jdbcType="VARCHAR" />
-    <result column="companyLink" property="companyLink" jdbcType="VARCHAR" />
+    <result column="company_link" property="companyLink" jdbcType="VARCHAR" />
     <result column="weChat" property="weChat" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
@@ -83,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, account, password, company, city, name, photo, main_bussiness_scope, working_time,
-    age, sex, service_advantage, companyLink, weChat, phone, email, send_quote_count,
+    age, sex, service_advantage, company_link, weChat, phone, email, send_quote_count,
     advertise_count, user_status, register_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyExample" >
@@ -100,15 +100,47 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from freight_agency
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from freight_agency
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByAccount" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from freight_agency
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
+
+  <select id="selectByFaIdList" parameterType="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from freight_agency
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    order by id
+  </select>
+
+    <select id="selectByAccountAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from freight_agency
+        where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from freight_agency
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyExample" >
     delete from freight_agency
@@ -116,18 +148,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.FreightAgency" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into freight_agency (account, password, company, 
+    <!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+     SELECT LAST_INSERT_ID()
+    </selectKey>-->
+    insert into freight_agency (id, account, password, company,
       city, name, photo, main_bussiness_scope,
       working_time, age, sex,
-      service_advantage, companyLink, weChat,
+      service_advantage, company_link, wechat,
       phone, email, send_quote_count,
       advertise_count, user_status, register_time
       )
-    values (#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR},
       #{city,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=CHAR}, #{mainBussinessScope,jdbcType=VARCHAR},
       #{workingTime,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{sex,jdbcType=CHAR},
       #{serviceAdvantage,jdbcType=VARCHAR}, #{companyLink,jdbcType=VARCHAR}, #{weChat,jdbcType=VARCHAR},
@@ -141,6 +174,9 @@
     </selectKey>
     insert into freight_agency
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="account != null" >
         account,
       </if>
@@ -200,6 +236,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="account != null" >
         #{account,jdbcType=VARCHAR},
       </if>
@@ -269,7 +308,7 @@
     update freight_agency
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.account != null" >
         account = #{record.account,jdbcType=VARCHAR},
@@ -335,7 +374,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update freight_agency
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       company = #{record.company,jdbcType=VARCHAR},
@@ -420,7 +459,7 @@
         register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.FreightAgency" >
     update freight_agency
@@ -435,7 +474,7 @@
       age = #{age,jdbcType=TINYINT},
       sex = #{sex,jdbcType=CHAR},
       service_advantage = #{serviceAdvantage,jdbcType=VARCHAR},
-      companyLink = #{companyLink,jdbcType=VARCHAR},
+      company_link = #{companyLink,jdbcType=VARCHAR},
       weChat = #{weChat,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
       email = #{email,jdbcType=VARCHAR},
@@ -443,8 +482,171 @@
       advertise_count = #{advertiseCount,jdbcType=TINYINT},
       user_status = #{userStatus,jdbcType=CHAR},
       register_time = #{registerTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="selectByParam" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        freight_agency
+        <where>
+            or account = #{param,jdbcType=VARCHAR}
+            or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or city = #{param,jdbcType=VARCHAR}
+            or name = #{param,jdbcType=VARCHAR}
+            or main_bussiness_scope like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or wechat = #{param,jdbcType=VARCHAR}
+            or phone = #{param,jdbcType=VARCHAR}
+            or email = #{param,jdbcType=VARCHAR}
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByParam" parameterType="string" resultType="integer">
+        select count(*)
+        from
+        freight_agency
+        <where>
+            or account = #{param,jdbcType=VARCHAR}
+            or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or city = #{param,jdbcType=VARCHAR}
+            or name = #{param,jdbcType=VARCHAR}
+            or main_bussiness_scope like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or wechat = #{param,jdbcType=VARCHAR}
+            or phone = #{param,jdbcType=VARCHAR}
+            or email = #{param,jdbcType=VARCHAR}
+        </where>
+    </select>
+  <select id="selectByCriteria" parameterType="FreightAgency" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List"/>
+  from freight_agency
+  <where>
+    <if test="account != null and account != ''">
+      account = #{fa.account,jdbcType=VARCHAR}
+    </if>
+    <if test="company != null and company != ''">
+      company like concat('%',#{fa.company,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="city != null and city != ''">
+      city = #{fa.city,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null and name != ''">
+      name like concat('%',#{fa.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="industry != null and industry != ''">
+      main_bussiness_scope like concat('%',#{fa.mainBussinessScope,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="weChat != null and weChat != ''">
+      wechat = #{fa.weChat,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null and phone != ''">
+      phone = #{fa.phone,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null and email != ''">
+      email = #{fa.email,jdbcType=VARCHAR}
+    </if>
+  </where>
+  order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+    <select id="selectCountByCriteria" parameterType="FreightAgency" resultMap="BaseResultMap">
+        select count(*)
+        from freight_agency
+        <where>
+            <if test="account != null and account != ''">
+                account = #{fa.account,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                company like concat('%',#{fa.company,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="city != null and city != ''">
+                city = #{fa.city,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null and name != ''">
+                name like concat('%',#{fa.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="industry != null and industry != ''">
+                main_bussiness_scope like concat('%',#{fa.mainBussinessScope,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="weChat != null and weChat != ''">
+                wechat = #{fa.weChat,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{fa.phone,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                email = #{fa.email,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="selectFullIndex" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from freight_agency
+        <where>
+            or account like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or city = #{text,jdbcType=VARCHAR}
+            or name = #{text,jdbcType=VARCHAR}
+            or main_bussiness_scope like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByFullIndex" resultType="integer" parameterType="string">
+        select count(*)
+        from freight_agency
+        <where>
+            or account like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or city = #{text,jdbcType=VARCHAR}
+            or name = #{text,jdbcType=VARCHAR}
+            or main_bussiness_scope like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+    </select>
+    <select id="selectByList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from freight_agency
+        where id in
+        <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <update id="decreaseSendQuoteCount" parameterType="integer">
+        update freight_agency
+        set send_quote_count = send_quote_count - 1
+        where id = #{id,jdbcType=BIGINT} and send_quote_count > 0
+    </update>
+    <update id="decreaseAdvertiseCount" parameterType="long">
+        update freight_agency
+        set advertise_count =  advertise_count - 1
+        where id = #{id,jdbcType=BIGINT} and advertise_count > 0
+    </update>
+    <update id="resetSendQuoteCount">
+        update freight_agency
+        set send_product_count = #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="resetAdvertiseCount">
+        update freight_agency
+        set advertise_count = #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="resetAllSendQuoteCount" parameterType="integer">
+        update freight_agency
+        set send_product_count = #{count,jdbcType=INTEGER}
+    </update>
+    <update id="resetAllAdvertiseCount" parameterType="integer">
+        update freight_agency
+        set demand_count = #{count,jdbcType=INTEGER}
+    </update>
+
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyExample" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >

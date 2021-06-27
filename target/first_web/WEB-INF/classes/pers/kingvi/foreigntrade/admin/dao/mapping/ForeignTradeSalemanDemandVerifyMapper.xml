@@ -3,11 +3,11 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.ForeignTradeSalemanDemandVerifyMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="fts_id" property="ftsId" jdbcType="INTEGER" />
+    <result column="fts_id" property="ftsId" jdbcType="BIGINT" />
     <result column="fts_name" property="ftsName" jdbcType="VARCHAR" />
     <result column="fts_company" property="ftsCompany" jdbcType="VARCHAR" />
     <result column="fts_city" property="ftsCity" jdbcType="VARCHAR" />
-    <result column="main_business" property="company" jdbcType="VARCHAR" />
+    <result column="main_business" property="mainBusiness" jdbcType="VARCHAR" />
     <result column="requirement" property="requirement" jdbcType="VARCHAR" />
     <result column="demand_description" property="demandDescription" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
@@ -101,10 +101,119 @@
     from fts_demand_verify
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectByFtsId" resultMap="BaseResultMap" parameterType="long">
+        select
+        <include refid="Base_Column_List"/>
+        from fts_demand_verify
+        where fts_id = #{ftsId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByPrimaryKeyAndFtsId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fts_demand_verify
+        where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByBean" parameterType="ForeignTradeSalemanDemandVerify" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+    </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    order by id desc limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+    <select id="selectCountByAll" resultType="integer">
+        select count(*)
+        from fts_demand_verify
+        order by id desc limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+    </select>
+  <select id="selectByCriteria" parameterType="ForeignTradeSalemanDemandVerify" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    <where>
+      <if test="ftsName != null and ftsName != ''">
+        fts_name = #{ftsd.ftsName,jdbcType=VARCHAR}
+      </if>
+      <if test="ftsCompany != null and ftsCompany != ''">
+        fts_company like concat('%',#{ftsd.ftsCompany,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="ftsCity != null and ftsCity != ''">
+        fts_city like concat('%',#{ftsd.ftsCity,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mainBusiness != null and mainBusiness != ''">
+        main_business like concat('%',#{ftsd.mainBusiness,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountByCriteria" parameterType="ForeignTradeSalemanDemandVerify" resultType="integer">
+    select count(*)
+    from fts_demand_verify
+    <where>
+      <if test="ftsName != null and ftsName != ''">
+        fts_name = #{ftsName,jdbcType=VARCHAR}
+      </if>
+      <if test="ftsCompany != null and ftsCompany != ''">
+        fts_company like concat('%',#{ftsCompany,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="ftsCity != null and ftsCity != ''">
+        fts_city like concat('%',#{ftsCity,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mainBusiness != null and mainBusiness != ''">
+        main_business like concat('%',#{mainBusiness,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+    <select id="selectFullIndex" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fts_demand_verify
+        <where>
+            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_name = #{text,jdbcType=VARCHAR}
+            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByFullIndex" resultType="integer" parameterType="string">
+        select count(*)
+        from fts_demand_verify
+        <where>
+            or fts_company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or fts_name = #{text,jdbcType=VARCHAR}
+            or demand_description like concat('%',#{text,jdbcType=VARCHAR},'%')
+        </where>
+    </select>
+  <select id="selectByList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fts_demand_verify
+    where id in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item,jdbcType=BIGINT}
+    </foreach>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fts_demand_verify
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByPrimaryKeyAndFtsId">
+      delete from fts_demand_verify
+      where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByBean" parameterType="ForeignTradeSalemanDemandVerify">
+      delete from fts_demand_verify
+      where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+  </delete>
+
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" >
     delete from fts_demand_verify
     <if test="_parameter != null" >
@@ -115,13 +224,13 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into fts_demand_verify (id, fts_id, fts_name, fts_company,
+    insert into fts_demand_verify (fts_id, fts_name, fts_company,
       fts_city, main_business, requirement,
       demand_description, phone, wechat,
       email, send_time, verify_status
       )
-    values (#{ftsId,jdbcType=INTEGER}, #{ftsName,jdbcType=VARCHAR}, #{ftsCompany,jdbcType=VARCHAR},
-      #{ftsCity,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR},
+    values (#{ftsId,jdbcType=BIGINT}, #{ftsName,jdbcType=VARCHAR}, #{ftsCompany,jdbcType=VARCHAR},
+      #{ftsCity,jdbcType=BIGINT}, #{mainBusiness,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR},
       #{demandDescription,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{weChat,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{verifyStatus,jdbcType=CHAR}
       )
@@ -144,7 +253,7 @@
       <if test="ftsCity != null" >
         fts_city,
       </if>
-      <if test="company != null" >
+      <if test="mainBusiness != null" >
         main_business,
       </if>
       <if test="requirement != null" >
@@ -171,7 +280,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ftsId != null" >
-        #{ftsId,jdbcType=INTEGER},
+        #{ftsId,jdbcType=BIGINT},
       </if>
       <if test="ftsName != null" >
         #{ftsName,jdbcType=VARCHAR},
@@ -182,8 +291,8 @@
       <if test="ftsCity != null" >
         #{ftsCity,jdbcType=VARCHAR},
       </if>
-      <if test="company != null" >
-        #{company,jdbcType=VARCHAR},
+      <if test="mainBusiness != null" >
+        #{mainBusiness,jdbcType=VARCHAR},
       </if>
       <if test="requirement != null" >
         #{requirement,jdbcType=VARCHAR},
@@ -221,7 +330,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.ftsId != null" >
-        fts_id = #{record.ftsId,jdbcType=INTEGER},
+        fts_id = #{record.ftsId,jdbcType=BIGINT},
       </if>
       <if test="record.ftsName != null" >
         fts_name = #{record.ftsName,jdbcType=VARCHAR},
@@ -232,8 +341,8 @@
       <if test="record.ftsCity != null" >
         fts_city = #{record.ftsCity,jdbcType=VARCHAR},
       </if>
-      <if test="record.company != null" >
-        main_business = #{record.company,jdbcType=VARCHAR},
+      <if test="record.mainBusiness != null" >
+        main_business = #{record.mainBusiness,jdbcType=VARCHAR},
       </if>
       <if test="record.requirement != null" >
         requirement = #{record.requirement,jdbcType=VARCHAR},
@@ -264,11 +373,11 @@
   <update id="updateByExample" parameterType="map" >
     update fts_demand_verify
     set id = #{record.id,jdbcType=INTEGER},
-      fts_id = #{record.ftsId,jdbcType=INTEGER},
+      fts_id = #{record.ftsId,jdbcType=BIGINT},
       fts_name = #{record.ftsName,jdbcType=VARCHAR},
       fts_company = #{record.ftsCompany,jdbcType=VARCHAR},
       fts_city = #{record.ftsCity,jdbcType=VARCHAR},
-      main_business = #{record.company,jdbcType=VARCHAR},
+      main_business = #{record.mainBusiness,jdbcType=VARCHAR},
       requirement = #{record.requirement,jdbcType=VARCHAR},
       demand_description = #{record.demandDescription,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=CHAR},
@@ -284,7 +393,7 @@
     update fts_demand_verify
     <set >
       <if test="ftsId != null" >
-        fts_id = #{ftsId,jdbcType=INTEGER},
+        fts_id = #{ftsId,jdbcType=BIGINT},
       </if>
       <if test="ftsName != null" >
         fts_name = #{ftsName,jdbcType=VARCHAR},
@@ -296,7 +405,7 @@
         fts_city = #{ftsCity,jdbcType=VARCHAR},
       </if>
       <if test="company != null" >
-        main_business = #{company,jdbcType=VARCHAR},
+        main_business = #{mainBusiness,jdbcType=VARCHAR},
       </if>
       <if test="requirement != null" >
         requirement = #{requirement,jdbcType=VARCHAR},
@@ -324,11 +433,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify" >
     update fts_demand_verify
-    set fts_id = #{ftsId,jdbcType=INTEGER},
+    set fts_id = #{ftsId,jdbcType=BIGINT},
       fts_name = #{ftsName,jdbcType=VARCHAR},
       fts_company = #{ftsCompany,jdbcType=VARCHAR},
       fts_city = #{ftsCity,jdbcType=VARCHAR},
-      main_business = #{company,jdbcType=VARCHAR},
+      main_business = #{mainBusiness,jdbcType=VARCHAR},
       requirement = #{requirement,jdbcType=VARCHAR},
       demand_description = #{demandDescription,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},

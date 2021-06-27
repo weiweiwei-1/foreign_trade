@@ -3,7 +3,7 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.LoginRecordMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.LoginRecord" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userId" property="userId" jdbcType="INTEGER" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
     <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, userId, ip, login_time
+    id, user_id, ip, login_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.LoginRecordExample" >
     select
@@ -102,9 +102,9 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into login_record (userId, ip, login_time
+    insert into login_record (user_id, ip, login_time
       )
-    values (#{userId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}
+    values (#{userId,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.LoginRecord" >
@@ -114,7 +114,7 @@
     insert into login_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        userId,
+        user_id,
       </if>
       <if test="ip != null" >
         ip,
@@ -125,7 +125,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="ip != null" >
         #{ip,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null" >
-        userId = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.ip != null" >
         ip = #{record.ip,jdbcType=VARCHAR},
@@ -164,7 +164,7 @@
   <update id="updateByExample" parameterType="map" >
     update login_record
     set id = #{record.id,jdbcType=INTEGER},
-      userId = #{record.userId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
       ip = #{record.ip,jdbcType=VARCHAR},
       login_time = #{record.loginTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -175,7 +175,7 @@
     update login_record
     <set >
       <if test="userId != null" >
-        userId = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="ip != null" >
         ip = #{ip,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.LoginRecord" >
     update login_record
-    set userId = #{userId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=BIGINT},
       ip = #{ip,jdbcType=VARCHAR},
       login_time = #{loginTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

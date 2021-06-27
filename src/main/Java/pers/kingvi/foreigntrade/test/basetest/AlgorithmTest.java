@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.test.basetest;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class AlgorithmTest {
     int[] a = {1,15,2,8,8,7,2,5,7,23};
@@ -106,7 +107,6 @@ public class AlgorithmTest {
                 }
                 break;
             }
-
         }
     }*/
 
@@ -117,4 +117,22 @@ public class AlgorithmTest {
      System.out.println(FutuTest.getSecondMin(a));
  }
 
+    @Test
+    public void testgetspiraOrder() {
+     int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+     List<Integer> list = Algorithm.spiralOrder(matrix);
+     System.out.print(list);
+    }
+
+    @Test
+//    ListNode list=new ListNode(0) 初始化一个节点值为0的空节点，最常用最正规写法
+    public void testArray() {
+     for (int i = 0; i < 10; i++) {
+         System.out.print(i);
+     }
+     System.out.println("断开");
+     for (int i = 0; i < 10; ++i) {
+         System.out.print(i);
+     }
+    }
 }

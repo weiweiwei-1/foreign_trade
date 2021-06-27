@@ -4,11 +4,56 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+   <!-- <properties resource="properties/db.properties"></properties>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"></setting>
+        <setting name="cacheEnabled" value="true"></setting>
+    </settings>
+-->
     <!--给实体类设置别名-->
     <typeAliases>
         <package name="pers.kingvi.foreigntrade.po"></package>
         <package name="pers.kingvi.foreigntrade.vo"></package>
     </typeAliases>
+
+    <!--<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"></property>
+                <property name="url" value="${jdbc.url}"></property>
+                <property name="username" value="${jdbc.username}"></property>
+                <property name="password" value="${jdbc.password}"></property>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <mapper resource="pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanDemandMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ProductInformationMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyRecommendMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/AdminMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/ForeignTradeSalemanDemandVerifyMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/FreightAgencyRecommendVerifyMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/FriendApplyMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/LoginRecordMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/MessageMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/PermissionMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/ProductInformationVerifyMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/QuoteRecordMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/RoleMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/RolePermissionMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/UserRoleMapper.xml"/>
+        <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/UserMapper.xml"/>
+
+    </mappers>-->
 
 
 </configuration>

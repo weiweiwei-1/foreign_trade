@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="company" property="company" jdbcType="VARCHAR" />
@@ -83,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, account, password, company, city, name, photo, industry, working_time, age, sex,
-    main_product, storeLink, weChat, phone, email, send_product_count, demand_count,
+    main_product, store_link, weChat, phone, email, send_product_count, demand_count,
     user_status, register_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample" >
@@ -100,21 +100,195 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from foreign_trade_saleman
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from foreign_trade_saleman
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+  <select id="selectByFtsIdList" parameterType="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from foreign_trade_saleman
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    order by id
+  </select>
+    <select id="selectByCriteria" parameterType="ForeignTradeSaleman" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        <where>
+            <if test="account != null and account != ''">
+                account = #{fts.account,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                company like concat('%',#{fts.company,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="city != null and city != ''">
+                city = #{fts.city,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null and name != ''">
+                name like concat('%',#{fts.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="industry != null and industry != ''">
+                industry like concat('%',#{fts.industry,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="mainProduct != null and mainProduct != ''">
+                main_product like concat('%',#{fts.mainProduct,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="weChat != null and weChat != ''">
+                wechat = #{fts.weChat,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{fts.phone,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                email = #{fts.email,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectByParam" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        foreign_trade_saleman
+        <where>
+        or account = #{param,jdbcType=VARCHAR}
+        or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or city = #{param,jdbcType=VARCHAR}
+        or name = #{param,jdbcType=VARCHAR}
+        or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
+        or wechat = #{text,jdbcType=VARCHAR}
+        or phone = #{text,jdbcType=VARCHAR}
+        or email = #{text,jdbcType=VARCHAR}
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByParam" parameterType="string" resultType="integer">
+        select count(*)
+        from
+        foreign_trade_saleman
+        <where>
+            or account = #{param,jdbcType=VARCHAR}
+            or company like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or city = #{param,jdbcType=VARCHAR}
+            or name = #{param,jdbcType=VARCHAR}
+            or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+    </select>
+    <select id="selectCountByCriteria" parameterType="ForeignTradeSaleman" resultType="integer">
+        select count(*)
+        from
+        foreign_trade_saleman
+        <where>
+            <if test="account != null and account != ''">
+                account = #{fts.account,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                company like concat('%',#{fts.company,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="city != null and city != ''">
+                city = #{fts.city,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null and name != ''">
+                name like concat('%',#{fts.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="industry != null and industry != ''">
+                industry like concat('%',#{fts.industry,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="mainProduct != null and mainProduct != ''">
+                main_product like concat('%',#{fts.mainProduct,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="weChat != null and weChat != ''">
+                wechat = #{fts.weChat,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{fts.phone,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                email = #{fts.email,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="selectFullIndex" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        <where>
+            or account like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or name = #{text,jdbcType=VARCHAR}
+            or industry like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_product like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByFullIndex" resultType="integer" parameterType="string">
+        select count(*)
+        from foreign_trade_saleman
+        <where>
+            or account like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or company like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or city like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or name = #{text,jdbcType=VARCHAR}
+            or industry like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or main_product like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or wechat = #{text,jdbcType=VARCHAR}
+            or phone = #{text,jdbcType=VARCHAR}
+            or email = #{text,jdbcType=VARCHAR}
+        </where>
+    </select>
+    <select id="selectByList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        where id in
+        <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
   <select id="selectByAccount" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from foreign_trade_saleman
-    where account = #{account}
+    where account = #{account,jdbcType=VARCHAR}
   </select>
+    <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from foreign_trade_saleman
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample" >
     delete from foreign_trade_saleman
@@ -122,18 +296,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insert" parameterType="ForeignTradeSaleman" >
+    <!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into foreign_trade_saleman (account, password, company, 
+    </selectKey>-->
+    insert into foreign_trade_saleman (id, account, password, company,
       city, name, photo, industry,
       working_time, age, sex,
       main_product, store_link, weChat,
       phone, email, send_product_count,
       demand_count, user_status, register_time
       )
-    values (#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR},
       #{city,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=CHAR}, #{industry,jdbcType=VARCHAR}, 
       #{workingTime,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{sex,jdbcType=CHAR},
       #{mainProduct,jdbcType=VARCHAR}, #{storeLink,jdbcType=VARCHAR}, #{weChat,jdbcType=VARCHAR},
@@ -142,11 +316,14 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
-    </selectKey>
+    </selectKey>-->
     insert into foreign_trade_saleman
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="account != null" >
         account,
       </if>
@@ -206,6 +383,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="account != null" >
         #{account,jdbcType=VARCHAR},
       </if>
@@ -275,7 +455,7 @@
     update foreign_trade_saleman
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.account != null" >
         account = #{record.account,jdbcType=VARCHAR},
@@ -341,7 +521,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update foreign_trade_saleman
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       company = #{record.company,jdbcType=VARCHAR},
@@ -368,65 +548,65 @@
   <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
     update foreign_trade_saleman
     <set >
-      <if test="account != null" >
+      <if test="account != null and account != ''" >
         account = #{account,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password != ''" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="company != null" >
+      <if test="company != null and company != ''" >
         company = #{company,jdbcType=VARCHAR},
       </if>
-      <if test="city != null" >
+      <if test="city != null and city != ''" >
         city = #{city,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null and name != ''" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null" >
+      <if test="photo != null and photo != ''" >
         photo = #{photo,jdbcType=CHAR},
       </if>
-      <if test="industry != null" >
+      <if test="industry != null and industry != ''" >
         industry = #{industry,jdbcType=VARCHAR},
       </if>
-      <if test="workingTime != null" >
+      <if test="workingTime != null and workingTime != ''" >
         working_time = #{workingTime,jdbcType=TINYINT},
       </if>
-      <if test="age != null" >
+      <if test="age != null and age != ''" >
         age = #{age,jdbcType=TINYINT},
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex != ''" >
         sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="mainProduct != null" >
+      <if test="mainProduct != null and mainProduct != ''" >
         main_product = #{mainProduct,jdbcType=VARCHAR},
       </if>
-      <if test="storeLink != null" >
+      <if test="storeLink != null and storeLink != ''" >
         store_link = #{storeLink,jdbcType=VARCHAR},
       </if>
-      <if test="weChat != null" >
+      <if test="weChat != null and weChat != ''" >
         weChat = #{weChat,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null and phone != ''" >
         phone = #{phone,jdbcType=CHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email != ''" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sendProductCount != null" >
+      <if test="sendProductCount != null and sendProductCount != ''" >
         send_product_count = #{sendProductCount,jdbcType=TINYINT},
       </if>
-      <if test="demandCount != null" >
+      <if test="demandCount != null and demandCount != ''" >
         demand_count = #{demandCount,jdbcType=TINYINT},
       </if>
-      <if test="userStatus != null" >
+      <if test="userStatus != null and userStatus != ''" >
         user_status = #{userStatus,jdbcType=CHAR},
       </if>
-      <if test="registerTime != null" >
+      <if test="registerTime != null and registerTime != ''" >
         register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
     update foreign_trade_saleman
@@ -449,7 +629,7 @@
       demand_count = #{demandCount,jdbcType=TINYINT},
       user_status = #{userStatus,jdbcType=CHAR},
       register_time = #{registerTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample" id="selectByExampleWithRowbounds" >
     select
@@ -465,4 +645,32 @@
       order by ${orderByClause}
     </if>
   </select>
+    <update id="decreaseSendProductCount" parameterType="integer">
+        update foreign_trade_saleman
+        set send_product_count = send_product_count - 1
+        where id = #{id,jdbcType=BIGINT} and send_product_count > 0
+    </update>
+    <update id="decreaseDemandCount" parameterType="long">
+        update foreign_trade_saleman
+        set demand_count =  demand_count - 1
+        where id = #{id,jdbcType=BIGINT} and demand_count > 0
+    </update>
+    <update id="resetSendProductCount">
+        update foreign_trade_saleman
+        set send_product_count = #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="resetDemandCount">
+        update foreign_trade_saleman
+        set demand_count = #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="resetAllSendProductCount" parameterType="integer">
+        update foreign_trade_saleman
+        set send_product_count = #{count,jdbcType=INTEGER}
+    </update>
+    <update id="resetAllDemandCount" parameterType="integer">
+        update foreign_trade_saleman
+        set demand_count = #{count,jdbcType=INTEGER}
+    </update>
 </mapper>

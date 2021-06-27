@@ -5,21 +5,21 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties resource="properties/db.properties"></properties>
+   <!-- <properties resource="properties/db.properties"></properties>
 
     <settings>
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"></setting>
         <setting name="cacheEnabled" value="true"></setting>
     </settings>
-
+-->
     <!--给实体类设置别名-->
     <typeAliases>
         <package name="pers.kingvi.foreigntrade.po"></package>
         <package name="pers.kingvi.foreigntrade.vo"></package>
     </typeAliases>
 
-    <environments default="development">
+    <!--<environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
@@ -53,7 +53,7 @@
         <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/UserRoleMapper.xml"/>
         <mapper resource="pers/kingvi/foreigntrade/admin/dao/mapping/UserMapper.xml"/>
 
-    </mappers>
+    </mappers>-->
 
 
 </configuration>

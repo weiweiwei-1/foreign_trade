@@ -143,7 +143,7 @@
     insert into friend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        userId,
+        user_id,
       </if>
       <if test="friendId != null" >
         friend_id,
@@ -189,7 +189,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null" >
-        userId = #{record.userId,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.friendId != null" >
         friend_id = #{record.friendId,jdbcType=BIGINT},
@@ -211,7 +211,7 @@
   <update id="updateByExample" parameterType="map" >
     update friend
       set id = #{record.id,jdbcType=INTEGER},
-      userId = #{record.userId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       friend_id = #{record.friendId,jdbcType=BIGINT},
       user_mark = #{record.userMark,jdbcType=VARCHAR},
       friend_mark = #{record.friendMark,jdbcType=VARCHAR,
@@ -224,7 +224,7 @@
     update friend
     <set >
       <if test="userId != null" >
-        userId = #{userId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="friendId != null" >
         friend_id = #{friendId,jdbcType=BIGINT},
@@ -244,7 +244,7 @@
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.Friend" >
     update friend
     set user_id = #{userId,jdbcType=BIGINT},
-      friend_id = #{friendId,c},
+      friend_id = #{friendId,jdbcType=BIGINT},
       user_mark = #{userMark,jdbcType=VARCHAR},
       friend_mark = #{friendMark,jdbcType=VARCHAR}
       add_time = #{addTime,jdbcType=TIMESTAMP}

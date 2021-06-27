@@ -366,7 +366,37 @@ public class Algorithm {
         return root;
     }
 
-
+    public static List<Integer> spiralOrder(int[][] matrix) {
+        int row = matrix.length, column = matrix[0].length;
+        int left = 0, down = matrix.length, up = 0, right = matrix[0].length;
+        int sum = row * column;
+        List<Integer> list = new ArrayList<>();
+        int number = 0;
+        int count = 0;
+        while (count < sum) {
+            for (int i = left; i < right && count < sum; i++) {
+                list.add(number+=1);
+                count++;
+            }
+            up++;
+            for (int i = up; i < down && count < sum; i++) {
+                list.add(number+=column);
+                count++;
+            }
+            right--;
+            for (int i = right; i > left && count < sum; i--) {
+                list.add(number-=1);
+                count++;
+            }
+            down--;
+            for (int i = down; i > up && count < sum; i--) {
+                list.add(number-=column);
+                count++;
+            }
+            left++;
+        }
+        return list;
+    }
   /*  public static */
 
 }

@@ -3,8 +3,8 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.MessageMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.Message" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="senderId" property="senderId" jdbcType="INTEGER" />
-    <result column="receiverId" property="receiverId" jdbcType="INTEGER" />
+    <result column="senderId" property="senderId" jdbcType="BIGINT" />
+    <result column="receiverId" property="receiverId" jdbcType="BIGINT" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="CHAR" />
@@ -85,14 +85,38 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from message
-    where id = #{id,jdbcType=INTEGER}
+    select
+    <include refid="Base_Column_List"/>
+    from message where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="message" resultMap="BaseResultMap">
+    select * from message where senderId = #{senderId,jdbcType=BIGINT} and receiverId = #{receiverId,jdbcType=BIGINT}
+    union all
+    select * from message where senderId = #{receiverId,jdbcType=BIGINT} and receiverId = #{senderId,jdbcType=BIGINT}
+    order by id
+  </select>
+  <select id="selectLastAmount" resultMap="BaseResultMap">
+    select * from
+    (select * from message where senderId = #{message.senderId,jdbcType=BIGINT} and receiverId = #{message.receiverId,jdbcType=BIGINT}
+    union all
+    select * from message where senderId = #{message.receiverId,jdbcType=BIGINT} and receiverId = #{message.senderId,jdbcType=BIGINT}
+    order by id desc limit #{amount,jdbcType=INTEGER}) as message order by id
+  </select>
+  <select id="selectUnReadMessage" parameterType="long" resultType="UnReadMessageVo">
+    select id,count(id) as unReadMessageCount,senderId as friendId,receiverId,content,send_time from message where receiverId=#{userId} and status=0 group by senderId order by senderId
+  </select>
+  <select id="selectReadAndUnReadMessage" parameterType="long" resultType="ReadAndUnReadMessageVo" >
+    select id, senderId as friendId, content,send_time from message where id in (
+        select max(id) from message where receiverId = #{userId} group by senderId) order by senderId
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from message
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteAll" parameterType="Message">
+    delete from message
+    where senderId = #{senderId,jdbcType=BIGINT} and receiverId = #{receiverId,jdbcType=BIGINT}
+    or senderId = #{receiverId,jdbcType=BIGINT} and receiverId = #{senderId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.MessageExample" >
     delete from message
@@ -106,7 +130,7 @@
     </selectKey>
     insert into message (senderId, receiverId, content,
       send_time, status)
-    values (#{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+    values (#{senderId,jdbcType=BIGINT}, #{receiverId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR},
       #{sendTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.Message" >
@@ -133,10 +157,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="senderId != null" >
-        #{senderId,jdbcType=INTEGER},
+        #{senderId,jdbcType=BIGINT},
       </if>
       <if test="receiverId != null" >
-        #{receiverId,jdbcType=INTEGER},
+        #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
@@ -162,10 +186,10 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.senderId != null" >
-        senderId = #{record.senderId,jdbcType=INTEGER},
+        senderId = #{record.senderId,jdbcType=BIGINT},
       </if>
       <if test="record.receiverId != null" >
-        receiverId = #{record.receiverId,jdbcType=INTEGER},
+        receiverId = #{record.receiverId,jdbcType=BIGINT},
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
@@ -184,8 +208,8 @@
   <update id="updateByExample" parameterType="map" >
     update message
     set id = #{record.id,jdbcType=INTEGER},
-      senderId = #{record.senderId,jdbcType=INTEGER},
-      receiverId = #{record.receiverId,jdbcType=INTEGER},
+      senderId = #{record.senderId,jdbcType=BIGINT},
+      receiverId = #{record.receiverId,jdbcType=BIGINT},
       content = #{record.content,jdbcType=VARCHAR},
       send_time = #{record.sendTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=CHAR}
@@ -197,10 +221,10 @@
     update message
     <set >
       <if test="senderId != null" >
-        senderId = #{senderId,jdbcType=INTEGER},
+        senderId = #{senderId,jdbcType=BIGINT},
       </if>
       <if test="receiverId != null" >
-        receiverId = #{receiverId,jdbcType=INTEGER},
+        receiverId = #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
@@ -216,12 +240,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.Message" >
     update message
-    set senderId = #{senderId,jdbcType=INTEGER},
-      receiverId = #{receiverId,jdbcType=INTEGER},
+    set senderId = #{senderId,jdbcType=BIGINT},
+      receiverId = #{receiverId,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       send_time = #{sendTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateMessages" parameterType="Message">
+    update message set status=1 where senderId=#{senderId} and receiverId=#{receiverId} and status=0
   </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.MessageExample" id="selectByExampleWithRowbounds" >
     select
