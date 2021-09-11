@@ -64,6 +64,7 @@ public class FriendApplyServiceImpl implements FriendApplyService {
         return 0;
     }
 
+    //同意好友申请
     @Override
     public int permitApply(FriendApply friendApply) {
         Friend friend = new Friend();

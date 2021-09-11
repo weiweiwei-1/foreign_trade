@@ -7,86 +7,25 @@
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/serviceImpl/ForeignTradeSalemanServiceImpl.java" line="161" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" line="168" />
     <bookmark url="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ProductInformationMapper.xml" line="523" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicProgramTest.java" line="17" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5d6ba1-5f23-4d67-a6a5-b8d0c2a62666" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/config/sqlmap-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/config/sqlmap-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config/sqlmap-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config/sqlmap-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/Algorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/Algorithm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/ListNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/ListNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/TreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/TreeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/config/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/config/applicationContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/config/sqlmap-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/config/sqlmap-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/ForeignTradeSalemanDemandVerifyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/ForeignTradeSalemanDemandVerifyMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FreightAgencyRecommendVerifyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FreightAgencyRecommendVerifyMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FriendApplyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FriendApplyMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FriendMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/FriendMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/MessageMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/MessageMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/ProductInformationVerifyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/ProductInformationVerifyMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/QuoteRecordMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/QuoteRecordMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/ForeignTradeSalemanDemandVerifyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/ForeignTradeSalemanDemandVerifyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FreightAgencyRecommendVerifyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FreightAgencyRecommendVerifyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendApplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendApplyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/LoginRecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/LoginRecordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/MessageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/ProductInformationVerifyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/ProductInformationVerifyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/QuoteRecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/dao/mapping/QuoteRecordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/ForeignTradeSalemanDemandVerifyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/ForeignTradeSalemanDemandVerifyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FreightAgencyRecommendVerifyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FreightAgencyRecommendVerifyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FriendApplyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FriendApplyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FriendService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/FriendService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/LoginRecordService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/LoginRecordService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/MessageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/MessageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/ProductInformationVerifyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/admin/service/ProductInformationVerifyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanDemandMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanDemandMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ProductInformationMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ProductInformationMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanDemandMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanDemandMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ProductInformationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ProductInformationMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ForeignTradeSalemanDemandService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ForeignTradeSalemanDemandService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ForeignTradeSalemanService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ForeignTradeSalemanService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ProductInformationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/foreigntradesaleman/service/ProductInformationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/FreightAgencyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/FreightAgencyMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/FreightAgencyRecommendMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/FreightAgencyRecommendMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyRecommendMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyRecommendMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyRecommendService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyRecommendService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSaleman.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSaleman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSalemanDemand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSalemanDemand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSalemanDemandVerify.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ForeignTradeSalemanDemandVerify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgency.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgencyRecommend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgencyRecommend.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgencyRecommendVerify.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FreightAgencyRecommendVerify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Friend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Friend.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FriendApply.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/FriendApply.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/LoginRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/LoginRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Permission.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Permission.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ProductInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ProductInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ProductInformationVerify.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/ProductInformationVerify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/QuoteRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/QuoteRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/po/UserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/FriendApplyVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/FriendApplyVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/FriendVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/FriendVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/QuoteRecordProductVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/pers/kingvi/foreigntrade/vo/QuoteRecordProductVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/properties/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/first_web/WEB-INF/classes/properties/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendApplyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendApplyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/FutuTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/PageTest1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/StringTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/TreeNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/Algorithm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/FutuTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/PageTest1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/StringTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pers/kingvi/foreigntrade/test/basetest/TreeNode.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -102,32 +41,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Algorithm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java">
+      <file leaf-file-name="ServiceTestBean.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7277">
-              <caret line="385" selection-start-line="385" selection-end-line="385" />
+            <state relative-caret-position="152">
+              <caret line="39" column="39" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/test/test.jsp">
+      <file leaf-file-name="sqlmap-config.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Resources/config/sqlmap-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+            <state relative-caret-position="299">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlgorithmTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java">
+      <file leaf-file-name="FriendMapperTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/FriendMapperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="133" column="13" selection-start-line="133" selection-start-column="10" selection-end-line="133" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuoteRecordMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/QuoteRecordMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-162">
+              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoleMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/RoleMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-119">
+              <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductQuoteMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/ProductQuoteMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RolePermissionMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/RolePermissionMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/UserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-48">
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRoleMapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/UserRoleMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="29" column="35" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RolePermissionMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/RolePermissionMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -138,15 +137,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>freightAgencyRecommendVerifyVerifyMapper</find>
       <find>productInformation</find>
       <find>friend</find>
       <find>friendApplyApplyMapper</find>
@@ -176,6 +174,7 @@
       <find>FreightAgencyRecommend</find>
       <find>Vue</find>
       <find>friendId</find>
+      <find>TreeNode</find>
     </findStrings>
     <replaceStrings>
       <replace>Integer</replace>
@@ -216,21 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/FreightAgencyRecommendVerifyService.java" />
-        <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyRecommendMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FreightAgencyRecommendVerifyMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/ForeignTradeSalemanDemandVerifyMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/ForeignTradeSalemanDemandVerifyMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/ForeignTradeSalemanDemandVerifyServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/FreightAgencyRecommendVerifyMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FreightAgencyRecommendVerifyServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/vo/FriendApplyVo.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/FtsFriendApplyService.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/FriendApplyService.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendApplyServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/vo/FriendVo.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/vo/UserDetailVo.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/dao/FreightAgencyMapper.java" />
         <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/freightagency/dao/mapping/FreightAgencyMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanMapper.java" />
         <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ForeignTradeSalemanMapper.xml" />
@@ -255,7 +239,6 @@
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/QuoteRecordServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Test.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/FutuTest.java" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/TreeNode.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/ListNode.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ProductInformationMapper.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/serviceImpl/FreightAgencyServiceImpl.java" />
@@ -265,8 +248,24 @@
         <option value="$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/test/test.jsp" />
-        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" />
         <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgramTest.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/TreeNode.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/TreeNode.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Program_test.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Program.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicProgram.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/List/List.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/BuildTree.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeNodeTest.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeTest/TreeNodeTest.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeNode.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeTest/TreeTest.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeOrder.java" />
+        <option value="$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendApplyServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -307,7 +306,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="width" value="1366" />
+    <option name="x" value="-7" />
+    <option name="width" value="1380" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -318,6 +318,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -427,6 +429,17 @@
               <item name="pers" type="462c0819:PsiDirectoryNode" />
               <item name="kingvi" type="462c0819:PsiDirectoryNode" />
               <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
+              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="pers" type="462c0819:PsiDirectoryNode" />
+              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
+              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
               <item name="filter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -450,32 +463,7 @@
               <item name="kingvi" type="462c0819:PsiDirectoryNode" />
               <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
               <item name="foreigntradesaleman" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntradesaleman" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntradesaleman" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
@@ -498,43 +486,7 @@
               <item name="kingvi" type="462c0819:PsiDirectoryNode" />
               <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
               <item name="freightagency" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="freightagency" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="freightagency" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="po" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
@@ -546,18 +498,6 @@
               <item name="kingvi" type="462c0819:PsiDirectoryNode" />
               <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="basetest" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
@@ -582,17 +522,6 @@
               <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="servicetest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="pers" type="462c0819:PsiDirectoryNode" />
-              <item name="kingvi" type="462c0819:PsiDirectoryNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="vo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
@@ -761,54 +690,6 @@
             </path>
             <path>
               <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="foreign_trade_saleman" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="freight_agency" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
-              <item name="foreigntrade" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="foreigntrade" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -816,8 +697,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -825,22 +704,15 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/IDEA-workspace/foreigntrade/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanMapper.java&#10;find&#9;ACTION&#9;FindModal" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/桌面其他文档收集/新建文件夹/MyChat/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vue_project/foreign_trade" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\foreigntradesaleman\dao\mapping" />
-      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\freightagency\dao\mapping" />
-      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\foreigntradesaleman\dao" />
-      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\freightagency\dao" />
-      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\config" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="pers.kingvi.foreigntrade.admin.dao" />
       <recent name="pers.kingvi.foreigntrade.foreigntradesaleman.dao" />
@@ -852,6 +724,13 @@
       <recent name="E:\IDEA-workspace\foreigntrade\src\main\webapp\freight_agency" />
       <recent name="E:\IDEA-workspace\foreigntrade\src\main\webapp\foreign_trade_saleman" />
       <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\foreigntradesaleman\dao\mapping" />
+      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\freightagency\dao\mapping" />
+      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\foreigntradesaleman\dao" />
+      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\pers\kingvi\foreigntrade\freightagency\dao" />
+      <recent name="E:\IDEA-workspace\foreigntrade\src\main\Resources\config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -866,23 +745,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AlgorithmTest.testArray">
+  <component name="RunManager" selected="Tomcat Server.Unnamed">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="AlgorithmTest.testArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TreeTest.preTreeToArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="foreigntrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.basetest.*" />
+          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.basetest" />
-      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.basetest.AlgorithmTest" />
-      <option name="METHOD_NAME" value="testArray" />
+      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest" />
+      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.TreeTest" />
+      <option name="METHOD_NAME" value="preTreeToArray" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -893,19 +772,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="AlgorithmTest.testgetSecondMin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TreeTest.testDeSerialize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="foreigntrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.basetest.*" />
+          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.basetest" />
-      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.basetest.AlgorithmTest" />
-      <option name="METHOD_NAME" value="testgetSecondMin" />
+      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest" />
+      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.TreeTest" />
+      <option name="METHOD_NAME" value="testDeSerialize" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -916,19 +795,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="AlgorithmTest.testgetspiraOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TreeTest.testInTreeToArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="foreigntrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.basetest.*" />
+          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.basetest" />
-      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.basetest.AlgorithmTest" />
-      <option name="METHOD_NAME" value="testgetspiraOrder" />
+      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest" />
+      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.TreeTest" />
+      <option name="METHOD_NAME" value="testInTreeToArray" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -939,19 +818,19 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ServiceTestBean.testMessageService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TreeTest.testPostTreeToArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="foreigntrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.servicetest.*" />
+          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.servicetest" />
-      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.servicetest.ServiceTestBean" />
-      <option name="METHOD_NAME" value="testMessageService" />
+      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest" />
+      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.TreeTest" />
+      <option name="METHOD_NAME" value="testPostTreeToArray" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -962,31 +841,28 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ServiceTestBean.testSelectByPrimaryKey" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TreeTest.testSerialize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="foreigntrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.servicetest.*" />
+          <option name="PATTERN" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.servicetest" />
-      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.servicetest.ServiceTestBean" />
-      <option name="METHOD_NAME" value="testSelectByPrimaryKey" />
+      <option name="PACKAGE_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest" />
+      <option name="MAIN_CLASS_NAME" value="pers.kingvi.foreigntrade.test.algorithm.Tree.TreeTest.TreeTest" />
+      <option name="METHOD_NAME" value="testSerialize" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://%MODULE_WORKING_DIR%" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <patterns />
-      <method>
-        <option name="MakeNoErrorCheck" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1126,19 +1002,19 @@
     <list>
       <item itemvalue="Maven.Unnamed" />
       <item itemvalue="Tomcat Server.Unnamed" />
-      <item itemvalue="JUnit.AlgorithmTest.testgetSecondMin" />
-      <item itemvalue="JUnit.ServiceTestBean.testSelectByPrimaryKey" />
-      <item itemvalue="JUnit.ServiceTestBean.testMessageService" />
-      <item itemvalue="JUnit.AlgorithmTest.testgetspiraOrder" />
-      <item itemvalue="JUnit.AlgorithmTest.testArray" />
+      <item itemvalue="JUnit.TreeTest.preTreeToArray" />
+      <item itemvalue="JUnit.TreeTest.testInTreeToArray" />
+      <item itemvalue="JUnit.TreeTest.testPostTreeToArray" />
+      <item itemvalue="JUnit.TreeTest.testSerialize" />
+      <item itemvalue="JUnit.TreeTest.testDeSerialize" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AlgorithmTest.testArray" />
-        <item itemvalue="JUnit.AlgorithmTest.testgetspiraOrder" />
-        <item itemvalue="JUnit.AlgorithmTest.testgetSecondMin" />
-        <item itemvalue="JUnit.ServiceTestBean.testMessageService" />
-        <item itemvalue="JUnit.ServiceTestBean.testSelectByPrimaryKey" />
+        <item itemvalue="JUnit.TreeTest.testDeSerialize" />
+        <item itemvalue="JUnit.TreeTest.testSerialize" />
+        <item itemvalue="JUnit.TreeTest.testPostTreeToArray" />
+        <item itemvalue="JUnit.TreeTest.testInTreeToArray" />
+        <item itemvalue="JUnit.TreeTest.preTreeToArray" />
       </list>
     </recent_temporary>
   </component>
@@ -1182,44 +1058,50 @@
       <workItem from="1619010055020" duration="24566000" />
       <workItem from="1621957193244" duration="1941000" />
       <workItem from="1624378689385" duration="1942000" />
-      <workItem from="1624773325591" duration="3083000" />
+      <workItem from="1624773325591" duration="8936000" />
+      <workItem from="1625243633794" duration="2942000" />
+      <workItem from="1626100870305" duration="20290000" />
+      <workItem from="1626444755980" duration="11560000" />
+      <workItem from="1627577481954" duration="844000" />
+      <workItem from="1630204314343" duration="28398000" />
+      <workItem from="1630689088906" duration="19059000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AlgorithmTest_testgetspiraOrder - 2021.05.12 at 01h 19m 56s.xml">
-      <configuration name="AlgorithmTest.testgetspiraOrder" configurationId="JUnit" />
+    <history-entry file="TreeTest_preTreeToArray - 2021.09.07 at 23h 47m 39s.xml">
+      <configuration name="TreeTest.preTreeToArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testgetSecondMin - 2021.05.12 at 01h 20m 07s.xml">
-      <configuration name="AlgorithmTest.testgetSecondMin" configurationId="JUnit" />
+    <history-entry file="TreeTest_preTreeToArray - 2021.09.07 at 23h 57m 45s.xml">
+      <configuration name="TreeTest.preTreeToArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testgetspiraOrder - 2021.05.12 at 01h 21m 41s.xml">
-      <configuration name="AlgorithmTest.testgetspiraOrder" configurationId="JUnit" />
+    <history-entry file="TreeTest_preTreeToArray - 2021.09.07 at 23h 58m 25s.xml">
+      <configuration name="TreeTest.preTreeToArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testgetspiraOrder - 2021.05.12 at 01h 23m 21s.xml">
-      <configuration name="AlgorithmTest.testgetspiraOrder" configurationId="JUnit" />
+    <history-entry file="TreeTest_testInTreeToArray - 2021.09.08 at 00h 13m 16s.xml">
+      <configuration name="TreeTest.testInTreeToArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testgetspiraOrder - 2021.05.12 at 01h 27m 27s.xml">
-      <configuration name="AlgorithmTest.testgetspiraOrder" configurationId="JUnit" />
+    <history-entry file="TreeTest_testPostTreeToArray - 2021.09.08 at 00h 13m 39s.xml">
+      <configuration name="TreeTest.testPostTreeToArray" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testgetspiraOrder - 2021.05.12 at 01h 29m 23s.xml">
-      <configuration name="AlgorithmTest.testgetspiraOrder" configurationId="JUnit" />
+    <history-entry file="TreeTest_testSerialize - 2021.09.08 at 00h 47m 38s.xml">
+      <configuration name="TreeTest.testSerialize" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testArray - 2021.05.25 at 23h 45m 59s.xml">
-      <configuration name="AlgorithmTest.testArray" configurationId="JUnit" />
+    <history-entry file="TreeTest_testSerialize - 2021.09.08 at 00h 48m 37s.xml">
+      <configuration name="TreeTest.testSerialize" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testArray - 2021.05.25 at 23h 49m 32s.xml">
-      <configuration name="AlgorithmTest.testArray" configurationId="JUnit" />
+    <history-entry file="TreeTest_testSerialize - 2021.09.08 at 00h 49m 00s.xml">
+      <configuration name="TreeTest.testSerialize" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testArray - 2021.05.25 at 23h 50m 18s.xml">
-      <configuration name="AlgorithmTest.testArray" configurationId="JUnit" />
+    <history-entry file="TreeTest_testDeSerialize - 2021.09.09 at 00h 12m 27s.xml">
+      <configuration name="TreeTest.testDeSerialize" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AlgorithmTest_testArray - 2021.05.25 at 23h 50m 41s.xml">
-      <configuration name="AlgorithmTest.testArray" configurationId="JUnit" />
+    <history-entry file="TreeTest_testDeSerialize - 2021.09.09 at 00h 12m 45s.xml">
+      <configuration name="TreeTest.testDeSerialize" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="512034000" />
+    <option name="totallyTimeSpent" value="600980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1231,45 +1113,45 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="735" extended-state="1" />
+    <frame x="-7" y="0" width="1380" height="735" extended-state="1" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
       <window_info anchor="bottom" id="Application Servers" order="13" weight="0.18245614" />
-      <window_info anchor="right" id="Maven Projects" order="12" weight="0.3297546" />
-      <window_info anchor="right" id="CDI" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="12" weight="0.32954547" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="right" id="CDI" order="8" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="JSF" order="5" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="JSF" order="5" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4013841" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.34582624" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.29411766" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.34429064" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.29930797" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" weight="0.32879046" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32879046" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33217993" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.10380623" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32879046" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5795848" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2894334" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.28892735" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.42651516" />
       <window_info anchor="bottom" id="Problems" order="15" />
       <window_info anchor="right" id="Bean Validation" order="10" weight="0.3297546" />
       <window_info id="Web" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.16089965" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" x="0" y="0" width="291" height="526" id="Documentation" order="11" side_tool="true" weight="0.3297546" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.12456747" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.16183986" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Application Servers" order="13" weight="0.18245614" />
@@ -1344,443 +1226,327 @@
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>202</line>
+          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicProgram.java</url>
+          <line>90</line>
           <properties />
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>205</line>
-          <properties />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>197</line>
-          <properties />
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>200</line>
-          <properties />
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>380</line>
-          <properties />
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>377</line>
-          <properties />
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>378</line>
-          <properties />
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>385</line>
-          <properties />
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>387</line>
-          <properties />
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>388</line>
-          <properties />
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>392</line>
-          <properties />
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>393</line>
-          <properties />
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>395</line>
-          <properties />
-          <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>382</line>
-          <properties />
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java</url>
-          <line>383</line>
-          <properties />
-          <option name="timeStamp" value="81" />
+          <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="82" />
+      <option name="time" value="158" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanDemandMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ForeignTradeSalemanMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/JDK/src.zip!/javax/swing/tree/TreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="80" column="21" lean-forward="true" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/maven_default_respoit/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar!/com/fasterxml/jackson/core/TreeNode.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/JDK/src.zip!/java/util/Deque.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="192" column="22" selection-start-line="192" selection-start-column="17" selection-end-line="192" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Program_test.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Array.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Program.java" />
     <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/ListNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/FutuTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/TreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/foreigntradesaleman/dao/mapping/ProductInformationMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="525" column="11" lean-forward="true" selection-start-line="525" selection-start-column="11" selection-end-line="525" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/dao/ProductInformationMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="54" column="70" selection-start-line="54" selection-start-column="70" selection-end-line="54" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/serviceImpl/FaFriendApplyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/serviceImpl/FreightAgencyRecommendServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="166" column="63" selection-start-line="166" selection-start-column="37" selection-end-line="166" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/serviceImpl/FreightAgencyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-418">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/FaFriendApplyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyRecommendService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/FreightAgencyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/ProductInformationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="9" selection-start-line="9" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/FreightAgencyRecommendVerifyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/FriendApplyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/FriendService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/LoginRecordService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/QuoteRecordService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/QuoteRecordServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="13" column="50" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/ProductInformationVerifyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/core-scripting.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/MessageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="173" column="66" lean-forward="true" selection-start-line="173" selection-start-column="66" selection-end-line="173" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/ForeignTradeSalemanDemandVerifyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-456" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/serviceImpl/ForeignTradeSalemanServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/sqlmap-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/MessageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/ForeignTradeSalemanDemandVerifyMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="65" column="168" selection-start-line="65" selection-start-column="168" selection-end-line="65" selection-end-column="168" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/ForeignTradeSalemanDemandVerifyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/po/Friend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FriendMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/List/List.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-621">
-          <caret line="246" column="44" selection-start-line="246" selection-start-column="44" selection-end-line="246" selection-end-column="44" />
+        <state relative-caret-position="76">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FriendApplyMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicProgramTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2242">
-          <caret line="118" column="71" selection-start-line="118" selection-start-column="71" selection-end-line="118" selection-end-column="71" />
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/ForeignTradeSalemanService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicProgram.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        <state relative-caret-position="114">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/springMvc.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeTest/TreeNodeTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/DynamicProgram/DynamicTest/DynamicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/framework/vue.js">
+    <entry file="jar://E:/JDK/src.zip!/java/util/LinkedList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="678" column="19" selection-start-line="678" selection-start-column="16" selection-end-line="678" selection-end-column="19" />
+        <state relative-caret-position="97">
+          <caret line="554" selection-start-line="554" selection-end-line="554" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/test/vue_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/FreightAgencyRecommendVerifyMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/StringTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/PageTest1.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/BuildTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="152">
+          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeTest/TreeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/algorithm/Tree/TreeOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="145" column="26" lean-forward="true" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/QuoteRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/ProductInformationVerifyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/MessageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="173" column="66" lean-forward="true" selection-start-line="173" selection-start-column="66" selection-end-line="173" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/LoginRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FriendApplyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1038">
+          <caret line="172" column="19" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/ForeignTradeSalemanDemandVerifyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-876">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/serviceImpl/FreightAgencyRecommendVerifyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-154">
+          <caret line="143" column="10" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/service/ForeignTradeSalemanDemandVerifyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/properties/db.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/ProductInformationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/FaFriendApplyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/freightagency/service/serviceImpl/FaFriendApplyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="25" column="61" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/foreigntradesaleman/service/FtsFriendApplyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="10" column="55" lean-forward="true" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/filter/AuthorizeRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/filter/ShiroFormAuthenticationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="36" column="45" lean-forward="true" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/common/SnowflakeIdWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="118" column="5" lean-forward="true" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/config/ShiroBeanConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="698">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/UserMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-722">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/QuoteRecordMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/ProductInformationMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/MessageMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1401" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/springMvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-280" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/config/sqlmap-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/servicetest/ServiceTestBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="152">
+          <caret line="39" column="39" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/framework/jquery-3.0.0.min.js">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/mapperTest/FriendMapperTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13438" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/test/test.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+        <state relative-caret-position="76">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/Algorithm.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/pers/kingvi/foreigntrade/admin/dao/mapping/RolePermissionMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7277">
-          <caret line="385" selection-start-line="385" selection-end-line="385" />
+        <state relative-caret-position="163">
+          <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/test/basetest/AlgorithmTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/ProductQuoteMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="133" column="13" selection-start-line="133" selection-start-column="10" selection-end-line="133" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="76">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/QuoteRecordMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/RoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/RolePermissionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Java/pers/kingvi/foreigntrade/admin/dao/UserRoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="29" column="35" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="35" />
         </state>
       </provider>
     </entry>
