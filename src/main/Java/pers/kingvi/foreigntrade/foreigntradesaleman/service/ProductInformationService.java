@@ -18,6 +18,8 @@ public interface ProductInformationService {
 
     PageBeanVo<ProductInformation> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord);
 
+    PageBeanVo<ProductInformation> selectByCity(String city, Integer currentPage, Integer perPageRecord);
+
     ProductInformation selectByIdAndFtsId(Integer id, Long ftsId);
 
     ProductInformation selectByProductInformation(ProductInformation productInformation);

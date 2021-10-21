@@ -33,6 +33,7 @@ public class TreeTest {
         add("#");
     }};
 
+
     //    List<String> strLinkList = Arrays.asList("1","2","#","4","#","#","3","#","#");
     @Before
     public void init() {
@@ -107,5 +108,44 @@ public class TreeTest {
         TreeNode tree = treeOrder.deSerialize(data);
         System.out.println(tree);
         System.out.println(treeOrder.preTreeToArray(tree, strList));
+    }
+
+    @Test
+    public void btsTest() {
+//        判断是否是合法的二叉搜索数
+        String btsData = "5,3,2,#,#,4,#,#,7,6,#,#,8,#,#";
+        TreeNode tree = treeOrder.deSerialize(btsData);
+        //输出二叉树最大值
+        System.out.println("二叉树的最大值为：" + treeOrder.findMax(tree));
+        //输出二叉树的最小值
+        System.out.println("二叉树的最小值为：" + treeOrder.findMin(tree));
+        //判断是否是合法的二叉搜索数
+        boolean symbol = true;
+        int lastValue = -1;
+        System.out.println("是否是合法的二叉搜索数：" + treeOrder.isBst(tree, lastValue));
+        //在二叉搜索树中搜索一个数
+        System.out.println("二叉搜索数中查找是否存在10:" + treeOrder.isInBst(tree, 9));
+        //在二叉搜索树中搜索一个数简化版
+        System.out.println("二叉搜索树中是否存在2简化版" + treeOrder.isInBstEasy(tree, 2));
+        //求二叉搜索树各子树的和
+        System.out.println("二叉搜索树的和为" + treeOrder.findSum(tree));
+        //计算完全二叉树的节点数
+        String totalTree = "1,2,4,#,#,3,#,#";
+        TreeNode root = treeOrder.deSerialize(totalTree);
+        System.out.println("完全二叉树的节点数为：" + treeOrder.findNodeCount(root));
+
+        //计算二叉树的深度
+        String randomTree = "1,2,3,4,#,#,#,5,#,#,6,#,#";
+        TreeNode aim = treeOrder.deSerialize(randomTree);
+        System.out.println("随机二叉树的深度为:" + treeOrder.findTreeDepth(aim));
+        //求二叉搜索指数的最大键值和
+        String subBst = "1,4,2,#,#,4,#,#,3,2,#,#,5,4,#,#,6,#,#";
+        aim = treeOrder.deSerialize(subBst);
+        int[] res = treeOrder.maxSubTree(aim);
+        System.out.println("二叉搜索数的最大子树和：" + treeOrder.getmaxSum());
+        //判断是否是完全二叉树
+        String totalTrees = "1,2,4,#,#,5,#,6,#,#,#,3,7,#,#,#";
+        aim = treeOrder.deSerialize(totalTrees);
+        System.out.println("判断是否是完全二叉树：" + treeOrder.isTotalTree(aim));
     }
 }

@@ -22,7 +22,7 @@ public class ServiceTestBean {
 
     @Before
     public void setUp() {
-        ApplicationContext ac=new ClassPathXmlApplicationContext("config/applicationContext.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("config/applicationContext.xml");
         foreignTradeSalemanService = (ForeignTradeSalemanService) ac.getBean("foreignTradeSalemanServiceImpl");
         freightAgencyService = (FreightAgencyService) ac.getBean("freightAgencyServiceImpl");
         messageService = (MessageService)ac.getBean("messageServiceImpl");

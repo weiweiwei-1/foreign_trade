@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.foreigntradesaleman.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kingvi.foreigntrade.admin.dao.ProductInformationVerifyMapper;
+import pers.kingvi.foreigntrade.foreigntradesaleman.api.ProductionInformationController;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ProductInformationService;
@@ -129,6 +130,11 @@ public class ProductInformationServiceImpl implements ProductInformationService 
         pageBeanVo.setTotalRecord(count);
         pageBeanVo.setPageCount(perPageRecord, count);
         return pageBeanVo;
+    }
+
+    @Override
+    public PageBeanVo<ProductInformation> selectByCity(String city, Integer currentPage, Integer perPageRecord) {
+        return null;
     }
 
     @Override

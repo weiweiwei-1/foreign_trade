@@ -46,7 +46,7 @@ public interface ProductInformationMapper {
 
     int selectCountByFullIndex(@Param("text") String text);    //全文索引某一页结果数量
 
-    List<ProductInformation> selectByList(@Param("idList") List<Integer> idList, @Param("start") Integer start, @Param("end") Integer end);   //随机选择某一页，系统随机匹配
+    List<ProductInformation> selectByList(@Param("idList") List<Integer> idList, @Param("start") Integer start, @Param("end") Integer end);   //系统默认页面
 
     int updateByExampleSelective(@Param("record") ProductInformation record, @Param("example") ProductInformationExample example);
 

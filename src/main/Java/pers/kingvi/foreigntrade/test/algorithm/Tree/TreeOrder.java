@@ -1,6 +1,12 @@
 package pers.kingvi.foreigntrade.test.algorithm.Tree;
 
+import sun.reflect.generics.tree.Tree;
+
+import java.security.cert.TrustAnchor;
 import java.util.*;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class TreeOrder {
     private String NULL = "#";
@@ -149,5 +155,142 @@ public class TreeOrder {
         return subTree;
     }
 
+    //二叉搜索数
+    //找到最大值
+    public int findMax(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        int left = findMax(root.left);
+        int right = findMax(root.right);
+        return root.val > max(left, right) ? root.val : max(left, right);
+    }
 
+    //找到最小值
+    public int findMin(TreeNode root) {
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+        int left = findMin(root.left);
+        int right = findMin(root.right);
+        return root.val < min(left, right) ? root.val : min(left, right);
+    }
+
+
+    //判断是否是合法的二叉搜索数
+    boolean symbol = true;
+    public boolean isBst(TreeNode root, int lastValue) {
+        if (root == null) {
+            return true;
+        }
+        isBst(root.left, lastValue);
+        if (root.val <= lastValue) {
+            symbol = false;
+        } else {
+            lastValue = root.val;
+        }
+        isBst(root.right, lastValue);
+        return symbol;
+    }
+
+    //判断二叉搜索树是否有相关的对象
+    public boolean isInBst(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        if (root.val == target) {
+            return true;
+        }
+        return isInBst(root.left, target) || isInBst(root.right, target);
+    }
+
+    //上面算法的简化版
+    public boolean isInBstEasy(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        if (root.val == target) {
+            return true;
+        }
+        if (root.val < target) {
+            return isInBstEasy(root.right,target);
+        } else {
+            return isInBstEasy(root.left, target);
+        }
+    }
+
+    //找到二叉树节点的和
+    public int findSum(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return root.val + findSum(root.left) + findSum(root.right);
+    }
+
+    //计算完全二叉数和节点数
+    public int findNodeCount(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        TreeNode l = root, r = root;
+        int hl = 0, rl = 0;
+        while (l != null) {
+            l = l.left;
+            hl++;
+        }
+        while (r != null) {
+            r = r.right;
+            rl++;
+        }
+        if (hl == rl) {
+            return (int)Math.pow(2, hl) - 1;
+        }
+        return 1 + findNodeCount(root.left) + findNodeCount(root.right);
+    }
+
+    //求二叉树的深度
+    public int findTreeDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return max(1 + findTreeDepth(root.left), 1 + findTreeDepth(root.right));
+    }
+
+    private int maxSum = 0;
+    //求一棵二叉搜索树最大键值和
+    public int[] maxSubTree(TreeNode root) {
+        if (root == null) {
+            return new int[] {1, Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
+        }
+        int[] left = maxSubTree(root.left);
+        int[] right = maxSubTree( root.right);
+        int[] res = new int[4];
+        if (left[0] == 1 && right[0] == 1 && root.val > left[2] && root.val < right[1]) {
+            res[0] = 1;
+            res[1] = Math.min(left[1], root.val);
+            res[2] = Math.max(right[2], root.val);
+            res[3] = root.val + left[3] + right[3];
+            maxSum = Math.max(maxSum, res[3]);
+        } else {
+            res[0] = 0;
+        }
+        return res;
+    }
+    public int getmaxSum() {
+        return maxSum;
+    }
+
+
+    //判断二叉树是否是完全二叉树
+    public boolean isTotalTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        int leftDepth = findTreeDepth(root.left);
+        int rightDepth = findTreeDepth(root.right);
+        if (leftDepth - rightDepth >= 2 || rightDepth > leftDepth) {
+            return false;
+        }
+        return isTotalTree(root.left) && isTotalTree(root.right);
+    }
 }
