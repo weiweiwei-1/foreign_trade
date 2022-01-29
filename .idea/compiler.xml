@@ -9,5 +9,8 @@
         <module name="foreigntrade" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="foreigntrade" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
