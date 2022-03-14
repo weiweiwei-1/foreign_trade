@@ -23,25 +23,22 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
 
     @Override
     public int insertSelective(FreightAgency fa) {
-        try {
-            User user = userMapper.selectByUserAccount(fa.getAccount());
-            if (user == null) {
-                freightAgencyMapper.insertSelective(fa);
-                user = new User();
-                user.setUserId(fa.getId());
-                user.setUserType("货代");
-                user.setUserAccount(fa.getAccount());
-                userMapper.insertSelective(user);
-            }
-            return 1;
-        } catch (Exception e) {
-            return 0;
-        }
+        freightAgencyMapper.insertSelective(fa);
+        User user = new User();
+        user.setUserId(fa.getId());
+        user.setUserType("fa");
+        user.setUserAccount(fa.getAccount());
+        return userMapper.insertSelective(user);
     }
 
     @Override
     public FreightAgency selectByPrimaryKey(Long id) {
         return freightAgencyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public FreightAgency selectByAccount(String account) {
+        return freightAgencyMapper.selectByAccount(account);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pers.kingvi.foreigntrade.config;
 
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -10,10 +11,14 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import pers.kingvi.foreigntrade.filter.AuthorizeRealm;
+import pers.kingvi.foreigntrade.filter.CustomizedAuthenticator;
+import pers.kingvi.foreigntrade.filter.FaRealm;
+import pers.kingvi.foreigntrade.filter.FtsRealm;
 import pers.kingvi.foreigntrade.filter.ShiroFormAuthenticationFilter;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 @Component
@@ -22,13 +27,20 @@ public class ShiroBeanConfig {
     private ShiroFormAuthenticationFilter shiroFormAuthenticationFilter;
 
     @Autowired
-    private AuthorizeRealm myRealms;
+    private FaRealm faRealm;
+
+    @Autowired
+    private FtsRealm ftsRealm;
+
+    @Autowired
+    private CustomizedAuthenticator customizedAuthenticator;
 
     @Bean(name = "cookie")
     public static SimpleCookie getSimpleCookie() {
         SimpleCookie simpleCookie = new SimpleCookie();
         simpleCookie.setHttpOnly(true);
         simpleCookie.setMaxAge(604800);
+//        simpleCookie.setName("cookie");
         return simpleCookie;
     }
 
@@ -40,10 +52,20 @@ public class ShiroBeanConfig {
         return rememberMeManager;
     }
 
+    @Bean(name = "authenticator")
+    public CustomizedAuthenticator getCustomizedAuthenticator() {
+        return customizedAuthenticator;
+    }
+
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager getSecurityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myRealms);
+//        securityManager.setRealm(myRealms);
+        Collection<Realm> realms = new ArrayList<>();
+        realms.add(faRealm);
+        realms.add(ftsRealm);
+        securityManager.setAuthenticator(getCustomizedAuthenticator());
+        securityManager.setRealms(realms);
         securityManager.setRememberMeManager(getRememberMeManager());
         return securityManager;
     }
@@ -75,9 +97,8 @@ public class ShiroBeanConfig {
         shiroFilterFactoryBean.setFilters(filterMap);
         shiroFilterFactoryBean.setSecurityManager(getSecurityManager());
         LinkedHashMap<String, String> urlMap = new LinkedHashMap<>();
-        urlMap.put("/ChatPage/login", "anon");
+        urlMap.put("/fa/product/list", "anon");
         urlMap.put("/ChatPage/register", "anon");
-//        urlMap.put("/ChatPage/**", "authc");
         urlMap.put("/AddUser/**", "authc");
         urlMap.put("/Friend/**", "authc,roles[admin]");
         urlMap.put("/Message/**", "authc");

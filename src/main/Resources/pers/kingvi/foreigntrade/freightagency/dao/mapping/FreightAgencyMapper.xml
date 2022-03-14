@@ -169,9 +169,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.FreightAgency" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <!--<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
-    </selectKey>
+    </selectKey>-->
     insert into freight_agency
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

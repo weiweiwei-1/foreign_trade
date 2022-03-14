@@ -13,6 +13,8 @@ public class ProductInformation {
 
     private String origin;
 
+    private String destinationCountry;
+
     private String destination;
 
     private String postcode;
@@ -83,6 +85,14 @@ public class ProductInformation {
 
     public void setOrigin(String origin) {
         this.origin = origin == null ? null : origin.trim();
+    }
+
+    public String getDestinationCountry() {
+        return destinationCountry;
+    }
+
+    public void setDestinationCountry(String destinationCountry) {
+        this.destinationCountry = destinationCountry;
     }
 
     public String getDestination() {

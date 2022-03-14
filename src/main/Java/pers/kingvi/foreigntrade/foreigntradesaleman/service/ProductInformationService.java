@@ -12,13 +12,15 @@ public interface ProductInformationService {
 
     List<ProductInformation> selectByFtsId(Long ftsId);
 
+    int selectAllCount();
+
     PageBeanVo<ProductInformation> selectByCriteria(String condition, String text, Integer currentPage, Integer perPageRecord);
 
     PageBeanVo<ProductInformation> selectByFullIndex(String text, Integer currentPage, Integer perPageRecord);
 
     PageBeanVo<ProductInformation> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord);
 
-    PageBeanVo<ProductInformation> selectByCity(String city, Integer currentPage, Integer perPageRecord);
+    PageBeanVo<ProductInformation> selectByCityRecommend(String city, Integer currentPage, Integer perPageRecord);  //首页推荐，根据货物发货地首先选择
 
     ProductInformation selectByIdAndFtsId(Integer id, Long ftsId);
 

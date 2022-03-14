@@ -13,7 +13,9 @@ public interface FreightAgencyService {
 
     FreightAgency selectByPrimaryKey(Long id);   //根据id查询账号
 
-    int updateByPrimaryKeySelective(FreightAgency fa);      //选择更新
+    FreightAgency selectByAccount(String account);   //根据邮箱账号查询货代信息
+
+    int updateByPrimaryKeySelective(FreightAgency fa);     //选择更新
 
     int closeAccountByFaId(Long Id, String password, String secretSecurity);     //注销账号，也就是删除账号
 

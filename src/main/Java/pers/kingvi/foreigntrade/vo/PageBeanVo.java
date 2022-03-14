@@ -9,9 +9,11 @@ public class PageBeanVo<T> {
 
     private Integer perPageRecord;    //每页记录数
 
-    private Integer pageCount;        //总页数
+    private Integer pageCount;        //总记录数除以每页记录数后的总页数
 
     private List<T> beanList;  //查询推荐结果列表
+
+
 
     public Integer getCurrentPage() {
         return currentPage;

@@ -1,9 +1,9 @@
 package pers.kingvi.foreigntrade.foreigntradesaleman.service.serviceImpl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kingvi.foreigntrade.admin.dao.ProductInformationVerifyMapper;
-import pers.kingvi.foreigntrade.foreigntradesaleman.api.ProductionInformationController;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ProductInformationService;
@@ -11,7 +11,7 @@ import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ProductInformationServiceImpl implements ProductInformationService {
@@ -40,7 +40,12 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     }
 
     @Override
-    public PageBeanVo<ProductInformation> selectByCriteria(String condition, String text, Integer currentPage, Integer perPageRecord) {
+    public int selectAllCount() {
+        return productInformationMapper.selectAllCount();
+    }
+
+    @Override
+    public PageBeanVo<ProductInformation> selectByCriteria(java.lang.String condition, java.lang.String text, Integer currentPage, Integer perPageRecord) {
         ProductInformation productInformation = new ProductInformation();
         List<ProductInformation> productInformationList;
         int count;
@@ -103,7 +108,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     }
 
     @Override
-    public PageBeanVo<ProductInformation> selectByFullIndex(String text, Integer currentPage, Integer perPageRecord) {
+    public PageBeanVo<ProductInformation> selectByFullIndex(java.lang.String text, Integer currentPage, Integer perPageRecord) {
         int count = productInformationMapper.selectCountByFullIndex(text);
         int start = (currentPage-1)*perPageRecord;
         int end = perPageRecord;
@@ -118,9 +123,86 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     }
 
     @Override
+    public PageBeanVo<ProductInformation> selectByCityRecommend(java.lang.String city, Integer currentPage, Integer perPageRecord) {
+        int start = (currentPage - 1) * perPageRecord;
+        int end = perPageRecord;
+        List<ProductInformation> productInformationList;
+        //页面数小于1，
+        if (currentPage < 1) {
+            return null;
+        }
+        //总记录数
+        int totalCount = productInformationMapper.selectAllCount();
+        PageBeanVo<ProductInformation> pageBeanVo = new PageBeanVo<>();
+        pageBeanVo.setPageCount(40, totalCount);
+        pageBeanVo.setCurrentPage(currentPage);
+        if (currentPage > pageBeanVo.getPageCount()) {
+            return null;
+        }
+        if (StringUtils.isBlank(city)) {
+            //如果货代未更新地址，即地址为空，则首页显示的是数据库中最新插入的数据
+            productInformationList = productInformationMapper.selectByNewestRecord(start, end);
+            pageBeanVo.setBeanList(productInformationList);
+            return pageBeanVo;
+        } else {
+            ProductInformation pi = new ProductInformation();
+            pi.setOrigin(city);
+            productInformationList = productInformationMapper.selectBySelective(pi);
+            //如果按照地址查询的数据库记录为空，返回系统默认页面
+            if (productInformationList == null) {
+                productInformationList = productInformationMapper.selectByNewestRecord(start, end);
+                pageBeanVo.setBeanList(productInformationList);
+                return pageBeanVo;
+            } else {
+                //按城市查询的数据非空
+                //非城市查询结果索引开始位置，也即城市查询结果的数值，在城市查询结果后面
+                int citySearchCount = productInformationList.size();
+                List<Integer> besideList = new ArrayList<>();
+                for (ProductInformation productInformation : productInformationList) {
+                    besideList.add(productInformation.getId());
+                }
+                //除城市索引外添加的数据记录
+                List<ProductInformation> addList;
+                //结果
+                List<ProductInformation> res = new ArrayList<>();
+                //当前页第一条数据距离起始位置的长度
+                int pageStart = start + 1;
+                //当前页最后一条数据距离起始位置的长度
+                int pageEnd = currentPage * perPageRecord;
+                int startIndex;
+                //城市搜索最后一条记录在当前页之前
+                if (citySearchCount < pageStart) {
+                    startIndex = start - citySearchCount;
+                    res = productInformationMapper.selectBesideList(besideList, startIndex, perPageRecord);
+                }
+                //城市搜索最后一条记录在当前页
+                if (pageStart <= citySearchCount && citySearchCount <= pageEnd) {
+                    List<ProductInformation> cityList = productInformationList.subList(start, citySearchCount);
+                    addList = productInformationMapper.selectBesideList(besideList, 0, pageEnd - citySearchCount);
+                    if (addList == null) {
+                        res = cityList;
+                    } else {
+                        //合并城市搜索结果和非城市搜索结果
+                        Collections.addAll(cityList, addList.toArray(new ProductInformation[0]));
+                        res = cityList;
+                    }
+                }
+                //城市搜索最后一条记录在当前页之后
+                if (citySearchCount > pageEnd) {
+                    res = productInformationList.subList(start, pageEnd);
+                }
+                pageBeanVo.setBeanList(res);
+                //返回页面数据
+                return pageBeanVo;
+            }
+        }
+
+    }
+
+    @Override
     public PageBeanVo<ProductInformation> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord) {
         int count = idList.size();
-        int start = (currentPage-1)*perPageRecord;
+        int start = (currentPage-1) * perPageRecord;
         int end = perPageRecord;
         List<ProductInformation> productInformationList = productInformationMapper.selectByList(idList, start, end);
         PageBeanVo<ProductInformation> pageBeanVo = new PageBeanVo<>();
@@ -130,11 +212,6 @@ public class ProductInformationServiceImpl implements ProductInformationService 
         pageBeanVo.setTotalRecord(count);
         pageBeanVo.setPageCount(perPageRecord, count);
         return pageBeanVo;
-    }
-
-    @Override
-    public PageBeanVo<ProductInformation> selectByCity(String city, Integer currentPage, Integer perPageRecord) {
-        return null;
     }
 
     @Override

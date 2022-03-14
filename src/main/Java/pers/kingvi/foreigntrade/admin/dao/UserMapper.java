@@ -23,5 +23,4 @@ public interface UserMapper {
 
     int deleteByAccount(String userAccount);      //根据账号删除用户
 
-
 }

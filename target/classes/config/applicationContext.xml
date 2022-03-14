@@ -80,6 +80,7 @@
     <tx:advice id="myTx" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="select*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"></tx:method>
             <tx:method name="find*" propagation="REQUIRED"></tx:method>
             <tx:method name="delete*" propagation="REQUIRED"></tx:method>
             <tx:method name="update*" propagation="REQUIRED"></tx:method>

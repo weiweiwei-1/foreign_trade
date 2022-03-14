@@ -8,6 +8,7 @@
     <result column="photo" property="photo" jdbcType="CHAR" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="destination_country" property="destinationCountry" jdbcType="CHAR"/>
     <result column="destination" property="destination" jdbcType="VARCHAR" />
     <result column="postcode" property="postcode" jdbcType="VARCHAR" />
     <result column="weight" property="weight" jdbcType="DECIMAL" />
@@ -80,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, fts_id, fts_name, photo, product_name, origin, destination, postcode, weight,
+    id, fts_id, fts_name, photo, product_name, origin, destination_country, destination, postcode, weight,
     volumn, time_requirement, charger, certificate, real_order, remark, send_time, quote_count,
     verify_status
   </sql>
@@ -132,6 +133,9 @@
       <if test="pi.origin != null and pi.origin != ''">
         origin = #{pi.origin,jdbcType=VARCHAR}
       </if>
+      <if test="pi.destinationCountry != null and pi.destinationCountry != ''">
+        destination_country = #{pi.destinationCountry,jdbcType=CHAR}
+      </if>
       <if test="pi.destination != null and pi.destination != ''">
         destination like concat('%',#{pi.destination,jdbcType=VARCHAR},'%')
       </if>
@@ -141,6 +145,45 @@
     </where>
     order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
   </select>
+
+  <select id="selectBySelective" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from product_information
+    <where>
+      <if test="pi.ftsName != null and pi.ftsName != ''">
+        and fts_name = #{pi.ftsName,jdbcType=VARCHAR}
+      </if>
+      <if test="pi.productName != null and pi.productName != ''">
+        and product_name = #{pi.productName,jdbcType=VARCHAR}
+      </if>
+      <if test="pi.origin != null and pi.origin != ''">
+        and origin = #{pi.origin,jdbcType=VARCHAR}
+      </if>
+      <if test="pi.destinationCountry != null and pi.destinationCountry != ''">
+        and destination_country = #{pi.destinationCountry,jdbcType=CHAR}
+      </if>
+      <if test="pi.destination != null and pi.destination != ''">
+        and destination = #{pi.destination,jdbcType=VARCHAR}
+      </if>
+      <if test="pi.remark != null and pi.remark != ''">
+        and remark = #{pi.remark,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectBesideList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product_information
+    where id not in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+
     <select id="selectCountByCriteria" resultType="integer">
         select count(*)
         from product_information
@@ -153,6 +196,9 @@
             </if>
             <if test="pi.origin != null and pi.origin != ''">
                 origin = #{pi.origin,jdbcType=VARCHAR}
+            </if>
+            <if test="pi.destinationCountry != null and pi.destinationCountry != ''">
+                destination_country = #{pi.destinationCountry,jdbcType=CHAR}
             </if>
             <if test="pi.destination != null and pi.destination != ''">
                 destination like concat('%',#{pi.destination,jdbcType=VARCHAR},'%')
@@ -170,6 +216,7 @@
             or fts_name like concat('%',#{text,jdbcType=VARCHAR},'%')
             or product_name like concat('%',#{text,jdbcType=VARCHAR},'%')
             or origin = #{text,jdbcType=VARCHAR}
+            or destination_country like concat('%',#{text,jdbcType=CHAR},'%')
             or destination like concat('%',#{text,jdbcType=VARCHAR},'%')
             or remark like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
@@ -182,6 +229,7 @@
             or fts_name like concat('%',#{text,jdbcType=VARCHAR},'%')
             or product_name like concat('%',#{text,jdbcType=VARCHAR},'%')
             or origin = #{text,jdbcType=VARCHAR}
+            or destination_country = #{text,jdbcType=CHAR}
             or destination like concat('%',#{text,jdbcType=VARCHAR},'%')
             or remark like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
@@ -195,6 +243,13 @@
             #{item,jdbcType=INTEGER}
         </foreach>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByNewestRecord" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from product_information
+      order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
     <select id="selectByFtsId" resultMap="BaseResultMap">
         select
@@ -226,13 +281,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into product_information (fts_id, fts_name, photo,
-      product_name, origin, destination,
+      product_name, origin, destination_country, destination,
       postcode, weight, volumn,
       time_requirement, charger, certificate,
       real_order, remark, send_time,
       quote_count, verify_status)
     values (#{ftsId,jdbcType=BIGINT}, #{ftsName,jdbcType=VARCHAR}, #{photo,jdbcType=CHAR},
-      #{productName,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
+      #{productName,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{destination_country,jdbcType=CHAR}, #{destination,jdbcType=VARCHAR},
       #{postcode,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{volumn,jdbcType=VARCHAR}, 
       #{timeRequirement,jdbcType=CHAR}, #{charger,jdbcType=CHAR}, #{certificate,jdbcType=CHAR},
       #{realOrder,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},
@@ -258,6 +313,9 @@
       </if>
       <if test="origin != null" >
         origin,
+      </if>
+      <if test="destinationCountry != null" >
+        destination_country,
       </if>
       <if test="destination != null" >
         destination,
@@ -312,6 +370,9 @@
       <if test="origin != null" >
         #{origin,jdbcType=VARCHAR},
       </if>
+      <if test="destinationCountry != null" >
+        #{destinationCountry,jdbcType=CHAR},
+      </if>
       <if test="destination != null" >
         #{destination,jdbcType=VARCHAR},
       </if>
@@ -350,6 +411,9 @@
       </if>
     </trim>
   </insert>
+  <select id="selectAllCount" resultType="integer">
+    select count(*) from product_information where quote_count > 0;
+  </select>
   <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" resultType="java.lang.Integer" >
     select count(*) from product_information
     <if test="_parameter != null" >
@@ -376,6 +440,9 @@
       </if>
       <if test="record.origin != null" >
         origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destinationCountry != null" >
+        destination_country = #{record.destinationCountry,jdbcType=CHAR},
       </if>
       <if test="record.destination != null" >
         destination = #{record.destination,jdbcType=VARCHAR},
@@ -426,6 +493,7 @@
       photo = #{record.photo,jdbcType=CHAR},
       product_name = #{record.productName,jdbcType=VARCHAR},
       origin = #{record.origin,jdbcType=VARCHAR},
+      destination_country = #{record.destinationCountry,jdbcType=CHAR},
       destination = #{record.destination,jdbcType=VARCHAR},
       postcode = #{record.postcode,jdbcType=VARCHAR},
       weight = #{record.weight,jdbcType=DECIMAL},
@@ -459,6 +527,9 @@
       </if>
       <if test="origin != null" >
         origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationCountry != null" >
+        destination_country = #{destinationCountry,jdbcType=CHAR},
       </if>
       <if test="destination != null" >
         destination = #{destination,jdbcType=VARCHAR},
@@ -506,6 +577,7 @@
       photo = #{photo,jdbcType=CHAR},
       product_name = #{productName,jdbcType=VARCHAR},
       origin = #{origin,jdbcType=VARCHAR},
+      destination_country = #{destinationCountry,jdbcType=CHAR},
       destination = #{destination,jdbcType=VARCHAR},
       postcode = #{postcode,jdbcType=VARCHAR},
       weight = #{weight,jdbcType=DECIMAL},
