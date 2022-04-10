@@ -11,7 +11,7 @@
     <result column="requirement" property="requirement" jdbcType="VARCHAR" />
     <result column="demand_description" property="demandDescription" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
-    <result column="wechat" property="weChat" jdbcType="VARCHAR" />
+    <result column="weChat" property="weChat" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
     <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
@@ -78,7 +78,7 @@
   <sql id="Base_Column_List" >
     id, fts_id, fts_name, fts_company,
     fts_city, main_business, requirement,
-    demand_description, phone, wechat,
+    demand_description, phone, weChat,
     email, send_time, verify_status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerifyExample" >
@@ -226,7 +226,7 @@
     </selectKey>
     insert into fts_demand_verify (fts_id, fts_name, fts_company,
       fts_city, main_business, requirement,
-      demand_description, phone, wechat,
+      demand_description, phone, weChat,
       email, send_time, verify_status
       )
     values (#{ftsId,jdbcType=BIGINT}, #{ftsName,jdbcType=VARCHAR}, #{ftsCompany,jdbcType=VARCHAR},
@@ -266,7 +266,7 @@
         phone,
       </if>
       <if test="weChat != null" >
-        wechat,
+        weChat,
       </if>
       <if test="email != null" >
         email,
@@ -354,7 +354,7 @@
         phone = #{record.phone,jdbcType=CHAR},
       </if>
       <if test="record.weChat != null" >
-        wechat = #{record.weChat,jdbcType=VARCHAR},
+        weChat = #{record.weChat,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
@@ -381,7 +381,7 @@
       requirement = #{record.requirement,jdbcType=VARCHAR},
       demand_description = #{record.demandDescription,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=CHAR},
-      wechat = #{record.weChat,jdbcType=VARCHAR},
+      weChat = #{record.weChat,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       send_time = #{record.sendTime,jdbcType=TIMESTAMP},
       verify_status = #{record.verifyStatus,jdbcType=CHAR}
@@ -417,7 +417,7 @@
         phone = #{phone,jdbcType=CHAR},
       </if>
       <if test="weChat != null" >
-        wechat = #{weChat,jdbcType=VARCHAR},
+        weChat = #{weChat,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -441,7 +441,7 @@
       requirement = #{requirement,jdbcType=VARCHAR},
       demand_description = #{demandDescription,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
-      wechat = #{weChat,jdbcType=VARCHAR},
+      weChat = #{weChat,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       send_time = #{sendTime,jdbcType=TIMESTAMP},
       verify_status = #{verifyStatus,jdbcType=CHAR}

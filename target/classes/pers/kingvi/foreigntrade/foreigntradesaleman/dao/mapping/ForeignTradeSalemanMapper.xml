@@ -10,7 +10,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="CHAR" />
     <result column="industry" property="industry" jdbcType="VARCHAR" />
-    <result column="working_time" property="workingTime" jdbcType="TINYINT" />
+    <result column="workingTime" property="workingTime" jdbcType="TINYINT" />
     <result column="age" property="age" jdbcType="TINYINT" />
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="main_product" property="mainProduct" jdbcType="VARCHAR" />
@@ -82,7 +82,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, account, password, company, city, name, photo, industry, working_time, age, sex,
+    id, account, password, company, city, name, photo, industry, workingTime, age, sex,
     main_product, store_link, weChat, phone, email, send_product_count, demand_count,
     user_status, register_time
   </sql>
@@ -147,7 +147,7 @@
                 main_product like concat('%',#{fts.mainProduct,jdbcType=VARCHAR},'%')
             </if>
             <if test="weChat != null and weChat != ''">
-                wechat = #{fts.weChat,jdbcType=VARCHAR}
+                weChat = #{fts.weChat,jdbcType=VARCHAR}
             </if>
             <if test="phone != null and phone != ''">
                 phone = #{fts.phone,jdbcType=VARCHAR}
@@ -170,7 +170,7 @@
         or name = #{param,jdbcType=VARCHAR}
         or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
         or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
-        or wechat = #{text,jdbcType=VARCHAR}
+        or weChat = #{text,jdbcType=VARCHAR}
         or phone = #{text,jdbcType=VARCHAR}
         or email = #{text,jdbcType=VARCHAR}
         </where>
@@ -187,7 +187,7 @@
             or name = #{param,jdbcType=VARCHAR}
             or industry like concat('%',#{param,jdbcType=VARCHAR},'%')
             or main_product like concat('%',#{param,jdbcType=VARCHAR},'%')
-            or wechat = #{text,jdbcType=VARCHAR}
+            or weChat = #{text,jdbcType=VARCHAR}
             or phone = #{text,jdbcType=VARCHAR}
             or email = #{text,jdbcType=VARCHAR}
         </where>
@@ -216,7 +216,7 @@
                 main_product like concat('%',#{fts.mainProduct,jdbcType=VARCHAR},'%')
             </if>
             <if test="weChat != null and weChat != ''">
-                wechat = #{fts.weChat,jdbcType=VARCHAR}
+                weChat = #{fts.weChat,jdbcType=VARCHAR}
             </if>
             <if test="phone != null and phone != ''">
                 phone = #{fts.phone,jdbcType=VARCHAR}
@@ -237,7 +237,7 @@
             or name = #{text,jdbcType=VARCHAR}
             or industry like concat('%',#{text,jdbcType=VARCHAR},'%')
             or main_product like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or wechat = #{text,jdbcType=VARCHAR}
+            or weChat = #{text,jdbcType=VARCHAR}
             or phone = #{text,jdbcType=VARCHAR}
             or email = #{text,jdbcType=VARCHAR}
         </where>
@@ -253,7 +253,7 @@
             or name = #{text,jdbcType=VARCHAR}
             or industry like concat('%',#{text,jdbcType=VARCHAR},'%')
             or main_product like concat('%',#{text,jdbcType=VARCHAR},'%')
-            or wechat = #{text,jdbcType=VARCHAR}
+            or weChat = #{text,jdbcType=VARCHAR}
             or phone = #{text,jdbcType=VARCHAR}
             or email = #{text,jdbcType=VARCHAR}
         </where>
@@ -302,7 +302,7 @@
     </selectKey>-->
     insert into foreign_trade_saleman (id, account, password, company,
       city, name, photo, industry,
-      working_time, age, sex,
+      workingTime, age, sex,
       main_product, store_link, weChat,
       phone, email, send_product_count,
       demand_count, user_status, register_time
@@ -346,7 +346,7 @@
         industry,
       </if>
       <if test="workingTime != null" >
-        working_time,
+        workingTime,
       </if>
       <if test="age != null" >
         age,
@@ -479,7 +479,7 @@
         industry = #{record.industry,jdbcType=VARCHAR},
       </if>
       <if test="record.workingTime != null" >
-        working_time = #{record.workingTime,jdbcType=TINYINT},
+        workingTime = #{record.workingTime,jdbcType=TINYINT},
       </if>
       <if test="record.age != null" >
         age = #{record.age,jdbcType=TINYINT},
@@ -529,7 +529,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=CHAR},
       industry = #{record.industry,jdbcType=VARCHAR},
-      working_time = #{record.workingTime,jdbcType=TINYINT},
+      workingTime = #{record.workingTime,jdbcType=TINYINT},
       age = #{record.age,jdbcType=TINYINT},
       sex = #{record.sex,jdbcType=CHAR},
       main_product = #{record.mainProduct,jdbcType=VARCHAR},
@@ -570,7 +570,7 @@
         industry = #{industry,jdbcType=VARCHAR},
       </if>
       <if test="workingTime != null and workingTime != ''" >
-        working_time = #{workingTime,jdbcType=TINYINT},
+        workingTime = #{workingTime,jdbcType=TINYINT},
       </if>
       <if test="age != null and age != ''" >
         age = #{age,jdbcType=TINYINT},
@@ -617,7 +617,7 @@
       name = #{name,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=CHAR},
       industry = #{industry,jdbcType=VARCHAR},
-      working_time = #{workingTime,jdbcType=TINYINT},
+      workingTime = #{workingTime,jdbcType=TINYINT},
       age = #{age,jdbcType=TINYINT},
       sex = #{sex,jdbcType=CHAR},
       main_product = #{mainProduct,jdbcType=VARCHAR},

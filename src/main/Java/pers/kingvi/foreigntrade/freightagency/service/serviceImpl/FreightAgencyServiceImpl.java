@@ -9,6 +9,7 @@ import pers.kingvi.foreigntrade.freightagency.service.FreightAgencyService;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.User;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
+import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
 
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
     @Override
     public int updateByPrimaryKeySelective(FreightAgency fa) {
         return freightAgencyMapper.updateByPrimaryKeySelective(fa);
+    }
+
+    @Override
+    public int updateByPrimaryKey(FaUpdateVo faUpdateVo) {
+        return freightAgencyMapper.updateByPrimaryKey(faUpdateVo);
     }
 
     @Override

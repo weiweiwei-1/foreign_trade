@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pers.kingvi.foreigntrade.freightagency.dao.FreightAgencyMapper;
 import pers.kingvi.foreigntrade.po.FreightAgency;
+import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
 
 import java.io.InputStream;
 
@@ -18,6 +19,8 @@ public class FreightAgencyMapperTest{
     private FreightAgency freightAgency;
 
     private SqlSession sqlSession;
+
+    private FaUpdateVo faUpdateVo;
 
     @Before
     public void setUp() throws Exception {
@@ -100,18 +103,18 @@ public class FreightAgencyMapperTest{
 
     @Test
     public void updateByPrimaryKey() {
-        freightAgency.setId(4L);
-        freightAgency.setAccount("134qwer424");
-        freightAgency.setPassword("19960529");
-        freightAgency.setCompany("庆威科技股份");
-        freightAgency.setCity("深圳");
-        freightAgency.setName("庆威");
-        freightAgency.setPhoto("me.jpg");
-        freightAgency.setSendQuoteCount(15);
-        freightAgency.setAdvertiseCount(30);
-        freightAgency.setUserStatus("0");
-//        FreightAgency.setName("Kingvi");
-        freightAgencyMapper.updateByPrimaryKey(freightAgency);  //出现错误
+        faUpdateVo .setId(4L);
+//        faUpdateVo .setAccount("134qwer424");
+//        faUpdateVo .setPassword("19960529");
+        faUpdateVo.setCompany("庆威科技股份");
+        faUpdateVo .setCity("深圳");
+        faUpdateVo .setName("庆威");
+        faUpdateVo .setPhoto("me.jpg");
+//        faUpdateVo .setSendQuoteCount(15);
+//        faUpdateVo.setAdvertiseCount(30);
+//        faUpdateVo.setUserStatus("0");
+//        fa.setName("Kingvi");
+        freightAgencyMapper.updateByPrimaryKey(faUpdateVo);  //出现错误
         sqlSession.commit();
         sqlSession.close();
     }

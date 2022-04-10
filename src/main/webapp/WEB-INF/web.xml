@@ -110,7 +110,12 @@
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
-    <session-config>
+    <!--<session-config>
         <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+-->
+    <session-config>
+        <!-- session 过期时间60分钟 -->
+        <session-timeout>60</session-timeout>
     </session-config>
 </web-app>

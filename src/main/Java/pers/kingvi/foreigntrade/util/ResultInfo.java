@@ -2,7 +2,7 @@ package pers.kingvi.foreigntrade.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-public final class ErrorInfo {
+public final class ResultInfo {
     public static final String DBS_ERROR = "数据库操作错误, 错误码：";
     public static final String NULL_EMAIL = "邮箱不能为空";
     public static final String EMAIL_FORMAT = "邮箱格式错误";
@@ -18,6 +18,12 @@ public final class ErrorInfo {
     public static final String PAGE_COUNT_TOO_SHORT = "页面数不能小于1";
     public static final String SEARCH_NULL = "搜索条件不能为空";
     public static final String SEARCH_TOO_LONG = "搜索字段超过指定长度8";
+    public static final String AUTH_SUCCESS = "登录且认证成功";
+    public static final String AUTH_FAIL = "未登录或登录过期,请重新登录！";
+    public static final String AUTH_NOT_MATCH = "已登录但角色不匹配";
+    public static final String AUTH_FOR_FTS = "请登录外贸账号";
+    public static final String AUTH_FOR_FA = "请登录货代账号";
+    public static final String WRITE_PHOTO_ERROR = "照片保存错误";
 
 
 }

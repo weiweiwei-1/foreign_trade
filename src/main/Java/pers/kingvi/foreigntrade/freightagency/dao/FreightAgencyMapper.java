@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.FreightAgencyExample;
+import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
 
 public interface FreightAgencyMapper {
     int countByExample(FreightAgencyExample example);
@@ -38,7 +39,7 @@ public interface FreightAgencyMapper {
 
     int updateByPrimaryKeySelective(FreightAgency record);     //选择更新记录
 
-    int updateByPrimaryKey(FreightAgency record);              //直接更新记录
+    int updateByPrimaryKey(FaUpdateVo faUpdateVo);              //直接更新记录
 
     List<FreightAgency> selectByParam(@Param("param") String param, @Param("start") Integer start, @Param("end") Integer end);         //根据条件进行好友查询
 

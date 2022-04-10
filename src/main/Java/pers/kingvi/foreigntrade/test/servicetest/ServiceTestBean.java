@@ -12,7 +12,6 @@ import pers.kingvi.foreigntrade.freightagency.service.FreightAgencyService;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.Message;
-import pers.kingvi.foreigntrade.util.ErrorInfo;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.sql.SQLException;

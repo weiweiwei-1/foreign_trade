@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.freightagency.service;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
+import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ public interface FreightAgencyService {
     FreightAgency selectByAccount(String account);   //根据邮箱账号查询货代信息
 
     int updateByPrimaryKeySelective(FreightAgency fa);     //选择更新
+
+    int updateByPrimaryKey(FaUpdateVo faUpdateVo);
 
     int closeAccountByFaId(Long Id, String password, String secretSecurity);     //注销账号，也就是删除账号
 

@@ -15,7 +15,7 @@
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="service_advantage" property="serviceAdvantage" jdbcType="VARCHAR" />
     <result column="company_link" property="companyLink" jdbcType="VARCHAR" />
-    <result column="weChat" property="weChat" jdbcType="VARCHAR" />
+    <result column="wechat" property="weChat" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="send_quote_count" property="sendQuoteCount" jdbcType="TINYINT" />
@@ -83,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, account, password, company, city, name, photo, main_bussiness_scope, working_time,
-    age, sex, service_advantage, company_link, weChat, phone, email, send_quote_count,
+    age, sex, service_advantage, company_link, wechat, phone, email, send_quote_count,
     advertise_count, user_status, register_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyExample" >
@@ -211,10 +211,10 @@
         service_advantage,
       </if>
       <if test="companyLink != null" >
-        companyLink,
+        company_link,
       </if>
       <if test="weChat != null" >
-        weChat,
+        wechat,
       </if>
       <if test="phone != null" >
         phone,
@@ -344,10 +344,10 @@
         service_advantage = #{record.serviceAdvantage,jdbcType=VARCHAR},
       </if>
       <if test="record.companyLink != null" >
-        companyLink = #{record.companyLink,jdbcType=VARCHAR},
+        company_link = #{record.companyLink,jdbcType=VARCHAR},
       </if>
       <if test="record.weChat != null" >
-        weChat = #{record.weChat,jdbcType=VARCHAR},
+        wechat = #{record.weChat,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=CHAR},
@@ -386,8 +386,8 @@
       age = #{record.age,jdbcType=TINYINT},
       sex = #{record.sex,jdbcType=CHAR},
       service_advantage = #{record.serviceAdvantage,jdbcType=VARCHAR},
-      companyLink = #{record.companyLink,jdbcType=VARCHAR},
-      weChat = #{record.weChat,jdbcType=VARCHAR},
+      company_link = #{record.companyLink,jdbcType=VARCHAR},
+      wechat = #{record.weChat,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=CHAR},
       email = #{record.email,jdbcType=VARCHAR},
       send_quote_count = #{record.sendQuoteCount,jdbcType=TINYINT},
@@ -435,10 +435,10 @@
         service_advantage = #{serviceAdvantage,jdbcType=VARCHAR},
       </if>
       <if test="companyLink != null" >
-        companyLink = #{companyLink,jdbcType=VARCHAR},
+        company_link = #{companyLink,jdbcType=VARCHAR},
       </if>
       <if test="weChat != null" >
-        weChat = #{weChat,jdbcType=VARCHAR},
+        wechat = #{weChat,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=CHAR},
@@ -461,10 +461,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.FreightAgency" >
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.vo.fa.FaUpdateVo" >
     update freight_agency
-    set account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+    set
       company = #{company,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -475,13 +474,9 @@
       sex = #{sex,jdbcType=CHAR},
       service_advantage = #{serviceAdvantage,jdbcType=VARCHAR},
       company_link = #{companyLink,jdbcType=VARCHAR},
-      weChat = #{weChat,jdbcType=VARCHAR},
+      wechat = #{weChat,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
-      email = #{email,jdbcType=VARCHAR},
-      send_quote_count = #{sendQuoteCount,jdbcType=TINYINT},
-      advertise_count = #{advertiseCount,jdbcType=TINYINT},
-      user_status = #{userStatus,jdbcType=CHAR},
-      register_time = #{registerTime,jdbcType=TIMESTAMP}
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="selectByParam" parameterType="string" resultMap="BaseResultMap">
@@ -620,7 +615,7 @@
     </select>
     <update id="decreaseSendQuoteCount" parameterType="integer">
         update freight_agency
-        set send_quote_count = send_quote_count - 1
+        set send_quote_count = sendQuoteCount - 1
         where id = #{id,jdbcType=BIGINT} and send_quote_count > 0
     </update>
     <update id="decreaseAdvertiseCount" parameterType="long">

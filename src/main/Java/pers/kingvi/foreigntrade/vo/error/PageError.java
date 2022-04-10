@@ -1,4 +1,4 @@
-package pers.kingvi.foreigntrade.util;
+package pers.kingvi.foreigntrade.vo.error;
 
 public class PageError {
     //页面数错误

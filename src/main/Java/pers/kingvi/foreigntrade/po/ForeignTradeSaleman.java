@@ -208,7 +208,7 @@ public class ForeignTradeSaleman {
 
     @Override
     public String toString() {
-        return "ForeignTradeSaleman{" +
+        return "fts{" +
                 "id=" + id +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +

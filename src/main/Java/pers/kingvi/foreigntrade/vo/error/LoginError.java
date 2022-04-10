@@ -1,10 +1,13 @@
-package pers.kingvi.foreigntrade.util;
+package pers.kingvi.foreigntrade.vo.error;
 
 import pers.kingvi.foreigntrade.po.LoginRecord;
 
 public class LoginError {
+    //邮箱错误信息
     private String emailError;
+    //密码错误信息
     private String passwordError;
+    //错误代码code
     private String codeError;
 
     public LoginError() {

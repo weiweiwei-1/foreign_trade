@@ -149,7 +149,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
             pi.setOrigin(city);
             productInformationList = productInformationMapper.selectBySelective(pi);
             //如果按照地址查询的数据库记录为空，返回系统默认页面
-            if (productInformationList == null) {
+            if (productInformationList.size() == 0) {
                 productInformationList = productInformationMapper.selectByNewestRecord(start, end);
                 pageBeanVo.setBeanList(productInformationList);
                 return pageBeanVo;

@@ -4,6 +4,9 @@ public final class ResultCode {
     public static final int SUCCESS = 1;                  //请求成功，参数合法，读或者写数据库成功
     public static final int ERROR = 0;                    //请求成功，参数非法，读或者写数据库被系统拒绝
     public static final int FAIL = -1;                    //系统内部错误
+    public static final int AUTH_SUCCESS = 1000;          //登录且认证成功
+    public static final int AUTH_FAIL = -1000;            //登录认证失败，未登录
+    public static final int AUTH_NOT_MATCH = 1001;        //登录成功，但是不符合角色
     public static final int NULL_EMAIL = 100;             //邮箱不能为空
     public static final int EMAIL_FORMAT = 101;           //邮箱格式错误
     public static final int EMAIL_INVALID = 21;           //邮箱不存在

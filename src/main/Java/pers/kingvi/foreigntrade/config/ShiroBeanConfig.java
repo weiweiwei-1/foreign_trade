@@ -37,10 +37,9 @@ public class ShiroBeanConfig {
 
     @Bean(name = "cookie")
     public static SimpleCookie getSimpleCookie() {
-        SimpleCookie simpleCookie = new SimpleCookie();
+        SimpleCookie simpleCookie = new SimpleCookie("myCookie");
         simpleCookie.setHttpOnly(true);
         simpleCookie.setMaxAge(604800);
-//        simpleCookie.setName("cookie");
         return simpleCookie;
     }
 

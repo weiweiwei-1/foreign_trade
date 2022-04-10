@@ -5,29 +5,31 @@ import java.util.Date;
 public class FreightAgency {
     private Long id;
 
+    private Integer sendQuoteCount;
+
     private String account;
 
     private String password;
 
-    private String company;
-
-    private String city;
+    private String photo;
 
     private String name;
 
-    private String photo;
+    private String city;
 
-    private String mainBussinessScope;
+    private String company;
 
-    private Integer workingTime;
-
-    private Integer age;
+    private String companyLink;
 
     private String sex;
 
-    private String serviceAdvantage;
+    private Integer age;
 
-    private String companyLink;
+    private Integer workingTime;
+
+    private String mainBussinessScope;
+
+    private String serviceAdvantage;
 
     private String weChat;
 
@@ -35,13 +37,32 @@ public class FreightAgency {
 
     private String email;
 
-    private Integer sendQuoteCount;
-
     private Integer advertiseCount;
 
     private String userStatus;
 
     private String registerTime;
+
+    public FreightAgency() {
+
+    }
+
+    public FreightAgency(Long id, String photo, String name, String city, String company, String companyLink, String sex, Integer age, Integer workingTime, String mainBussinessScope, String serviceAdvantage, String weChat, String phone, String email) {
+        this.id = id;
+        this.photo = photo;
+        this.name = name;
+        this.city = city;
+        this.company = company;
+        this.companyLink = companyLink;
+        this.sex = sex;
+        this.age = age;
+        this.workingTime = workingTime;
+        this.mainBussinessScope = mainBussinessScope;
+        this.serviceAdvantage = serviceAdvantage;
+        this.weChat = weChat;
+        this.phone = phone;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -51,12 +72,20 @@ public class FreightAgency {
         this.id = id;
     }
 
+    public Integer getSendQuoteCount() {
+        return sendQuoteCount;
+    }
+
+    public void setSendQuoteCount(Integer sendQuoteCount) {
+        this.sendQuoteCount = sendQuoteCount;
+    }
+
     public String getAccount() {
         return account;
     }
 
     public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+        this.account = account;
     }
 
     public String getPassword() {
@@ -64,31 +93,7 @@ public class FreightAgency {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company == null ? null : company.trim();
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.password = password;
     }
 
     public String getPhoto() {
@@ -96,23 +101,47 @@ public class FreightAgency {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+        this.photo = photo;
     }
 
-    public String getMainBussinessScope() {
-        return mainBussinessScope;
+    public String getName() {
+        return name;
     }
 
-    public void setMainBussinessScope(String mainBussinessScope) {
-        this.mainBussinessScope = mainBussinessScope == null ? null : mainBussinessScope.trim();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getWorkingTime() {
-        return workingTime;
+    public String getCity() {
+        return city;
     }
 
-    public void setWorkingTime(Integer workingTime) {
-        this.workingTime = workingTime;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getCompanyLink() {
+        return companyLink;
+    }
+
+    public void setCompanyLink(String companyLink) {
+        this.companyLink = companyLink;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public Integer getAge() {
@@ -123,12 +152,20 @@ public class FreightAgency {
         this.age = age;
     }
 
-    public String getSex() {
-        return sex;
+    public Integer getWorkingTime() {
+        return workingTime;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setWorkingTime(Integer workingTime) {
+        this.workingTime = workingTime;
+    }
+
+    public String getMainBussinessScope() {
+        return mainBussinessScope;
+    }
+
+    public void setMainBussinessScope(String mainBussinessScope) {
+        this.mainBussinessScope = mainBussinessScope;
     }
 
     public String getServiceAdvantage() {
@@ -136,15 +173,7 @@ public class FreightAgency {
     }
 
     public void setServiceAdvantage(String serviceAdvantage) {
-        this.serviceAdvantage = serviceAdvantage == null ? null : serviceAdvantage.trim();
-    }
-
-    public String getCompanyLink() {
-        return companyLink;
-    }
-
-    public void setCompanyLink(String companyLink) {
-        this.companyLink = companyLink == null ? null : companyLink.trim();
+        this.serviceAdvantage = serviceAdvantage;
     }
 
     public String getWeChat() {
@@ -152,7 +181,7 @@ public class FreightAgency {
     }
 
     public void setWeChat(String weChat) {
-        this.weChat = weChat == null ? null : weChat.trim();
+        this.weChat = weChat;
     }
 
     public String getPhone() {
@@ -160,7 +189,7 @@ public class FreightAgency {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -168,15 +197,7 @@ public class FreightAgency {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Integer getSendQuoteCount() {
-        return sendQuoteCount;
-    }
-
-    public void setSendQuoteCount(Integer sendQuoteCount) {
-        this.sendQuoteCount = sendQuoteCount;
+        this.email = email;
     }
 
     public Integer getAdvertiseCount() {
@@ -192,40 +213,6 @@ public class FreightAgency {
     }
 
     public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus == null ? null : userStatus.trim();
-    }
-
-    public String getRegisterTime() {
-        return registerTime;
-    }
-
-    public void setRegisterTime(String registerTime) {
-        this.registerTime = registerTime;
-    }
-
-    @Override
-    public String toString() {
-        return "FreightAgency{" +
-                "id=" + id +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", company='" + company + '\'' +
-                ", city='" + city + '\'' +
-                ", name='" + name + '\'' +
-                ", photo='" + photo + '\'' +
-                ", mainBussinessScope='" + mainBussinessScope + '\'' +
-                ", workingTime=" + workingTime +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ", serviceAdvantage='" + serviceAdvantage + '\'' +
-                ", companyLink='" + companyLink + '\'' +
-                ", weChat='" + weChat + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", sendQuoteCount=" + sendQuoteCount +
-                ", advertiseCount=" + advertiseCount +
-                ", userStatus='" + userStatus + '\'' +
-                ", registerTime='" + registerTime + '\'' +
-                '}';
+        this.userStatus = userStatus;
     }
 }
