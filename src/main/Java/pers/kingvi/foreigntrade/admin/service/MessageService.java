@@ -19,8 +19,7 @@ public interface MessageService {
 
     List<Message> selectLastFiftyMessage(Long id, Long friendId);      //显示最后50条消息记录
 
-    int deleteMessageByPrimaryKey(Long id, Long friendId);    //根据id删除消息记录，可以删除半小时以内的自己发送的消息内容（需要关联自己的id才能进行删除）。
+    int deleteMessageByPrimaryKey(Long id, Long friendId);    //根据id删除消息记录，可以删除半小时以内的自己发送的消息内容（需要关联自己的id进行删除）。
 
     int deleteAllMessages(Long id, Long friendId);
-
 }

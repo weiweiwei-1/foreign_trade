@@ -17,9 +17,10 @@
     <result column="certificate" property="certificate" jdbcType="CHAR" />
     <result column="real_order" property="realOrder" jdbcType="CHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="sendTime" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
     <result column="quote_count" property="quoteCount" jdbcType="TINYINT" />
-    <result column="verifyStatus" property="verifyStatus" jdbcType="CHAR" />
+    <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
+    <result column="destination_country" property="destinationCountry" jdbcType="CHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -81,8 +82,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, fts_id, fts_name, photo, product_name, origin, destination, postcode, weight,
-    volumn, time_requirement, charger, certificate, real_order, remark, sendTime, quote_count,
-    verifyStatus
+    volumn, time_requirement, charger, certificate, real_order, remark, send_time, quote_count,
+    verify_status, destination_country
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationVerifyExample" >
     select
@@ -145,109 +146,115 @@
     </selectKey>
     insert into product_information_verify
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ftsId != null" >
+      <if test="ftsId != null and ftsId != ''" >
         fts_id,
       </if>
-      <if test="ftsName != null" >
+      <if test="ftsName != null and ftsName != '' " >
         fts_name,
       </if>
-      <if test="photo != null" >
+      <if test="photo != null and photo != ''" >
         photo,
       </if>
-      <if test="productName != null" >
+      <if test="productName != null and productName != ''" >
         product_name,
       </if>
-      <if test="origin != null" >
+      <if test="origin != null and origin != ''" >
         origin,
       </if>
-      <if test="destination != null" >
+      <if test="destination != null and destination != ''" >
         destination,
       </if>
-      <if test="postcode != null" >
+      <if test="postcode != null and postcode != ''" >
         postcode,
       </if>
-      <if test="weight != null" >
+      <if test="weight != null and weight != ''" >
         weight,
       </if>
-      <if test="volumn != null" >
+      <if test="volumn != null and volumn != ''" >
         volumn,
       </if>
-      <if test="timeRequirement != null" >
+      <if test="timeRequirement != null and timeRequirement != ''" >
         time_requirement,
       </if>
-      <if test="charger != null" >
+      <if test="charger != null and charger != ''" >
         charger,
       </if>
-      <if test="certificate != null" >
+      <if test="certificate != null and certificate != ''" >
         certificate,
       </if>
-      <if test="realOrder != null" >
+      <if test="realOrder != null and realOrder != ''" >
         real_order,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null and remark != ''" >
         remark,
       </if>
-      <if test="sendTime != null" >
+      <if test="sendTime != null and sendTime != ''" >
         send_time,
       </if>
-      <if test="quoteCount != null" >
+      <if test="quoteCount != null and quoteCount != ''" >
         quote_count,
       </if>
-      <if test="verifyStatus != null" >
+      <if test="verifyStatus != null and verifyStatus != ''" >
         verify_status,
+      </if>
+      <if test="destinationCountry != null and destinationCountry != ''" >
+        destination_country,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ftsId != null" >
+      <if test="ftsId != null and ftsId != ''" >
         #{ftsId,jdbcType=BIGINT},
       </if>
-      <if test="ftsName != null" >
+      <if test="ftsName != null and ftsName != ''" >
         #{ftsName,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null" >
+      <if test="photo != null and photo != ''" >
         #{photo,jdbcType=CHAR},
       </if>
-      <if test="productName != null" >
+      <if test="productName != null and productName != ''" >
         #{productName,jdbcType=VARCHAR},
       </if>
-      <if test="origin != null" >
+      <if test="origin != null and origin != ''" >
         #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="destination != null" >
+      <if test="destination != null and destination != ''" >
         #{destination,jdbcType=VARCHAR},
       </if>
-      <if test="postcode != null" >
+      <if test="postcode != null and postcode != ''" >
         #{postcode,jdbcType=VARCHAR},
       </if>
-      <if test="weight != null" >
+      <if test="weight != null and weight != ''" >
         #{weight,jdbcType=DECIMAL},
       </if>
-      <if test="volumn != null" >
+      <if test="volumn != null and volumn != ''" >
         #{volumn,jdbcType=VARCHAR},
       </if>
-      <if test="timeRequirement != null" >
+      <if test="timeRequirement != null and timeRequirement != ''" >
         #{timeRequirement,jdbcType=CHAR},
       </if>
-      <if test="charger != null" >
+      <if test="charger != null and charger != ''" >
         #{charger,jdbcType=CHAR},
       </if>
-      <if test="certificate != null" >
+      <if test="certificate != null and certificate != ''" >
         #{certificate,jdbcType=CHAR},
       </if>
-      <if test="realOrder != null" >
+      <if test="realOrder != null and realOrder != ''" >
         #{realOrder,jdbcType=CHAR},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null and remark != ''" >
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="sendTime != null" >
+      <if test="sendTime != null and sendTime != ''" >
         #{sendTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="quoteCount != null" >
+      <if test="quoteCount != null and quoteCount != ''" >
         #{quoteCount,jdbcType=TINYINT},
       </if>
-      <if test="verifyStatus != null" >
+      <if test="verifyStatus != null and verifyStatus != ''" >
         #{verifyStatus,jdbcType=CHAR},
+      </if>
+      <if test="destinationCountry != null and destinationCountry != ''" >
+        #{destinationCountry,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -264,6 +271,11 @@
         <include refid="Base_Column_List"/>
         from product_information_verify
         where id = #{id,jdbcType=INTEGER} and fts_id = #{ftsId,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_information_verify order by id
     </select>
     <select id="selectByProductInformationVerify" parameterType="ProductInformation" resultMap="BaseResultMap">
         select

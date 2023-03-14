@@ -1,5 +1,7 @@
 package pers.kingvi.foreigntrade.po;
 
+import org.springframework.beans.factory.annotation.Required;
+
 public class ProductInformationVerify {
     private Integer id;
 
@@ -13,7 +15,7 @@ public class ProductInformationVerify {
 
     private String origin;
 
-    private String destination;
+    private String destinationCountry;
 
     private String postcode;
 
@@ -23,11 +25,13 @@ public class ProductInformationVerify {
 
     private String timeRequirement;
 
+    private String realOrder;
+
     private String charger;
 
     private String certificate;
 
-    private String realOrder;
+    private String destination;
 
     private String remark;
 
@@ -36,6 +40,28 @@ public class ProductInformationVerify {
     private Byte quoteCount;
 
     private String verifyStatus;
+
+    public ProductInformationVerify() {
+
+    }
+
+    public ProductInformationVerify(Long ftsId, String ftsName, String photo, String productName, String origin, String destinationCountry, String postcode, Double weight, String volumn, String timeRequirement, String realOrder, String charger, String certificate, String destination, String remark) {
+        this.ftsId = ftsId;
+        this.ftsName = ftsName;
+        this.photo = photo;
+        this.productName = productName;
+        this.origin = origin;
+        this.destinationCountry = destinationCountry;
+        this.postcode = postcode;
+        this.weight = weight;
+        this.volumn = volumn;
+        this.timeRequirement = timeRequirement;
+        this.realOrder = realOrder;
+        this.charger = charger;
+        this.certificate = certificate;
+        this.destination = destination;
+        this.remark = remark;
+    }
 
     public Integer getId() {
         return id;
@@ -58,7 +84,7 @@ public class ProductInformationVerify {
     }
 
     public void setFtsName(String ftsName) {
-        this.ftsName = ftsName == null ? null : ftsName.trim();
+        this.ftsName = ftsName;
     }
 
     public String getPhoto() {
@@ -66,7 +92,7 @@ public class ProductInformationVerify {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+        this.photo = photo;
     }
 
     public String getProductName() {
@@ -74,7 +100,7 @@ public class ProductInformationVerify {
     }
 
     public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+        this.productName = productName;
     }
 
     public String getOrigin() {
@@ -82,15 +108,15 @@ public class ProductInformationVerify {
     }
 
     public void setOrigin(String origin) {
-        this.origin = origin == null ? null : origin.trim();
+        this.origin = origin;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getDestinationCountry() {
+        return destinationCountry;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination == null ? null : destination.trim();
+    public void setDestinationCountry(String destinationCountry) {
+        this.destinationCountry = destinationCountry;
     }
 
     public String getPostcode() {
@@ -98,7 +124,7 @@ public class ProductInformationVerify {
     }
 
     public void setPostcode(String postcode) {
-        this.postcode = postcode == null ? null : postcode.trim();
+        this.postcode = postcode;
     }
 
     public Double getWeight() {
@@ -114,7 +140,7 @@ public class ProductInformationVerify {
     }
 
     public void setVolumn(String volumn) {
-        this.volumn = volumn == null ? null : volumn.trim();
+        this.volumn = volumn;
     }
 
     public String getTimeRequirement() {
@@ -122,23 +148,7 @@ public class ProductInformationVerify {
     }
 
     public void setTimeRequirement(String timeRequirement) {
-        this.timeRequirement = timeRequirement == null ? null : timeRequirement.trim();
-    }
-
-    public String getCharger() {
-        return charger;
-    }
-
-    public void setCharger(String charger) {
-        this.charger = charger == null ? null : charger.trim();
-    }
-
-    public String getCertificate() {
-        return certificate;
-    }
-
-    public void setCertificate(String certificate) {
-        this.certificate = certificate == null ? null : certificate.trim();
+        this.timeRequirement = timeRequirement;
     }
 
     public String getRealOrder() {
@@ -146,7 +156,31 @@ public class ProductInformationVerify {
     }
 
     public void setRealOrder(String realOrder) {
-        this.realOrder = realOrder == null ? null : realOrder.trim();
+        this.realOrder = realOrder;
+    }
+
+    public String getCharger() {
+        return charger;
+    }
+
+    public void setCharger(String charger) {
+        this.charger = charger;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public String getRemark() {
@@ -154,7 +188,7 @@ public class ProductInformationVerify {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+        this.remark = remark;
     }
 
     public String getSendTime() {
@@ -178,6 +212,31 @@ public class ProductInformationVerify {
     }
 
     public void setVerifyStatus(String verifyStatus) {
-        this.verifyStatus = verifyStatus == null ? null : verifyStatus.trim();
+        this.verifyStatus = verifyStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductInformationVerify{" +
+                "id=" + id +
+                ", ftsId=" + ftsId +
+                ", ftsName='" + ftsName + '\'' +
+                ", photo='" + photo + '\'' +
+                ", productName='" + productName + '\'' +
+                ", origin='" + origin + '\'' +
+                ", destinationCountry='" + destinationCountry + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", weight=" + weight +
+                ", volumn='" + volumn + '\'' +
+                ", timeRequirement='" + timeRequirement + '\'' +
+                ", realOrder='" + realOrder + '\'' +
+                ", charger='" + charger + '\'' +
+                ", certificate='" + certificate + '\'' +
+                ", destination='" + destination + '\'' +
+                ", remark='" + remark + '\'' +
+                ", sendTime='" + sendTime + '\'' +
+                ", quoteCount=" + quoteCount +
+                ", verifyStatus='" + verifyStatus + '\'' +
+                '}';
     }
 }

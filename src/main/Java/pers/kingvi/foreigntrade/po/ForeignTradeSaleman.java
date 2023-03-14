@@ -46,6 +46,14 @@ public class ForeignTradeSaleman {
 
     private String registerTime;
 
+    public ForeignTradeSaleman() {
+
+    }
+
+    public ForeignTradeSaleman(Integer sendProductCount) {
+        this.sendProductCount = sendProductCount;
+    }
+
     public Long getId() {
         return id;
     }

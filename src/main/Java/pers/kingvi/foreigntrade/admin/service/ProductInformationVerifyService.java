@@ -6,9 +6,21 @@ import pers.kingvi.foreigntrade.vo.PageBeanVo;
 import java.util.List;
 
 public interface ProductInformationVerifyService {
-    int insertSelective(ProductInformationVerify ProductInformationVerify);
+    List<ProductInformationVerify> selectAllProductList();
+
+    //管理员审核通过
+    int permitLaunch(ProductInformationVerify ProductInformationVerify);
+
+    //另一种审核接口，通过id查询产品信息进行操作
+    int permitProduct(Integer id);
+
+    int rejectProduct(Integer id);
+
+    int sendProductQuery(ProductInformationVerify productInformationVerify, Long ftsId);
 
     List<ProductInformationVerify> selectByFtsId(Long ftsId);
+
+    int insertSelective(ProductInformationVerify productInformationVerify);
 
     PageBeanVo<ProductInformationVerify> selectByCriteria(String condition, String text, Integer currentPage, Integer perPageRecord);
 

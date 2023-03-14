@@ -103,11 +103,37 @@
     order by id desc limit #{amount,jdbcType=INTEGER}) as message order by id
   </select>
   <select id="selectUnReadMessage" parameterType="long" resultType="UnReadMessageVo">
-    select id,count(id) as unReadMessageCount,senderId as friendId,receiverId,content,send_time from message where receiverId=#{userId} and status=0 group by senderId order by senderId
+    select id,count(id) as unReadMessageCount,senderId as friendId,receiverId,content,send_time from message where receiverId=#{userId,jdbcType=BIGINT} and status=0 group by senderId order by id DESC
   </select>
   <select id="selectReadAndUnReadMessage" parameterType="long" resultType="ReadAndUnReadMessageVo" >
     select id, senderId as friendId, content,send_time from message where id in (
         select max(id) from message where receiverId = #{userId} group by senderId) order by senderId
+  </select>
+  <select id="selectLastMessageListFromSenderId" parameterType="long" resultMap="BaseResultMap">
+    select * from message where id in
+    (SELECT max(id) from message where senderId = #{senderId,jdbcType=BIGINT} GROUP BY receiverId)
+    order by id desc
+  </select>
+  <select id="selectLastMessageListFromReceiverId" parameterType="long" resultMap="BaseResultMap">
+    select * from message where id in
+   (SELECT max(id) from message where receiverId = #{receiverId,jdbcType=BIGINT} GROUP BY senderId)
+    order by id desc
+  </select>
+  <select id="selectMessageListByIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from message where id in
+    <choose>
+      <when test="idList != null">
+        <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+          #{item,jdbcType=INTEGER}
+        </foreach>
+      </when>
+      <otherwise>
+        (-1)
+      </otherwise>
+    </choose>
+    order by id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from message

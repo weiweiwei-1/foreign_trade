@@ -8,6 +8,8 @@ import pers.kingvi.foreigntrade.foreigntradesaleman.service.ForeignTradeSalemanS
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.User;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
+import pers.kingvi.foreigntrade.vo.fts.FtsUpdateVo;
+
 import java.util.List;
 
 @Service
@@ -21,20 +23,12 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
 
     @Override
     public int insertSelective(ForeignTradeSaleman fts) {
-        try {
-            User user = userMapper.selectByUserAccount(fts.getAccount());
-            if (user == null) {
-                foreignTradeSalemanMapper.insertSelective(fts);
-                user = new User();
-                user.setUserId(fts.getId());
-                user.setUserType("外贸员");
-                user.setUserAccount(fts.getAccount());
-                userMapper.insertSelective(user);
-            }
-             return 1;
-        } catch (Exception e) {
-            return 0;
-        }
+        foreignTradeSalemanMapper.insertSelective(fts);
+        User user = new User();
+        user.setUserId(fts.getId());
+        user.setUserType("fts");
+        user.setUserAccount(fts.getAccount());
+        return userMapper.insertSelective(user);
     }
 
     @Override
@@ -43,8 +37,23 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
     }
 
     @Override
+    public ForeignTradeSaleman selectByAccount(String account) {
+        return foreignTradeSalemanMapper.selectByAccount(account);
+    }
+
+    @Override
+    public int updateByPrimaryKey(FtsUpdateVo ftsUpdateVo) {
+        return foreignTradeSalemanMapper.updateByPrimaryKey(ftsUpdateVo);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(ForeignTradeSaleman fts) {
         return foreignTradeSalemanMapper.updateByPrimaryKeySelective(fts);
+    }
+
+    @Override
+    public int resetSendProductCount(Integer productCount) {
+        return foreignTradeSalemanMapper.resetAllSendProductCount(productCount);
     }
 
     @Override
@@ -56,6 +65,11 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
     public int deleteByPrimaryKey(Long id) {
         userMapper.deleteByPrimaryKey(id);
         return foreignTradeSalemanMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<ForeignTradeSaleman> selectByIdList(List<Long> ftsIdList) {
+        return foreignTradeSalemanMapper.selectByFtsIdList(ftsIdList);
     }
 
     @Override

@@ -11,10 +11,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import pers.kingvi.foreigntrade.filter.CustomizedAuthenticator;
-import pers.kingvi.foreigntrade.filter.FaRealm;
-import pers.kingvi.foreigntrade.filter.FtsRealm;
-import pers.kingvi.foreigntrade.filter.ShiroFormAuthenticationFilter;
+import pers.kingvi.foreigntrade.filter.*;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -33,7 +30,13 @@ public class ShiroBeanConfig {
     private FtsRealm ftsRealm;
 
     @Autowired
+    private AdminRealm adminRealm;
+
+    @Autowired
     private CustomizedAuthenticator customizedAuthenticator;
+
+    @Autowired
+    private CustomizedAuthorizer customizedAuthorizer;
 
     @Bean(name = "cookie")
     public static SimpleCookie getSimpleCookie() {
@@ -56,13 +59,19 @@ public class ShiroBeanConfig {
         return customizedAuthenticator;
     }
 
+    @Bean(name = "authorizer")
+    public CustomizedAuthorizer getCustomizedAuthorizer() {
+        return customizedAuthorizer;
+    }
+
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager getSecurityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-//        securityManager.setRealm(myRealms);
         Collection<Realm> realms = new ArrayList<>();
         realms.add(faRealm);
         realms.add(ftsRealm);
+        realms.add(adminRealm);
+        securityManager.setAuthorizer(getCustomizedAuthorizer());
         securityManager.setAuthenticator(getCustomizedAuthenticator());
         securityManager.setRealms(realms);
         securityManager.setRememberMeManager(getRememberMeManager());
@@ -100,6 +109,7 @@ public class ShiroBeanConfig {
         urlMap.put("/ChatPage/register", "anon");
         urlMap.put("/AddUser/**", "authc");
         urlMap.put("/Friend/**", "authc,roles[admin]");
+        urlMap.put("/vivivi/*", "authc,roles[admin]");
         urlMap.put("/Message/**", "authc");
         urlMap.put("/User/**", "authc");
         urlMap.put("/**", "anon");

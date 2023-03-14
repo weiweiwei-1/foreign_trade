@@ -1,11 +1,7 @@
 package pers.kingvi.foreigntrade.freightagency.service;
 
-import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgencyRecommend;
 import pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify;
-import pers.kingvi.foreigntrade.po.FreightAgencyRecommend;
-import pers.kingvi.foreigntrade.vo.FreightAgencyRecommendPage;
-import pers.kingvi.foreigntrade.vo.FreightAgencyRecommendPage;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.util.List;

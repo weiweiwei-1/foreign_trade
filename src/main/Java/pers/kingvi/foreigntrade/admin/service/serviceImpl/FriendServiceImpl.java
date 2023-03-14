@@ -40,6 +40,11 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
+    public Friend selectFriend(Friend friend) {
+        return friendMapper.selectFriend(friend);
+    }
+
+    @Override
     public List<FriendVo> selectById(Long id) {
         User user = userMapper.selectByPrimaryKey(id);
         List<Long> idList =  new ArrayList<>();
@@ -114,21 +119,21 @@ public class FriendServiceImpl implements FriendService {
         User user = userMapper.selectByPrimaryKey(id);
         if (user != null) {
             Friend friend = new Friend();
-            friend.setUserId(id);
-            friend.setFriendId(friendId);
+            friend.setFaId(id);
+            friend.setFtsId(friendId);
             friend = friendMapper.selectFriend(friend);
             if (friend != null) {
                 //如果用户是货代，那么更改外贸的信息,id为faId也即friendId,friendId为ftsId也即userId
                 if ("fa".equals(user.getUserType())) {
-                    friend.setUserId(friendId);
-                    friend.setFriendId(id);
-                    friend.setUserMark(friendMark);
+                    friend.setFaId(friendId);
+                    friend.setFtsId(id);
+                    friend.setFaMark(friendMark);
                     return friendMapper.updateFriend(friend);
                     //如果用户是外贸，那么更改货代的信息，id为ftsId也即userId,friendId为faId也即friendId
                 } else if ("fts".equals(user.getUserType())) {
-                    friend.setUserId(id);
-                    friend.setFriendId(friendId);
-                    friend.setFriendMark(friendMark);
+                    friend.setFaId(id);
+                    friend.setFtsId(friendId);
+                    friend.setFtsMark(friendMark);
                     return friendMapper.updateFriend(friend);
                 } else {
                     return 0;

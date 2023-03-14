@@ -43,7 +43,7 @@
         <property name="logAbandoned" value="true" />
     </bean>
 
-    <!--会话工程配置，跟sqlmap的配置功能相似-->
+    <!--会话工程配置，跟sqlmap.config的配置功能相似-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
         <property name="dataSource" ref="dataSource"></property>
         <property name="mapperLocations">
@@ -61,7 +61,7 @@
     </bean>
 
     <!--mapper接口的扫描，包含包和beanname,一旦被扫描，说明接口类已经注入到了bean容器中，
-       因此类上面就可以不加注解标志了,如果没有basePackage-->
+       这样类上面就可以不加注解标志-->
     <bean id="mapperScannerConfigure" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="pers.kingvi.foreigntrade.freightagency.dao,pers.kingvi.foreigntrade.foreigntradesaleman.dao,pers.kingvi.foreigntrade.admin.dao"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
@@ -72,6 +72,7 @@
         <constructor-arg ref="dataSource"></constructor-arg>
     </bean>
     <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+    <!--service事务控制，对service接口名进行匹配-->
     <aop:config>
         <aop:pointcut id="txPointCut" expression="execution(* pers.kingvi.foreigntrade.*.service.serviceImpl.*.*(..))"/>
         <aop:advisor advice-ref="myTx" pointcut-ref="txPointCut"></aop:advisor>
@@ -86,6 +87,10 @@
             <tx:method name="update*" propagation="REQUIRED"></tx:method>
             <tx:method name="search*" propagation="REQUIRED"></tx:method>
             <tx:method name="decrease*" propagation="REQUIRED"></tx:method>
+            <tx:method name="permit*" propagation="REQUIRED"></tx:method>
+            <tx:method name="reject*" propagation="REQUIRED"></tx:method>
+            <tx:method name="send*" propagation="REQUIRED"></tx:method>
+            <tx:method name="**" propagation="REQUIRED"></tx:method>
         </tx:attributes>
 
     </tx:advice>

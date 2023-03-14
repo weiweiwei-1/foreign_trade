@@ -125,10 +125,13 @@
     <include refid="Base_Column_List"/>
     from freight_agency
     where id in
-    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+    <foreach collection="faIdList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>
-    order by id
+    ORDER BY field(id,
+    <foreach collection="faIdList" item="item" index="index" separator="," close=")" >
+      ${item}
+    </foreach>
   </select>
 
     <select id="selectByAccountAndPassword" resultMap="BaseResultMap">
@@ -613,9 +616,9 @@
         </foreach>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
-    <update id="decreaseSendQuoteCount" parameterType="integer">
+    <update id="decreaseSendQuoteCount" parameterType="long">
         update freight_agency
-        set send_quote_count = sendQuoteCount - 1
+        set send_quote_count = send_quote_count - 1
         where id = #{id,jdbcType=BIGINT} and send_quote_count > 0
     </update>
     <update id="decreaseAdvertiseCount" parameterType="long">
@@ -635,7 +638,7 @@
     </update>
     <update id="resetAllSendQuoteCount" parameterType="integer">
         update freight_agency
-        set send_product_count = #{count,jdbcType=INTEGER}
+        set send_quote_count = #{count,jdbcType=INTEGER}
     </update>
     <update id="resetAllAdvertiseCount" parameterType="integer">
         update freight_agency

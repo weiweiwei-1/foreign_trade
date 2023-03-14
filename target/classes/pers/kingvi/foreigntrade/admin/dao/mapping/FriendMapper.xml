@@ -3,10 +3,10 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.FriendMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.Friend" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userId" property="userId" jdbcType="BIGINT" />
-    <result column="friend_id" property="friendId" jdbcType="BIGINT" />
-    <result column="user_mark" property="userMark" jdbcType="VARCHAR" />
-    <result column="friend_mark" property="friendMark" jdbcType="VARCHAR" />
+    <result column="faId" property="faId" jdbcType="BIGINT" />
+    <result column="friend_id" property="ftsId" jdbcType="BIGINT" />
+    <result column="user_mark" property="faMark" jdbcType="VARCHAR" />
+    <result column="friend_mark" property="ftsMark" jdbcType="VARCHAR" />
     <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -91,36 +91,36 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectFriendListByUserId" parameterType="long" resultType="FriendVo">
-    select id, friend_id as friendId, friend_mark as friendMark from friend where user_id = #{userId,jdbcType=BIGINT}
+    select id, friend_id as ftsId, friend_mark as ftsMark from friend where user_id = #{faId,jdbcType=BIGINT}
     union all
-    select id, user_id as friendId, user_mark as friendMark from friend where friend_id = #{userId,jdbcType=BIGINT}
+    select id, user_id as ftsId, user_mark as ftsMark from friend where friend_id = #{faId,jdbcType=BIGINT}
     order by friend_id
   </select>
     <select id="selectFriendMarkAndAddTime" resultMap="BaseResultMap" parameterType="friend">
-        select friend_mark as friendMark, add_time as addTime from friend where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+        select friend_mark as ftsMark, add_time as addTime from friend where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
         union all
-        select user_mark as friendMark, add_time as addTime from friend where user_id = #{friendId,jdbcType=BIGINT} and friend_id = #{userId,jdbcType=BIGINT}
+        select user_mark as ftsMark, add_time as addTime from friend where user_id = #{ftsId,jdbcType=BIGINT} and friend_id = #{faId,jdbcType=BIGINT}
     </select>
     <select id="selectFriend" parameterType="friend" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from friend where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+        from friend where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
         union all
         select
         <include refid="Base_Column_List"/>
-        from friend where user_id = #{friendId,jdbcType=BIGINT} and friend_id = #{userId,jdbcType=BIGINT}
+        from friend where user_id = #{ftsId,jdbcType=BIGINT} and friend_id = #{faId,jdbcType=BIGINT}
     </select>
   <select id="selectByKey" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from friend where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+    from friend where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from friend
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <delete id="deleteFriend">
-        delete from friend where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+        delete from friend where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
     </delete>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.FriendExample" >
     delete from friend
@@ -132,9 +132,9 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into friend (userId, friend_id, user_mark, friend_mark, add_time)
-    values (#{userId,jdbcType=BIGINT}, #{friendId,jdbcType=BIGINT}, #{userMark,jdbcType=VARCHAR},
-      #{friendMark,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP})
+    insert into friend (faId, friend_id, user_mark, friend_mark, add_time)
+    values (#{faId,jdbcType=BIGINT}, #{ftsId,jdbcType=BIGINT}, #{faMark,jdbcType=VARCHAR},
+      #{ftsMark,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="pers.kingvi.foreigntrade.po.Friend" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -142,16 +142,16 @@
     </selectKey>
     insert into friend
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+      <if test="faId != null" >
         user_id,
       </if>
-      <if test="friendId != null" >
+      <if test="ftsId != null" >
         friend_id,
       </if>
-      <if test="userMark != null" >
+      <if test="faMark != null" >
         user_mark,
       </if>
-      <if test="friendMark != null" >
+      <if test="ftsMark != null" >
         friend_mark,
       </if>
       <if test="addTime != null" >
@@ -159,17 +159,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+      <if test="faId != null" >
+        #{faId,jdbcType=BIGINT},
       </if>
-      <if test="friendId != null" >
-        #{friendId,jdbcType=BIGINT},
+      <if test="ftsId != null" >
+        #{ftsId,jdbcType=BIGINT},
       </if>
-      <if test="userMark != null" >
-        #{userMark,jdbcType=VARCHAR},
+      <if test="faMark != null" >
+        #{faMark,jdbcType=VARCHAR},
       </if>
-      <if test="friendMark != null" >
-        #{friendMark,jdbcType=VARCHAR},
+      <if test="ftsMark != null" >
+        #{ftsMark,jdbcType=VARCHAR},
       </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
@@ -188,17 +188,17 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.faId != null" >
+        user_id = #{record.faId,jdbcType=BIGINT},
       </if>
-      <if test="record.friendId != null" >
-        friend_id = #{record.friendId,jdbcType=BIGINT},
+      <if test="record.ftsId != null" >
+        friend_id = #{record.ftsId,jdbcType=BIGINT},
       </if>
-      <if test="record.userMark != null" >
-        user_mark = #{record.userMark,jdbcType=VARCHAR},
+      <if test="record.faMark != null" >
+        user_mark = #{record.faMark,jdbcType=VARCHAR},
       </if>
-      <if test="record.friendMark != null" >
-        friend_mark = #{record.friendMark,jdbcType=VARCHAR},
+      <if test="record.ftsMark != null" >
+        friend_mark = #{record.ftsMark,jdbcType=VARCHAR},
       </if>
       <if test="record.addTime != null" >
         add_time = #{record.addTime,jdbcType=TIMESTAMP},
@@ -211,10 +211,10 @@
   <update id="updateByExample" parameterType="map" >
     update friend
       set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      friend_id = #{record.friendId,jdbcType=BIGINT},
-      user_mark = #{record.userMark,jdbcType=VARCHAR},
-      friend_mark = #{record.friendMark,jdbcType=VARCHAR,
+      user_id = #{record.faId,jdbcType=BIGINT},
+      friend_id = #{record.ftsId,jdbcType=BIGINT},
+      user_mark = #{record.faMark,jdbcType=VARCHAR},
+      friend_mark = #{record.ftsMark,jdbcType=VARCHAR,
       add_time = #{record.addTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -223,17 +223,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="pers.kingvi.foreigntrade.po.Friend" >
     update friend
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="faId != null" >
+        user_id = #{faId,jdbcType=BIGINT},
       </if>
-      <if test="friendId != null" >
-        friend_id = #{friendId,jdbcType=BIGINT},
+      <if test="ftsId != null" >
+        friend_id = #{ftsId,jdbcType=BIGINT},
       </if>
-      <if test="userMark != null" >
-        user_mark = #{userMark,jdbcType=VARCHAR},
+      <if test="faMark != null" >
+        user_mark = #{faMark,jdbcType=VARCHAR},
       </if>
-      <if test="friendMark != null" >
-        friend_mark = #{friendMark,jdbcType=VARCHAR},
+      <if test="ftsMark != null" >
+        friend_mark = #{ftsMark,jdbcType=VARCHAR},
       </if>
       <if test="addTime != null" >
         add_time = #{addTime,jdbcType=TIMESTAMP},
@@ -243,44 +243,44 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.Friend" >
     update friend
-    set user_id = #{userId,jdbcType=BIGINT},
-      friend_id = #{friendId,jdbcType=BIGINT},
-      user_mark = #{userMark,jdbcType=VARCHAR},
-      friend_mark = #{friendMark,jdbcType=VARCHAR}
+    set user_id = #{faId,jdbcType=BIGINT},
+      friend_id = #{ftsId,jdbcType=BIGINT},
+      user_mark = #{faMark,jdbcType=VARCHAR},
+      friend_mark = #{ftsMark,jdbcType=VARCHAR}
       add_time = #{addTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateFriend" parameterType="Friend">
     update friend
     <set>
-      <if test="userMark != null" >
-        user_mark = #{userMark,jdbcType=VARCHAR},
+      <if test="faMark != null" >
+        user_mark = #{faMark,jdbcType=VARCHAR},
       </if>
-      <if test="friendMark != null" >
-        friend_mark = #{friendMark,jdbcType=VARCHAR},
+      <if test="ftsMark != null" >
+        friend_mark = #{ftsMark,jdbcType=VARCHAR},
       </if>
     </set>
-      where user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+      where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
   </update>
     <update id="updateFriendMark" parameterType="pers.kingvi.foreigntrade.po.Friend">
         update friend
         <set>
-            <if test="friendMark!=null">
-                friend_mark = #{friendMark,jdbcType=VARCHAR},
+            <if test="ftsMark!=null">
+                friend_mark = #{ftsMark,jdbcType=VARCHAR},
             </if>
         </set>
         where
-        user_id = #{userId,jdbcType=BIGINT} and friend_id = #{friendId,jdbcType=BIGINT}
+        user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
     </update>
     <update id="updateUserMark" parameterType="pers.kingvi.foreigntrade.po.Friend">
         update friend
         <set>
-            <if test="friendMark!=null">
-                user_mark = #{friendMark,jdbcType=VARCHAR},
+            <if test="ftsMark!=null">
+                user_mark = #{ftsMark,jdbcType=VARCHAR},
             </if>
         </set>
         where
-        user_id = #{friendId,jdbcType=BIGINT} and friend_id = #{userId,jdbcType=BIGINT}
+        user_id = #{ftsId,jdbcType=BIGINT} and friend_id = #{faId,jdbcType=BIGINT}
     </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FriendExample" id="selectByExampleWithRowbounds" >
     select

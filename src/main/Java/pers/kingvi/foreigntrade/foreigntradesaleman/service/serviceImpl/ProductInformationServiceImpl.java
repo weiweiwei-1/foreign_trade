@@ -4,11 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kingvi.foreigntrade.admin.dao.ProductInformationVerifyMapper;
+import pers.kingvi.foreigntrade.admin.dao.QuoteRecordMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ProductInformationService;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
+import pers.kingvi.foreigntrade.po.QuoteRecord;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.util.*;
@@ -24,6 +26,9 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
     @Autowired
     private ProductInformationMapper productInformationMapper;
+
+    @Autowired
+    private QuoteRecordMapper quoteRecordMapper;
 
     @Override
     public int insertSelective(ProductInformationVerify productInformationVerify) {
@@ -127,7 +132,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
         int start = (currentPage - 1) * perPageRecord;
         int end = perPageRecord;
         List<ProductInformation> productInformationList;
-        //页面数小于1，
+        //页面数小于1，返回空
         if (currentPage < 1) {
             return null;
         }
@@ -140,7 +145,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
             return null;
         }
         if (StringUtils.isBlank(city)) {
-            //如果货代未更新地址，即地址为空，则首页显示的是数据库中最新插入的数据
+            //若货代未更新地址，即地址为空，则首页显示的是数据库中最新插入的数据(系统默认页面)
             productInformationList = productInformationMapper.selectByNewestRecord(start, end);
             pageBeanVo.setBeanList(productInformationList);
             return pageBeanVo;
@@ -148,7 +153,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
             ProductInformation pi = new ProductInformation();
             pi.setOrigin(city);
             productInformationList = productInformationMapper.selectBySelective(pi);
-            //如果按照地址查询的数据库记录为空，返回系统默认页面
+            //若按照地址查询的数据库记录为空，返回系统默认页面
             if (productInformationList.size() == 0) {
                 productInformationList = productInformationMapper.selectByNewestRecord(start, end);
                 pageBeanVo.setBeanList(productInformationList);
@@ -199,6 +204,12 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
     }
 
+
+    @Override
+    public ProductInformation selectByPrimaryKey(Integer productId) {
+        return productInformationMapper.selectByPrimaryKey(productId);
+    }
+
     @Override
     public PageBeanVo<ProductInformation> selectByList(List<Integer> idList, Integer currentPage, Integer perPageRecord) {
         int count = idList.size();
@@ -217,6 +228,15 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     @Override
     public ProductInformation selectByIdAndFtsId(Integer id, Long ftsId) {
         return productInformationMapper.selectByPrimaryKeyAndFtsId(id, ftsId);
+    }
+
+    @Override
+    public ProductInformation selectByQuoteRecord(QuoteRecord quoteRecord) {
+        quoteRecord = quoteRecordMapper.selectByProductIdAndFaId(quoteRecord);
+        if (quoteRecord == null) {
+            return null;
+        }
+        return productInformationMapper.selectByPrimaryKey(quoteRecord.getProductId());
     }
 
     @Override

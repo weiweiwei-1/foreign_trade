@@ -17,7 +17,7 @@ import pers.kingvi.foreigntrade.util.ResultInfo;
 import pers.kingvi.foreigntrade.vo.error.LoginError;
 import pers.kingvi.foreigntrade.util.Result;
 import pers.kingvi.foreigntrade.vo.AuthResult;
-import pers.kingvi.foreigntrade.vo.FreightAgencyInfoVo;
+import pers.kingvi.foreigntrade.vo.fa.FreightAgencyInfoVo;
 
 import java.util.regex.Pattern;
 
@@ -48,7 +48,7 @@ public class FaLoginController {
             return new Result<>().error(new LoginError(emailError, passwordError, null));
         } else {
             //格式校验通过，进行登录操作
-            CustomizedToken token = new CustomizedToken(email, password, "Fa");
+            CustomizedToken token = new CustomizedToken(email, password, "fa");
             token.setRememberMe(false);
             Subject subject = SecurityUtils.getSubject();
             try {
@@ -90,8 +90,20 @@ public class FaLoginController {
                     freightAgency.getEmail()
             );
             return new Result<FreightAgencyInfoVo>().success(freightAgencyInfoVo);
-        } else {
-            return null;
         }
+        return null;
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/logout")
+    public Result logout(){
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+        } catch (Exception e) {
+            return Result.fail;
+        }
+        return Result.success;
     }
 }

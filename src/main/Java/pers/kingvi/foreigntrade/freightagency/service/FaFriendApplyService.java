@@ -8,4 +8,6 @@ import java.util.List;
 public interface FaFriendApplyService {
 
     List<FriendApplyVo> selectByFaId(Long receiverId);
+
+    int insertSelective(FriendApply friendApply);
 }

@@ -1,8 +1,12 @@
 package pers.kingvi.foreigntrade.po;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.util.Date;
 
 public class FreightAgency {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Integer sendQuoteCount;
@@ -45,6 +49,10 @@ public class FreightAgency {
 
     public FreightAgency() {
 
+    }
+
+    public FreightAgency(Integer sendQuoteCount) {
+        this.sendQuoteCount = sendQuoteCount;
     }
 
     public FreightAgency(Long id, String photo, String name, String city, String company, String companyLink, String sex, Integer age, Integer workingTime, String mainBussinessScope, String serviceAdvantage, String weChat, String phone, String email) {

@@ -2,6 +2,7 @@ package pers.kingvi.foreigntrade.foreigntradesaleman.service;
 
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
+import pers.kingvi.foreigntrade.po.QuoteRecord;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.util.List;
@@ -22,7 +23,11 @@ public interface ProductInformationService {
 
     PageBeanVo<ProductInformation> selectByCityRecommend(String city, Integer currentPage, Integer perPageRecord);  //首页推荐，根据货物发货地首先选择
 
+    ProductInformation selectByPrimaryKey(Integer productId);
+
     ProductInformation selectByIdAndFtsId(Integer id, Long ftsId);
+
+    ProductInformation selectByQuoteRecord(QuoteRecord quoteRecord);
 
     ProductInformation selectByProductInformation(ProductInformation productInformation);
 

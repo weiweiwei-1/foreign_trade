@@ -28,6 +28,8 @@ public interface ProductInformationVerifyMapper {
 
     ProductInformationVerify selectByProductInformationVerify(ProductInformationVerify productInformationVerify);        //同上
 
+    List<ProductInformationVerify> selectAll();
+
     List<ProductInformationVerify> selectByCriteria(@Param("pi") ProductInformationVerify pi, @Param("start") Integer start, @Param("end") Integer end);     //根据条件查询页面结果
 
     int selectCountByCriteria(@Param("pi") ProductInformationVerify productInformationVerify);     //根据条件查询页面结果数量

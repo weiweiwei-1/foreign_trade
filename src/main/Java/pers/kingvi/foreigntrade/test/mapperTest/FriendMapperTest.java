@@ -32,10 +32,10 @@ public class FriendMapperTest {
     }
     @Test
     public void testInsert() {
-        friend.setFriendId(1L);
-        friend.setUserId(2L);
-        friend.setUserMark("威少");
-        friend.setFriendMark("晓丹");
+        friend.setFtsId(1L);
+        friend.setFaId(2L);
+        friend.setFaMark("威少");
+        friend.setFtsMark("晓丹");
         friendMapper.insert(friend);
         sqlSession.commit();
         sqlSession.close();
@@ -43,10 +43,10 @@ public class FriendMapperTest {
 
     @Test
     public void insertSelective() {
-        friend.setFriendId(1L);
-        friend.setUserId(2L);
-        friend.setUserMark("威少");
-        friend.setFriendMark("晓丹");
+        friend.setFtsId(1L);
+        friend.setFaId(2L);
+        friend.setFaMark("威少");
+        friend.setFtsMark("晓丹");
         friendMapper.insertSelective(friend);
         sqlSession.commit();
         sqlSession.close();
@@ -67,8 +67,8 @@ public class FriendMapperTest {
     @Test
     public void selectFriendMarkAndAddTime() {
         Friend friend1 =  new Friend();
-        friend1.setUserId(2L);
-        friend1.setFriendId(3L);
+        friend1.setFaId(2L);
+        friend1.setFtsId(3L);
         friend = friendMapper.selectFriendMarkAndAddTime(friend1);
         System.out.println(friend);
     }
@@ -76,9 +76,9 @@ public class FriendMapperTest {
     @Test
     public void updateFriendMark() {
         Friend friend =  new Friend();
-        friend.setUserId(2L);
-        friend.setFriendId(4L);
-        friend.setFriendMark("威少");
+        friend.setFaId(2L);
+        friend.setFtsId(4L);
+        friend.setFtsMark("威少");
         friendMapper.updateFriendMark(friend);
         sqlSession.commit();
         sqlSession.close();
@@ -87,9 +87,9 @@ public class FriendMapperTest {
     @Test
     public void updateUserMark() {
         Friend friend =  new Friend();
-        friend.setUserId(2L);
-        friend.setFriendId(4L);
-        friend.setFriendMark("威威威威");
+        friend.setFaId(2L);
+        friend.setFtsId(4L);
+        friend.setFtsMark("威威威威");
         friendMapper.updateFriendMark(friend);
         sqlSession.commit();
         sqlSession.close();
@@ -97,8 +97,8 @@ public class FriendMapperTest {
 
     @Test
     public void deleteFriend() {
-        friend.setFriendId(2L);
-        friend.setUserId(4L);
+        friend.setFtsId(2L);
+        friend.setFaId(4L);
         friendMapper.deleteFriend(friend);
         sqlSession.commit();
         sqlSession.close();

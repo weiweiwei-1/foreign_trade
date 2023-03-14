@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 public final class ResultInfo {
     public static final String DBS_ERROR = "数据库操作错误, 错误码：";
     public static final String NULL_EMAIL = "邮箱不能为空";
+    public static final String ACCOUNT_OR_PWD_ERROR = "用户名或密码错误";
     public static final String EMAIL_FORMAT = "邮箱格式错误";
     public static final String EMAIL_EXIST = "邮箱已被注册";
     public static final String EMAIL_NOT_EXIST = "邮箱不存在";
@@ -24,6 +25,7 @@ public final class ResultInfo {
     public static final String AUTH_FOR_FTS = "请登录外贸账号";
     public static final String AUTH_FOR_FA = "请登录货代账号";
     public static final String WRITE_PHOTO_ERROR = "照片保存错误";
+    public static final String UPDATE_PHOTO_ERROR = "更新照片错误";
 
 
 }

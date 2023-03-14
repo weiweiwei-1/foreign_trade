@@ -94,7 +94,7 @@
         <include refid="Base_Column_List"/>
         from friend_apply
         where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
---         or sender_id = #{receiverId,jdbcType=BIGINT} and receiver_id = #{senderId,jdbcType=BIGINT}
+        or sender_id = #{receiverId,jdbcType=BIGINT} and receiver_id = #{senderId,jdbcType=BIGINT}
     </select>
     <select id="selectByReceiverId" parameterType="long" resultMap="BaseResultMap">
         select

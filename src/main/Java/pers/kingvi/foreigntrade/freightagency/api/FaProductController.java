@@ -28,11 +28,7 @@ public class FaProductController {
     @ResponseBody
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public Result getProductList(@RequestParam("currentPage") Integer currentPage) {
-        System.out.println("当前页面为：" + currentPage);
         Subject subject = SecurityUtils.getSubject();
-        System.out.println(subject.getSession().getId());
-        FreightAgency user = (FreightAgency) SecurityUtils.getSubject().getPrincipal();
-        System.out.println("用户为：" + user);
         //页面错误信息
         PageError pageError;
         //初始化pageBeanVo
@@ -47,7 +43,7 @@ public class FaProductController {
                 String msg = ResultInfo.DBS_ERROR + statusCode;
                 return new Result(ResultCode.FAIL, msg);
             }
-            //如果授权，通过地址查询, 通过subject角色判断身份
+            //如果已经登录授权，通过地址查询, 通过subject角色判断身份
         } else {
             try {
                 if (subject.hasRole("fa")) {

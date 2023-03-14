@@ -2,7 +2,6 @@ package pers.kingvi.foreigntrade.filter;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
-//@Component
 public class CustomizedToken extends UsernamePasswordToken {
     private static final long serialVersionUID = 1L;
 

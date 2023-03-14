@@ -77,7 +77,7 @@ public class FaRegisterController {
                     String msg = ResultInfo.DBS_ERROR + statusCode;
                     return new Result(ResultCode.FAIL, msg);
                 }
-            CustomizedToken token = new CustomizedToken(email, password, "Fa");
+            CustomizedToken token = new CustomizedToken(email, password, "fa");
             token.setRememberMe(false);
             Subject subject = SecurityUtils.getSubject();
             try {
@@ -85,9 +85,8 @@ public class FaRegisterController {
             } catch (Exception e) {
                 return new Result(ResultCode.FAIL, e.toString());
             }
-            //将登录用户信息的密码置为空
+            //将登录用户信息的密码置为空,防止误操作返回账号密码信息等给前端
             FaUtils.getUserVo().setPassword("");
-//          LoginInfo loginInfo = new LoginInfo("fa", FaUtils.getUserVo().getName());
             AuthResult authResult = new AuthResult(1000, "fa", FaUtils.getUserVo().getName(), "login");
             return new Result<AuthResult>().success(authResult);
             }

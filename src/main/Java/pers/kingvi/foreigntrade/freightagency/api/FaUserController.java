@@ -1,6 +1,5 @@
 package pers.kingvi.foreigntrade.freightagency.api;
 
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,11 +17,10 @@ import pers.kingvi.foreigntrade.util.ResultInfo;
 import pers.kingvi.foreigntrade.util.fa.FaUtils;
 import pers.kingvi.foreigntrade.util.fa.error.FaVoErrorUtils;
 import pers.kingvi.foreigntrade.vo.error.fa.FaVoError;
+import pers.kingvi.foreigntrade.vo.fa.FaMessageVo;
 import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
 
-import javax.xml.ws.FaultAction;
 import java.io.File;
-import java.sql.SQLException;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -75,7 +73,7 @@ public class FaUserController {
         if (StringUtils.isBlank(city)) {
             cityError = FaVoErrorUtils.CITY_NULL;
         } else if (!StringUtils.isBlank(city)) {
-            if (city.trim().length() < 2 || name.trim().length() > 10) {
+            if (city.trim().length() < 2 || city.trim().length() > 10) {
                 cityError = FaVoErrorUtils.CITY_ERROR;
             }
         }
@@ -101,9 +99,6 @@ public class FaUserController {
         }
         //年龄校验
         if (!StringUtils.isBlank(age)) {
-            System.out.println("age" + age);
-            System.out.println(age.length());
-            System.out.println(StringUtils.isBlank(null));
             try {
                 Integer.parseInt(age);
             } catch (NumberFormatException e) {
@@ -185,7 +180,7 @@ public class FaUserController {
             FaVoError faVoError = new FaVoError(photoError, nameError, cityError, companyError, companyLinkError, sexError, ageError, workingTimeError, mainBussinessScopeError, serviceAdvantageError, weChatError, phoneError, emailError);
             return new Result<FaVoError>().error(faVoError);
         }
-        //格式校验通过， 才对文件进行操作
+        //格式校验通过， 对文件进行操作
         if (photo != null) {
             String originalFileName = photo.getOriginalFilename();
             if (originalFileName != null && originalFileName.length() > 0) {
@@ -214,12 +209,7 @@ public class FaUserController {
             try {
                 freightAgencyService.updateByPrimaryKey(faUpdateVo);
             } catch (DataAccessException e) {
-                /*SQLException exception = (SQLException) e.getCause();
-                int statusCode = exception.getErrorCode();
-                String msg = ResultInfo.DBS_ERROR + statusCode;*/
-                System.out.println(e.toString());
                 return new Result(ResultCode.FAIL, e.toString());
-//                System.out.println(e);
             }
         }
         FaUtils.getUserVo().setPhoto(!StringUtils.isBlank(newPhotoName) ? newPhotoName : FaUtils.getUserVo().getPhoto());
@@ -237,4 +227,19 @@ public class FaUserController {
         FaUtils.getUserVo().setEmail(email);
         return Result.success;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/info", method={RequestMethod.GET})
+    public Result getFaMsgInfo() {
+        Long faId = FaUtils.getUserVo().getId();
+        try {
+            FreightAgency freightAgency = freightAgencyService.selectByPrimaryKey(faId);
+            FaMessageVo faMessageVo = new FaMessageVo(faId, freightAgency.getPhoto(), freightAgency.getName());
+            return new Result<>().success(faMessageVo);
+        } catch (Exception e) {
+            return Result.fail;
+        }
+
+    }
+
 }

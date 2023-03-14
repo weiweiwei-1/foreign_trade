@@ -17,14 +17,15 @@ public class FaRealm extends AuthorizingRealm {
     @Autowired
     private FreightAgencyService freightAgencyService;
 
+    {
+        super.setName("fa");
+    }
     //认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         CustomizedToken token = (CustomizedToken) authenticationToken;
         String account = (String)token.getPrincipal();
         String password = String.valueOf(token.getPassword());
-        System.out.println("邮箱为：" + account);
-        System.out.println("密码为：" + password);
         FreightAgency freightAgency = freightAgencyService.selectByAccount(account);
         if (freightAgency == null) {
             throw new UnknownAccountException(ResultInfo.EMAIL_NOT_EXIST);
@@ -33,7 +34,7 @@ public class FaRealm extends AuthorizingRealm {
         }
         //将登录用户信息的密码置为空, 防止意外操作后台返回用户密码
         freightAgency.setPassword("");
-        return new SimpleAuthenticationInfo(freightAgency, password, account);
+        return new SimpleAuthenticationInfo(freightAgency, password, getName());
     }
 
     //授权

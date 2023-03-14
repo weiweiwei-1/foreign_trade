@@ -1,13 +1,18 @@
 package pers.kingvi.foreigntrade.util;
 
 public class Result<T> {
+    //请求结果状态码
     private Integer code;
+    //请求结果提示消息
     private String msg;
+    //请求成功返回接口数据
     private T data;
+    //请求参数错误返回错误详细信息
     private T error;
     public static Result success = new Result(ResultCode.SUCCESS, "success");
 
-    public static Result fail = new Result(ResultCode.FAIL, "fail");
+    //请求遇到后台异常返回fail信息
+    public static Result fail = new Result(ResultCode.FAIL, "fail, 后台出错");
 
     public static Result error_paramerter = new Result(ResultCode.ERROR, "error");
 
@@ -69,6 +74,7 @@ public class Result<T> {
         this.error = error;
     }
 
+    //请求成功返回接口数据
     public Result success(T t) {
         this.code = ResultCode.SUCCESS;
         this.msg = "success";
@@ -76,6 +82,7 @@ public class Result<T> {
         return this;
     }
 
+    //参数错误返回错误详细提示
     public Result error(T t) {
         this.code = ResultCode.ERROR;
         this.msg = "error";
@@ -83,9 +90,11 @@ public class Result<T> {
         return this;
     }
 
-    public Result fail() {
+    //请求失败携带失败信息，如失败异常原因等
+    public Result fail(String msg) {
         this.code = ResultCode.FAIL;
-        this.msg = "fail";
+        this.msg = msg;
         return this;
     }
+
 }

@@ -1,7 +1,7 @@
 package pers.kingvi.foreigntrade.admin.dao;
 
 import org.apache.ibatis.annotations.Param;
-import pers.kingvi.foreigntrade.vo.QuoteRecordProductVo;
+import pers.kingvi.foreigntrade.vo.fa.QuoteRecordProductVo;
 
 import java.util.List;
 

@@ -21,6 +21,25 @@ public class QuoteRecord {
 
     private String sendTime;
 
+    public QuoteRecord() {
+
+    }
+
+    public QuoteRecord(Integer productId, Long faId) {
+        this.productId = productId;
+        this.faId = faId;
+    }
+
+    public QuoteRecord(Integer productId, Long faId, String shippingWay, Integer price, String arrangeTime, String deliverTime, String remark) {
+        this.productId = productId;
+        this.faId = faId;
+        this.shippingWay = shippingWay;
+        this.price = price;
+        this.arrangeTime = arrangeTime;
+        this.deliverTime = deliverTime;
+        this.remark = remark;
+    }
+
     public Integer getId() {
         return id;
     }

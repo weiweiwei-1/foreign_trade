@@ -1,5 +1,8 @@
 package pers.kingvi.foreigntrade.vo;
 
+/*
+授权结果，用来对外贸员和货代区分角色
+ */
 public class AuthResult {
     //代码
     private int code;
@@ -7,7 +10,7 @@ public class AuthResult {
     private String role;
     //详细信息
     private String name;
-    //拦截类型，code为1000时区分拦截类型，当拦截类型为intercept时，页面提示登录符合身份的账号，当拦截类型为login时，注册或者登录成功，前端关闭窗口
+    //拦截类型，code为1000(已登录)时区分拦截类型，当拦截类型为intercept时，页面提示登录符合身份的账号，当拦截类型为login时，注册或者登录成功，前端关闭窗口
     private String interceptType;
 
     public int getCode() {

@@ -1,11 +1,16 @@
 package pers.kingvi.foreigntrade.vo;
 
+//import com.alibaba.fastjson.serializer.ToStringSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 
 public class ReadAndUnReadMessageVo {
     private Integer id;
 
-    private Integer friendId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long friendId;
 
     private String friendPhoto;
 
@@ -15,7 +20,17 @@ public class ReadAndUnReadMessageVo {
 
     private String content;
 
-    private Date sendTime;
+    private String sendTime;
+
+    public ReadAndUnReadMessageVo() {
+
+    }
+
+    public ReadAndUnReadMessageVo(Integer id, String content, String sendTime) {
+        this.id = id;
+        this.content = content;
+        this.sendTime = sendTime;
+    }
 
     public Integer getId() {
         return id;
@@ -25,11 +40,11 @@ public class ReadAndUnReadMessageVo {
         this.id = id;
     }
 
-    public Integer getFriendId() {
+    public Long getFriendId() {
         return friendId;
     }
 
-    public void setFriendId(Integer friendId) {
+    public void setFriendId(Long friendId) {
         this.friendId = friendId;
     }
 
@@ -65,11 +80,11 @@ public class ReadAndUnReadMessageVo {
         this.content = content;
     }
 
-    public Date getSendTime() {
+    public String getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
     }
 

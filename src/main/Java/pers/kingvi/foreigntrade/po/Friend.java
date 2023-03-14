@@ -1,17 +1,82 @@
 package pers.kingvi.foreigntrade.po;
 
+import pers.kingvi.foreigntrade.vo.LoginInfo;
+
 public class Friend {
     private Integer id;
 
-    private Long userId;
+    //约定userId为
+    private Long faId;
 
-    private Long friendId;
+    private Long ftsId;
 
-    private String userMark;
+    private String faMark;
 
-    private String friendMark;
+    private String ftsMark;
 
     private String addTime;
+
+    public Friend() {
+
+    }
+
+    public Friend(Long faId, Long ftsId) {
+        this.faId = faId;
+        this.ftsId = ftsId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getFaId() {
+        return faId;
+    }
+
+    public void setFaId(Long faId) {
+        this.faId = faId;
+    }
+
+    public Long getFtsId() {
+        return ftsId;
+    }
+
+    public void setFtsId(Long ftsId) {
+        this.ftsId = ftsId;
+    }
+
+    public String getFaMark() {
+        return faMark;
+    }
+
+    public void setFaMark(String faMark) {
+        this.faMark = faMark;
+    }
+
+    public String getFtsMark() {
+        return ftsMark;
+    }
+
+    public void setFtsMark(String ftsMark) {
+        this.ftsMark = ftsMark;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    /*public Friend(Long userId, Long friendId) {
+        this.userId = userId;
+        this.friendId = friendId;
+    }
 
     public String getAddTime() {
         return addTime;
@@ -72,5 +137,5 @@ public class Friend {
                 ", friendMark='" + friendMark + '\'' +
                 ", addTime='" + addTime + '\'' +
                 '}';
-    }
+    }*/
 }

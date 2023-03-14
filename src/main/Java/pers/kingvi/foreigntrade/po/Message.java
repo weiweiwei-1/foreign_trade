@@ -15,11 +15,25 @@ public class Message {
 
     private String messageType;
 
-    public String getMessageType() {
-        return messageType;
+    public Message() {
+
     }
 
-    public void setMessageType(String messageType) {
+    public Message(Long senderId, Long receiverId) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+    }
+
+    public Message(Long senderId, Long receiverId, String content, String sendTime, String status, String messageType) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.content = content;
+        this.sendTime = sendTime;
+        this.status = status;
+        this.messageType = messageType;
+    }
+
+    public Message(String messageType) {
         this.messageType = messageType;
     }
 
@@ -71,6 +85,14 @@ public class Message {
         this.status = status == null ? null : status.trim();
     }
 
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -80,6 +102,7 @@ public class Message {
                 ", content='" + content + '\'' +
                 ", sendTime='" + sendTime + '\'' +
                 ", status='" + status + '\'' +
+                ", messageType='" + messageType + '\'' +
                 '}';
     }
 }

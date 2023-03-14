@@ -1,13 +1,10 @@
 package pers.kingvi.foreigntrade.foreigntradesaleman.service;
 
-import org.apache.ibatis.annotations.Param;
 import pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemand;
 import pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemandVerify;
-import pers.kingvi.foreigntrade.vo.ForeignTradeSalemanDemandPage;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ForeignTradeSalemanDemandService {
     int insertSelective(ForeignTradeSalemanDemandVerify ftsd);       //发布需求，插入审核表中

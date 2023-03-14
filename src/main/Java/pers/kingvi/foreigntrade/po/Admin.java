@@ -11,6 +11,15 @@ public class Admin {
 
     private String loginTime;
 
+    public Admin() {
+
+    }
+
+    public Admin(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }

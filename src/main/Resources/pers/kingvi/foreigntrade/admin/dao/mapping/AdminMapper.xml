@@ -24,6 +24,13 @@
         where account = #{account,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByAccountAndPwd" parameterType="pers.kingvi.foreigntrade.po.Admin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from admin
+        where account = #{account,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from admin
     where id = #{id,jdbcType=INTEGER}

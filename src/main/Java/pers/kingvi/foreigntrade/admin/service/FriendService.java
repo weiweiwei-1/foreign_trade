@@ -9,7 +9,9 @@ import pers.kingvi.foreigntrade.vo.UserDetailVo;
 import java.util.List;
 
 public interface FriendService {
-    Friend selectByPrimaryKey(Integer id);
+    Friend selectByPrimaryKey(Integer id);        //根据主键查询好友信息
+
+    Friend selectFriend(Friend friend);
 
     List<FriendVo> selectById(Long id);       //好友列表显示
 

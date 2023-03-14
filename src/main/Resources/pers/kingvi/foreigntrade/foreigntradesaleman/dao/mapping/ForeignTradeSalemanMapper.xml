@@ -10,7 +10,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="CHAR" />
     <result column="industry" property="industry" jdbcType="VARCHAR" />
-    <result column="workingTime" property="workingTime" jdbcType="TINYINT" />
+    <result column="working_time" property="workingTime" jdbcType="TINYINT" />
     <result column="age" property="age" jdbcType="TINYINT" />
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="main_product" property="mainProduct" jdbcType="VARCHAR" />
@@ -82,7 +82,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, account, password, company, city, name, photo, industry, workingTime, age, sex,
+    id, account, password, company, city, name, photo, industry, working_time, age, sex,
     main_product, store_link, weChat, phone, email, send_product_count, demand_count,
     user_status, register_time
   </sql>
@@ -118,10 +118,13 @@
     <include refid="Base_Column_List"/>
     from foreign_trade_saleman
     where id in
-    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+    <foreach collection="ftsIdList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>
-    order by id
+    ORDER BY field(id,
+    <foreach collection="ftsIdList" item="item" index="index" separator="," close=")" >
+      ${item}
+    </foreach>
   </select>
     <select id="selectByCriteria" parameterType="ForeignTradeSaleman" resultMap="BaseResultMap">
         select
@@ -302,7 +305,7 @@
     </selectKey>-->
     insert into foreign_trade_saleman (id, account, password, company,
       city, name, photo, industry,
-      workingTime, age, sex,
+      working_time, age, sex,
       main_product, store_link, weChat,
       phone, email, send_product_count,
       demand_count, user_status, register_time
@@ -346,7 +349,7 @@
         industry,
       </if>
       <if test="workingTime != null" >
-        workingTime,
+        working_time,
       </if>
       <if test="age != null" >
         age,
@@ -479,7 +482,7 @@
         industry = #{record.industry,jdbcType=VARCHAR},
       </if>
       <if test="record.workingTime != null" >
-        workingTime = #{record.workingTime,jdbcType=TINYINT},
+        working_time = #{record.workingTime,jdbcType=TINYINT},
       </if>
       <if test="record.age != null" >
         age = #{record.age,jdbcType=TINYINT},
@@ -529,7 +532,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=CHAR},
       industry = #{record.industry,jdbcType=VARCHAR},
-      workingTime = #{record.workingTime,jdbcType=TINYINT},
+      working_time = #{record.workingTime,jdbcType=TINYINT},
       age = #{record.age,jdbcType=TINYINT},
       sex = #{record.sex,jdbcType=CHAR},
       main_product = #{record.mainProduct,jdbcType=VARCHAR},
@@ -570,7 +573,7 @@
         industry = #{industry,jdbcType=VARCHAR},
       </if>
       <if test="workingTime != null and workingTime != ''" >
-        workingTime = #{workingTime,jdbcType=TINYINT},
+        working_time = #{workingTime,jdbcType=TINYINT},
       </if>
       <if test="age != null and age != ''" >
         age = #{age,jdbcType=TINYINT},
@@ -608,27 +611,23 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" >
+
+  <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.vo.fts.FtsUpdateVo" >
     update foreign_trade_saleman
-    set account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      company = #{company,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+    set
       photo = #{photo,jdbcType=CHAR},
-      industry = #{industry,jdbcType=VARCHAR},
-      workingTime = #{workingTime,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=TINYINT},
       sex = #{sex,jdbcType=CHAR},
-      main_product = #{mainProduct,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
       store_link = #{storeLink,jdbcType=VARCHAR},
+      working_time = #{workingTime,jdbcType=TINYINT},
+      industry = #{industry,jdbcType=VARCHAR},
+      main_product = #{mainProduct,jdbcType=VARCHAR},
       weChat = #{weChat,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
-      email = #{email,jdbcType=VARCHAR},
-      send_product_count = #{sendProductCount,jdbcType=TINYINT},
-      demand_count = #{demandCount,jdbcType=TINYINT},
-      user_status = #{userStatus,jdbcType=CHAR},
-      register_time = #{registerTime,jdbcType=TIMESTAMP}
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample" id="selectByExampleWithRowbounds" >
@@ -645,7 +644,7 @@
       order by ${orderByClause}
     </if>
   </select>
-    <update id="decreaseSendProductCount" parameterType="integer">
+    <update id="decreaseSendProductCount" parameterType="long">
         update foreign_trade_saleman
         set send_product_count = send_product_count - 1
         where id = #{id,jdbcType=BIGINT} and send_product_count > 0

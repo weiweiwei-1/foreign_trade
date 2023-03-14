@@ -2,6 +2,8 @@ package pers.kingvi.foreigntrade.test.basetest;
 
 import org.junit.Test;
 
+import javax.jws.soap.SOAPBinding;
+
 public class User {
     private String username;
     private int age;
@@ -46,5 +48,11 @@ public class User {
         user.setAddress("adad");
         user.setAge(18);
         System.out.println(user.toString());
+    }
+
+    @Test
+    public void userNull() {
+        User user = new User();
+        System.out.println(user);
     }
 }

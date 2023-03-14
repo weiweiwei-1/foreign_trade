@@ -51,6 +51,26 @@ public class FriendApply {
         this.sendTime = sendTime;
     }
 
+    public FriendApply() {
+
+    }
+
+    public FriendApply(Long senderId, Long receiverId) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+    }
+
+    public FriendApply(Long receiverId, String senderName) {
+        this.receiverId = receiverId;
+        this.senderName = senderName;
+    }
+
+    public FriendApply(Long senderId, Long receiverId, String senderName) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.senderName = senderName;
+    }
+
     @Override
     public String toString() {
         return "FriendApply{" +

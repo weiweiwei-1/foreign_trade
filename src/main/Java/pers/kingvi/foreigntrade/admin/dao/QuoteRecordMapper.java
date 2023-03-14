@@ -18,9 +18,11 @@ public interface QuoteRecordMapper {
 
     int insertSelective(QuoteRecord record);       //选择插入
 
+//    Long selectFtsIdByFaId(@Param("faId") Long faId);
+
     List<QuoteRecord> selectByProductIdAndFtsId(@Param("productId") Integer productId, @Param("ftsId") Long ftsId);  //根据产品id和外贸员id查询报价记录，面向的是外贸员,有faId
 
-    List<ProductInformation> selectByFaId(Long faId);      //根据货代id查询产品信息，面向的是货代，有外贸id可查
+    List<ProductInformation> selectByFaId(Long faId);      //根据货代id查询产品信息，面向的是货代
 
     List<QuoteRecord> selectByExampleWithRowbounds(QuoteRecordExample example, RowBounds rowBounds);
 

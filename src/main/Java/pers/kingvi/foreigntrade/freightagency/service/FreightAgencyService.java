@@ -20,9 +20,13 @@ public interface FreightAgencyService {
 
     int updateByPrimaryKey(FaUpdateVo faUpdateVo);
 
+    int resetAllSendQuoteCount(Integer count);
+
     int closeAccountByFaId(Long Id, String password, String secretSecurity);     //注销账号，也就是删除账号
 
     int deleteByPrimaryKey(Long id);     //通过id删除账号
+
+    List<FreightAgency> selectByFaIdList(List<Long> faIdList);
 
     PageBeanVo<FreightAgency> selectByParam(String condition, String text, Integer currentPage, Integer perPageRecord);    //好友查询页面
 

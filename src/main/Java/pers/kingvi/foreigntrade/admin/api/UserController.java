@@ -11,7 +11,6 @@ import pers.kingvi.foreigntrade.util.fa.FaUtils;
 import pers.kingvi.foreigntrade.util.ResultCode;
 import pers.kingvi.foreigntrade.vo.AuthResult;
 
-
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -28,6 +27,9 @@ public class UserController {
             } else if (subject.hasRole("fts")) {
                 //返回fts的角色
                 return new AuthResult(ResultCode.AUTH_SUCCESS, "fts", FtsUtils.getUserVo().getName(), "login");
+            } else if (subject.hasRole("admin")) {
+                //返回admin的角色
+                return new AuthResult(ResultCode.AUTH_SUCCESS, "admin", "weiweiwei", "login");
             }
         }
         return new AuthResult(ResultCode.AUTH_FAIL, "", "");

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.ForeignTradeSalemanDemand;
 import pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample;
+import pers.kingvi.foreigntrade.vo.fts.FtsUpdateVo;
 
 public interface ForeignTradeSalemanMapper {
     int countByExample(ForeignTradeSalemanExample example);
@@ -26,7 +27,7 @@ public interface ForeignTradeSalemanMapper {
 
     List<ForeignTradeSaleman> selectById(Long id);
 
-    List<ForeignTradeSaleman> selectByFtsIdList(List<Long> ftsList);    //根据主键列表查询外贸员信息
+    List<ForeignTradeSaleman> selectByFtsIdList(@Param("ftsIdList") List<Long> ftsList);    //根据主键列表查询外贸员信息
 
     List<ForeignTradeSaleman> selectByCriteria(@Param("fts") ForeignTradeSaleman fts, @Param("start") Integer start, @Param("end") Integer end);   //根据条件查询某一页信息
 
@@ -54,7 +55,7 @@ public interface ForeignTradeSalemanMapper {
 
     int updateByPrimaryKeySelective(ForeignTradeSaleman record);     //主键选择更新
 
-    int updateByPrimaryKey(ForeignTradeSaleman record);       //主键非选择更新
+    int updateByPrimaryKey(FtsUpdateVo ftsUpdateVo);       //主键非选择更新
 
     int decreaseSendProductCount(Long id);      //发送产品数量减1
 
@@ -64,7 +65,7 @@ public interface ForeignTradeSalemanMapper {
 
     int resetDemandCount(@Param("id") Long id, @Param("count") Integer count);      //发送需求数量数量减1
 
-    int resetAllSendProductCount(Integer count);      //发送产品数量减1
+    int resetAllSendProductCount(Integer count);      //重置发送产品数
 
-    int resetAllDemandCount(Integer count);       //发送需求数量数量减1
+    int resetAllDemandCount(Integer count);       //重置货代需求数
 }

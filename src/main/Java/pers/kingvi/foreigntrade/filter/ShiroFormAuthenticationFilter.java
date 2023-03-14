@@ -57,14 +57,16 @@ public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpServletResponse resp = (HttpServletResponse) response;
                 setHeader(httpRequest, httpResponse);
-                AuthResult  authResult = new AuthResult();
-                //如果因为fts角色被拒绝访问，则提示登录fa账号
+                AuthResult authResult = new AuthResult();
+                //如果因为fts角色或admin被拒绝访问，则提示登录fa账号
                 if (subject.hasRole("fts")) {
                     authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "fts", FtsUtils.getUserVo().getName(), "intercept");
                 }
-                //如果因为fts角色被拒绝访问，则提示登录fa账号
+                //如果因为fts角色或admin被拒绝访问，则提示登录fa账号
                 else if (subject.hasRole("fa")) {
                     authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "fa", FaUtils.getUserVo().getName(), "intercept");
+                } else if (subject.hasRole("admin")){
+                    authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "admin", "weiweiwei");
                 }
                 PrintWriter out = resp.getWriter();
                 Gson gson = new Gson();

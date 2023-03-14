@@ -40,13 +40,17 @@ public class FriendApplyServiceImpl implements FriendApplyService {
     //发送好友申请
     @Override
     public int insertSelective(FriendApply friendApply) {
+//        查询被申请的用户id是否存在
         User user = userMapper.selectByPrimaryKey(friendApply.getReceiverId());
         Friend friend =  new Friend();
-        friend.setUserId(friendApply.getReceiverId());
-        friend.setFriendId(friendApply.getSenderId());
+        friend.setFaId(friendApply.getReceiverId());
+        friend.setFtsId(friendApply.getSenderId());
+//        查询是否已成为好友关系
         friend = friendMapper.selectFriend(friend);
+//        查询是否其中某一方已提交过好友申请
         FriendApply friendApply1 = friendApplyMapper.selectFriendApply(friendApply);
         if (user != null && friend == null && friendApply1 == null) {
+//            被申请者是外贸员
             if ("fts".equals(user.getUserType())) {
                 ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(user.getUserId());
                 if (foreignTradeSaleman != null) {
@@ -74,18 +78,18 @@ public class FriendApplyServiceImpl implements FriendApplyService {
             User receiver = userMapper.selectByPrimaryKey(friendApply.getReceiverId());
             if ("fts".equals(receiver.getUserType())) {
                 ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(receiver.getUserId());
-                friend.setUserId(receiver.getUserId());
-                friend.setUserMark(foreignTradeSaleman.getName());
-                friend.setFriendId(friendApply.getSenderId());
-                friend.setFriendMark(friendApply.getSenderName());
+                friend.setFaId(receiver.getUserId());
+                friend.setFaMark(foreignTradeSaleman.getName());
+                friend.setFtsId(friendApply.getSenderId());
+                friend.setFtsMark(friendApply.getSenderName());
                 friendMapper.insertSelective(friend);
                 return friendApplyMapper.deleteFriend(friendApply);
             } else if ("fa".equals(receiver.getUserType())) {
                 FreightAgency freightAgency = freightAgencyMapper.selectByPrimaryKey(receiver.getUserId());
-                friend.setUserId(friendApply.getSenderId());
-                friend.setUserMark(friendApply.getSenderName());
-                friend.setFriendId(receiver.getUserId());
-                friend.setFriendMark(freightAgency.getName());
+                friend.setFaId(friendApply.getSenderId());
+                friend.setFaMark(friendApply.getSenderName());
+                friend.setFtsId(receiver.getUserId());
+                friend.setFtsMark(freightAgency.getName());
                 friendMapper.insertSelective(friend);
                 return friendApplyMapper.deleteFriend(friendApply);
             }

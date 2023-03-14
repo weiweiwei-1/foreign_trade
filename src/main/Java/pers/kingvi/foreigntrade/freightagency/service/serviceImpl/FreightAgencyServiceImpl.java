@@ -53,6 +53,11 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
     }
 
     @Override
+    public int resetAllSendQuoteCount(Integer count) {
+        return freightAgencyMapper.resetAllSendQuoteCount(count);
+    }
+
+    @Override
     public int closeAccountByFaId(Long Id, String password, String secretSecurity) {
         return 0;
     }
@@ -60,6 +65,11 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
     @Override
     public int deleteByPrimaryKey(Long id) {
         return freightAgencyMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<FreightAgency> selectByFaIdList(List<Long> faIdList) {
+        return freightAgencyMapper.selectByFaIdList(faIdList);
     }
 
     @Override

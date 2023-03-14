@@ -10,7 +10,7 @@ import pers.kingvi.foreigntrade.admin.service.MessageService;
 import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.Message;
 import pers.kingvi.foreigntrade.po.User;
-import pers.kingvi.foreigntrade.vo.QuoteRecordProductVo;
+import pers.kingvi.foreigntrade.vo.fa.QuoteRecordProductVo;
 
 import java.util.List;
 
@@ -33,8 +33,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int insertMessage(Message message) {
         Friend friend =  new Friend();
-        friend.setUserId(message.getSenderId());
-        friend.setFriendId(message.getReceiverId());
+        friend.setFaId(message.getSenderId());
+        friend.setFtsId(message.getReceiverId());
         friend = friendMapper.selectFriend(friend);
         if (friend !=null) {
             messageMapper.insert(message);
@@ -69,8 +69,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int insertFtsMessage(Message message) {
         Friend friend = new Friend();
-        friend.setUserId(message.getSenderId());
-        friend.setFriendId(message.getReceiverId());
+        friend.setFaId(message.getSenderId());
+        friend.setFtsId(message.getReceiverId());
         friend = friendMapper.selectFriend(friend);
         if (friend != null) {
             messageMapper.insert(message);
@@ -90,8 +90,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int insertFaMessage(Message message) {
         Friend friend = new Friend();
-        friend.setFriendId(message.getSenderId());
-        friend.setUserId(message.getReceiverId());
+        friend.setFtsId(message.getSenderId());
+        friend.setFaId(message.getReceiverId());
         friend = friendMapper.selectByKey(friend);
         if (friend != null) {
             messageMapper.insert(message);
@@ -116,8 +116,8 @@ public class MessageServiceImpl implements MessageService {
         message.setContent(content);
         message.setSendTime(sendTime);
         Friend friend = new Friend();
-        friend.setFriendId(id);
-        friend.setUserId(receiverId);
+        friend.setFtsId(id);
+        friend.setFaId(receiverId);
         friend = friendMapper.selectFriend(friend);
         if (friend != null) {
             messageMapper.insert(message);

@@ -32,6 +32,7 @@
     <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
     <result column="quote_count" property="quoteCount" jdbcType="TINYINT" />
     <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
+    <result column="destination_country" property="destinationCountry" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -207,6 +208,10 @@
       </if>
     </trim>
   </insert>
+ <!-- <select id="selectFtsIdByFaId" resultType="long" parameterType="long">
+    select fts_id from quote_record, product_information
+    where quote_record.product_id = product_information.id and fa_id = #{faId,jdbcType=BIGINT}
+  </select>-->
   <select id="selectByProductIdAndFtsId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -217,6 +222,7 @@
     select * from product_information
     where id in
     (select product_id from quote_record where fa_id = #{faId,jdbcType=BIGINT})
+    order by id desc
   </select>
   <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.QuoteRecordExample" resultType="java.lang.Integer" >
     select count(*) from quote_record

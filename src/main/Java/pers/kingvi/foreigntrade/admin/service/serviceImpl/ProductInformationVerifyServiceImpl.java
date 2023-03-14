@@ -5,11 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kingvi.foreigntrade.admin.dao.ProductInformationVerifyMapper;
 import pers.kingvi.foreigntrade.admin.service.ProductInformationVerifyService;
+import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper;
+import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
+import pers.kingvi.foreigntrade.util.FilePath;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
+import java.io.File;
+import java.text.Format;
 import java.util.List;
 
 @Service
@@ -21,19 +26,83 @@ public class ProductInformationVerifyServiceImpl implements ProductInformationVe
     @Autowired
     private ProductInformationMapper productInformationMapper;
 
+    @Autowired
+    private ForeignTradeSalemanMapper foreignTradeSalemanMapper;
+
     @Override
-    public int insertSelective(ProductInformationVerify productInformationVerify) {
+    public List<ProductInformationVerify> selectAllProductList() {
+        return productInformationVerifyMapper.selectAll();
+    }
+
+    @Override
+    public int permitLaunch(ProductInformationVerify productInformationVerify) {
         ProductInformation productInformation =  new ProductInformation();
         productInformationVerifyMapper.deleteByPrimaryKey(productInformationVerify.getId());
-        BeanUtils.copyProperties(productInformationVerify,productInformation);
+        BeanUtils.copyProperties(productInformationVerify, productInformation);
         productInformation.setVerifyStatus("1");
         productInformationMapper.insertSelective(productInformation);
         return 0;
     }
 
     @Override
+    public int permitProduct(Integer id) {
+        ProductInformationVerify productInformationVerify = productInformationVerifyMapper.selectByPrimaryKey(id);
+        if (productInformationVerify == null) {
+            return 0;
+        } else {
+            String fileName = productInformationVerify.getPhoto();
+            File originFile = new File(FilePath.PRODUCT_VERIFY_IMAGE_PATH + fileName);
+            if (originFile.isFile()) {
+                File aimFile = new File(FilePath.PRODUCT_IMAGE_PATH + fileName);
+                if (aimFile.exists()) {
+                    return 0;
+                } else {
+                    ProductInformation productInformation = new ProductInformation();
+                    BeanUtils.copyProperties(productInformationVerify, productInformation);
+                    productInformation.setVerifyStatus("1");
+                    productInformation.setId(null);
+//                    将数据插入到审核通过的product_information表，同时删除product_verify表中对应的记录
+                    productInformationMapper.insertSelective(productInformation);
+                    productInformationVerifyMapper.deleteByPrimaryKey(id);
+//                    移动审核路径的图片到通过审核路径
+                    originFile.renameTo(aimFile);
+                    return 1;
+                }
+            }
+            return 0;
+        }
+    }
+
+    @Override
+    public int rejectProduct(Integer id) {
+        ProductInformationVerify productInformationVerify = productInformationVerifyMapper.selectByPrimaryKey(id);
+        if (productInformationVerify == null) {
+            return 0;
+        } else {
+            return productInformationVerifyMapper.deleteByPrimaryKey(id);
+        }
+    }
+
+    @Override
+    public int sendProductQuery(ProductInformationVerify productInformationVerify, Long ftsId) {
+        ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanMapper.selectByPrimaryKey(ftsId);
+        if (foreignTradeSaleman.getSendProductCount() == 0) {
+            return 0;
+        }
+        foreignTradeSalemanMapper.decreaseSendProductCount(ftsId);
+        productInformationVerifyMapper.insertSelective(productInformationVerify);
+        return 1;
+    }
+
+    @Override
     public List<ProductInformationVerify> selectByFtsId(Long ftsId) {
         return productInformationVerifyMapper.selectByFtsId(ftsId);
+    }
+
+    @Override
+    public int insertSelective(ProductInformationVerify productInformationVerify) {
+        foreignTradeSalemanMapper.decreaseSendProductCount(productInformationVerify.getFtsId());
+        return productInformationVerifyMapper.insertSelective(productInformationVerify);
     }
 
     @Override

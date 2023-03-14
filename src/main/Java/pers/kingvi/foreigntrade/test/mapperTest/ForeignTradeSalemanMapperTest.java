@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanDemandMapper;
 import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ForeignTradeSalemanMapper;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
+import pers.kingvi.foreigntrade.vo.fts.FtsUpdateVo;
 
 import java.io.InputStream;
 
@@ -23,6 +24,8 @@ public class ForeignTradeSalemanMapperTest {
 
     private SqlSession sqlSession;
 
+    private FtsUpdateVo ftsUpdateVo;
+
     @Before
     public void setUp() throws Exception {
         String resource = "config/sqlmap-config.xml";
@@ -31,6 +34,7 @@ public class ForeignTradeSalemanMapperTest {
         sqlSession = sqlSessionFactory.openSession();
         foreignTradeSalemanMapper = sqlSession.getMapper(ForeignTradeSalemanMapper.class);
         foreignTradeSaleman =  new ForeignTradeSaleman();
+        FtsUpdateVo ftsUpdateVo = new FtsUpdateVo();
     }
     @Test
     public void testInsert() {
@@ -93,14 +97,14 @@ public class ForeignTradeSalemanMapperTest {
 
     @Test
     public void updateByPrimaryKey() {
-        foreignTradeSaleman.setId(2L);
-        foreignTradeSaleman.setAccount("12345");
-        foreignTradeSaleman.setPassword("325456456");
-        foreignTradeSaleman.setCompany("中兴");
-        foreignTradeSaleman.setPhoto("me.jpg");
+        ftsUpdateVo.setId(2L);
+//        ftsUpdateVo.setAccount("12345");
+//        ftsUpdateVo.setPassword("325456456");
+        ftsUpdateVo.setCompany("中兴");
+        ftsUpdateVo.setPhoto("me.jpg");
 //        foreignTradeSaleman.setName("Kingvi");
-        foreignTradeSaleman.setCity("深圳");
-        foreignTradeSalemanMapper.updateByPrimaryKey(foreignTradeSaleman);  //出现错误
+        ftsUpdateVo.setCity("深圳");
+        foreignTradeSalemanMapper.updateByPrimaryKey(ftsUpdateVo);  //出现错误
         sqlSession.commit();
         sqlSession.close();
     }

@@ -7,9 +7,9 @@ public class UnReadMessageVo {
 
     private int unReadMessageCount;
 
-    private int friendId;
+    private Long friendId;
 
-    private int receiverId;
+    private Long receiverId;
 
     private String friendPhoto;
 
@@ -17,7 +17,7 @@ public class UnReadMessageVo {
 
     private String content;
 
-    private Date sendTime;
+    private String sendTime;
 
     public int getId() {
         return id;
@@ -35,19 +35,19 @@ public class UnReadMessageVo {
         this.unReadMessageCount = unReadMessageCount;
     }
 
-    public int getFriendId() {
+    public Long getFriendId() {
         return friendId;
     }
 
-    public void setFriendId(int friendId) {
+    public void setFriendId(Long friendId) {
         this.friendId = friendId;
     }
 
-    public int getReceiverId() {
+    public Long getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(int receiverId) {
+    public void setReceiverId(Long receiverId) {
         this.receiverId = receiverId;
     }
 
@@ -75,11 +75,11 @@ public class UnReadMessageVo {
         this.content = content;
     }
 
-    public Date getSendTime() {
+    public String getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
     }
 
