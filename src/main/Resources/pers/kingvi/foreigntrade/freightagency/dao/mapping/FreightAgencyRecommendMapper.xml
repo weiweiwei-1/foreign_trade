@@ -6,7 +6,7 @@
     <result column="fa_id" property="faId" jdbcType="BIGINT" />
     <result column="fa_name" property="faName" jdbcType="VARCHAR" />
     <result column="fa_company" property="faCompany" jdbcType="VARCHAR" />
-    <result column="companyLink" property="companyLink" jdbcType="VARCHAR" />
+    <result column="company_link" property="companyLink" jdbcType="VARCHAR" />
     <result column="fa_city" property="faCity" jdbcType="VARCHAR" />
     <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
     <result column="main_business" property="mainBusiness" jdbcType="VARCHAR" />
@@ -79,12 +79,12 @@
   </sql>
   <sql id="Base_Column_List" >
     id,fa_id, fa_name, fa_company,
-    companyLink, fa_city, key_words,
+    company_link, fa_city, key_words,
     main_business, description, activity_photo,
     phone, weChat, email,
     send_time, verify_status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendExample">
     select
     <if test="distinct" >
       distinct
@@ -110,11 +110,43 @@
         from fa_recommend
         where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
     </select>
-  <select id="selectByBean" resultMap="BaseResultMap" parameterType="FreightAgencyRecommend">
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="FreightAgencyRecommend">
     select
     <include refid="Base_Column_List"/>
     from fa_recommend
-    where id = #{id,jdbcType=INTEGER} and fa_id = #{faId,jdbcType=BIGINT}
+    <where>
+      <if test="faName != null and faName != ''">
+        and fa_name = #{faName,jdbcType=VARCHAR}
+      </if>
+      <if test="faCompany != null and faCompany != ''">
+        and fa_company = #{faCompany,jdbcType=VARCHAR}
+      </if>
+      <if test="faCity != null and faCity != ''">
+        and fa_city = #{faCity,jdbcType=VARCHAR}
+      </if>
+      <if test="keyWords != null and keyWords != ''">
+        and key_words = #{keyWords,jdbcType=CHAR}
+      </if>
+      <if test="description != null and description != ''">
+        and destination = #{description,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="selectBesideList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend
+    where id not in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
+  <select id="selectByFaIdSingle" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend
+    where fa_id = #{faId,jdbcType=BIGINT}
   </select>
     <select id="selectByFaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -122,11 +154,20 @@
         from fa_recommend
         where fa_id = #{faId,jdbcType=BIGINT}
     </select>
+  <select id="selectAllCount" resultType="integer">
+    select count(*) from fa_recommend
+  </select>
   <select id="selectCountByFaId" parameterType="integer" resultType="integer">
         select count(*)
         from fa_recommend
         where fa_id = #{faId,jdbcType=BIGINT}
     </select>
+  <select id="selectByNewestRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend
+    order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+  </select>
   <select id="selectByCriteria" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -181,6 +222,7 @@
             or main_business like concat('%',#{text,jdbcType=VARCHAR},'%')
             or fa_name = #{text,jdbcType=VARCHAR}
             or key_words like concat('%',#{text,jdbcType=VARCHAR},'%')
+            or description like concat('%',#{text,jdbcType=VARCHAR},'%')
         </where>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
@@ -230,7 +272,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into fa_recommend (fa_id, fa_name, fa_company,
-      companyLink, fa_city, key_words,
+      company_link, fa_city, key_words,
       main_business, description, activity_photo,
       phone, weChat, email,
       send_time, verify_status)
@@ -256,7 +298,7 @@
         fa_company,
       </if>
       <if test="companyLink != null" >
-        companyLink,
+        company_link,
       </if>
       <if test="faCity != null" >
         fa_city,
@@ -356,7 +398,7 @@
         fa_company = #{record.faCompany,jdbcType=VARCHAR},
       </if>
       <if test="record.companyLink != null" >
-        companyLink = #{record.companyLink,jdbcType=VARCHAR},
+        company_link = #{record.companyLink,jdbcType=VARCHAR},
       </if>
       <if test="record.faCity != null" >
         fa_city = #{record.faCity,jdbcType=VARCHAR},
@@ -399,7 +441,7 @@
       fa_id = #{record.faId,jdbcType=BIGINT},
       fa_name = #{record.faName,jdbcType=VARCHAR},
       fa_company = #{record.faCompany,jdbcType=VARCHAR},
-      companyLink = #{record.companyLink,jdbcType=VARCHAR},
+      company_link = #{record.companyLink,jdbcType=VARCHAR},
       fa_city = #{record.faCity,jdbcType=VARCHAR},
       key_words = #{record.keyWords,jdbcType=VARCHAR},
       main_business = #{record.mainBusiness,jdbcType=VARCHAR},
@@ -427,7 +469,7 @@
         fa_company = #{faCompany,jdbcType=VARCHAR},
       </if>
       <if test="companyLink != null" >
-        companyLink = #{companyLink,jdbcType=VARCHAR},
+        company_link = #{companyLink,jdbcType=VARCHAR},
       </if>
       <if test="faCity != null" >
         fa_city = #{faCity,jdbcType=VARCHAR},
@@ -467,7 +509,7 @@
     set fa_id = #{faId,jdbcType=BIGINT},
       fa_name = #{faName,jdbcType=VARCHAR},
       fa_company = #{faCompany,jdbcType=VARCHAR},
-      companyLink = #{companyLink,jdbcType=VARCHAR},
+      company_link = #{companyLink,jdbcType=VARCHAR},
       fa_city = #{faCity,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
       main_business = #{mainBusiness,jdbcType=VARCHAR},

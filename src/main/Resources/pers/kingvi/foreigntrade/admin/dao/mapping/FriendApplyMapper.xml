@@ -96,17 +96,23 @@
         where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
         or sender_id = #{receiverId,jdbcType=BIGINT} and receiver_id = #{senderId,jdbcType=BIGINT}
     </select>
+  <select id="selectFriendApplySingle" parameterType="FriendApply" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from friend_apply
+    where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
+  </select>
     <select id="selectByReceiverId" parameterType="long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from friend_apply
-        where receiver_id = #{receiverId,jdbcType=BIGINT} order by sender_id
+        where receiver_id = #{receiverId,jdbcType=BIGINT} order by id
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from friend_apply
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteFriend">
+  <delete id="deleteFriendApply">
     delete from friend_apply
     where sender_id = #{senderId,jdbcType=BIGINT} and receiver_id = #{receiverId,jdbcType=BIGINT}
   </delete>

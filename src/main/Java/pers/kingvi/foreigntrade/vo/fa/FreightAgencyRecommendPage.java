@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.vo.fa;
 import java.util.List;
 
 public class FreightAgencyRecommendPage<T> {
+
     private Integer currentPage;  //当前页码
 
     private Integer totalRecord;   //总记录数

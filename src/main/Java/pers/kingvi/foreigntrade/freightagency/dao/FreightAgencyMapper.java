@@ -19,6 +19,10 @@ public interface FreightAgencyMapper {
 
     int insertSelective(FreightAgency record);   //选择插入记录
 
+    int selectAllCount();
+
+    List<FreightAgency> selectAll();
+
     List<FreightAgency> selectByExampleWithRowbounds(FreightAgencyExample example, RowBounds rowBounds);
 
     List<FreightAgency> selectByExample(FreightAgencyExample example);
@@ -30,6 +34,8 @@ public interface FreightAgencyMapper {
     FreightAgency selectByAccount(String account);      //根据账号查询
 
     List<FreightAgency> selectByFaIdList(@Param("faIdList") List<Long> faIdList);    //根据主键id列表查询货代信息
+
+    List<Long> selectByIdList();
 
     FreightAgency selectByAccountAndPassword(@Param("account") String account, @Param("password") String password);  //根据账号密码查询
 

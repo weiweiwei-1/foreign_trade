@@ -1,20 +1,27 @@
 package pers.kingvi.foreigntrade.freightagency.api;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import pers.kingvi.foreigntrade.config.WebSocketUtils;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ForeignTradeSalemanService;
 import pers.kingvi.foreigntrade.freightagency.service.FaFriendService;
 import pers.kingvi.foreigntrade.freightagency.service.FaMessageService;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
+import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.Message;
 import pers.kingvi.foreigntrade.util.Result;
 import pers.kingvi.foreigntrade.util.fa.FaUtils;
+import pers.kingvi.foreigntrade.util.fts.FtsUtils;
 import pers.kingvi.foreigntrade.vo.ReadAndUnReadMessageVo;
+import pers.kingvi.foreigntrade.vo.fa.FaFriendInfoDetailVo;
 import pers.kingvi.foreigntrade.vo.fa.FaMessageVo;
 import pers.kingvi.foreigntrade.vo.fts.FtsMessageVo;
 
@@ -79,12 +86,9 @@ public class FaMessageController {
     @RequestMapping(value = "/fts/info/pid", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Result getFtsMessageInfoByPid(@RequestParam("productId") Integer productId) {
+        Long faId = FaUtils.getUserVo().getId();
         ForeignTradeSaleman foreignTradeSaleman = faMessageService.getFtsInfoByProductId(productId);
-        if (foreignTradeSaleman != null) {
-            FtsMessageVo ftsMessageVo = new FtsMessageVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getPhoto(), foreignTradeSaleman.getName());
-            return new Result<>().success(ftsMessageVo);
-        }
-        return Result.fail;
+        return getResult(faId, foreignTradeSaleman);
     }
 
     /**
@@ -96,9 +100,21 @@ public class FaMessageController {
     @RequestMapping(value = "/fts/info/sid", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Result getFtsMessageInfoBySenderId(@RequestParam("senderId") Long senderId) {
+        Long faId = FaUtils.getUserVo().getId();
         ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanService.selectByPrimaryKey(senderId);
+        return getResult(faId, foreignTradeSaleman);
+    }
+
+    private Result getResult(Long faId, ForeignTradeSaleman foreignTradeSaleman) {
         if (foreignTradeSaleman != null) {
-            FtsMessageVo ftsMessageVo = new FtsMessageVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getPhoto(), foreignTradeSaleman.getName());
+            FtsMessageVo ftsMessageVo;
+            Friend friend = new Friend(faId, foreignTradeSaleman.getId());
+            friend = faFriendService.selectFriend(friend);
+            if (friend == null) {
+                ftsMessageVo = new FtsMessageVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getPhoto(), foreignTradeSaleman.getName());
+            } else {
+                ftsMessageVo = new FtsMessageVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getPhoto(), friend.getFtsMark());
+            }
             return new Result<>().success(ftsMessageVo);
         }
         return Result.fail;
@@ -110,12 +126,31 @@ public class FaMessageController {
         Long receiverId = FaUtils.getUserVo().getId();
         try {
             List<ReadAndUnReadMessageVo> readAndUnReadMessageVoList = faMessageService.getMessageList(receiverId);
-            if (readAndUnReadMessageVoList == null) {
-                return Result.fail;
-            }
             return new Result<>().success(readAndUnReadMessageVoList);
         } catch (Exception e) {
+            System.out.println(e.toString());
             return Result.fail;
+        }
+    }
+
+
+
+    @RequestMapping(value = "/count", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public int getUnReadMsgCount() {
+        FreightAgency freightAgency;
+        try {
+            freightAgency = FaUtils.getUserVo();
+        } catch (Exception e) {
+            return 0;
+        }
+        if (freightAgency == null) {
+            return 0;
+        }
+        try {
+            return faMessageService.getUnReadMsgCount(freightAgency.getId());
+        } catch (Exception e) {
+            return -1;
         }
     }
 
@@ -153,12 +188,25 @@ public class FaMessageController {
     @RequestMapping(value = "/read", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Result readMessage(Long senderId) {
-        Long ftsId = FaUtils.getUserVo().getId();
-        Message message = new Message(senderId, ftsId);
+        Long faId = FaUtils.getUserVo().getId();
+        Message message = new Message(senderId, faId);
         try {
             faMessageService.readAllMessages(message);
+            if (WebSocketUtils.hasConnection(senderId)) {
+//                发给发送消息的人
+                message.setMessageType("readMessage");
+                message.setStatus("1");
+                WebSocketUtils.get(senderId).sendMessage(new TextMessage(JSONObject.toJSONString(message)));
+            }
+            if (WebSocketUtils.hasConnection(faId)) {
+//                发给自己
+                message.setMessageType("hasRead");
+                message.setSenderId(senderId);
+                WebSocketUtils.get(faId).sendMessage(new TextMessage(JSONObject.toJSONString(message)));
+            }
             return Result.success;
         } catch (Exception e) {
+            System.out.println(e.toString());
             return Result.fail;
         }
     }

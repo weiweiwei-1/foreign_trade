@@ -1,10 +1,19 @@
 package pers.kingvi.foreigntrade.vo.fa;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 public class QuoteRecordProductVo {
     private Integer productId;   //产品id
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long ftsId;       //外贸id
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long faId;         //货代id
 
     private String ftsName;      //外贸名字

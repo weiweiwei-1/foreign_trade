@@ -97,7 +97,7 @@ public class FriendApplyMapperTest {
     public void deleteFriend() {
             friendApply.setSenderId(4L);
             friendApply.setReceiverId(6L);
-            friendApplyMapper.deleteFriend(friendApply);
+            friendApplyMapper.deleteFriendApply(friendApply);
         sqlSession.commit();
         sqlSession.close();
     }

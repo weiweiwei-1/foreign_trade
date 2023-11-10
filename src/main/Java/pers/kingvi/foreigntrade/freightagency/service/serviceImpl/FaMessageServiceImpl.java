@@ -62,11 +62,20 @@ public class FaMessageServiceImpl implements FaMessageService {
     }
 
     @Override
+    public int getUnReadMsgCount(Long receiverId) {
+        List<UnReadMessageVo> unReadMessageVoList = messageMapper.selectUnReadMessage(receiverId);
+        int unReadCount = 0;
+        for (UnReadMessageVo unReadMessageVo : unReadMessageVoList) {
+            unReadCount += unReadMessageVo.getUnReadMessageCount();
+        }
+        return unReadCount;
+    }
+
+    @Override
     public ForeignTradeSaleman getFtsInfoByProductId(Integer productId) {
         ProductInformation productInformation = productInformationMapper.selectByPrimaryKey(productId);
         if (productInformation != null) {
             return foreignTradeSalemanMapper.selectByPrimaryKey(productInformation.getFtsId());
-
         }
         return null;
     }
@@ -146,6 +155,7 @@ public class FaMessageServiceImpl implements FaMessageService {
                     message.getContent(),
                     message.getSendTime()
             );
+            readAndUnReadMessageVo.setUnReadMessageCount(0);
             //已读消息列表中，获取最后一条消息的ftsId，同时添加到ftsIdList中
             if (message.getSenderId().equals(userId)) {
                 readAndUnReadMessageVo.setFriendId(message.getReceiverId());

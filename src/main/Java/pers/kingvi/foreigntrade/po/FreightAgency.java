@@ -2,11 +2,15 @@ package pers.kingvi.foreigntrade.po;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.util.Date;
 
 public class FreightAgency {
-    @TableId(type = IdType.AUTO)
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId
     private Long id;
 
     private Integer sendQuoteCount;
@@ -49,6 +53,14 @@ public class FreightAgency {
 
     public FreightAgency() {
 
+    }
+
+    public String getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime;
     }
 
     public FreightAgency(Integer sendQuoteCount) {

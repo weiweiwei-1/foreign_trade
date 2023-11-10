@@ -17,8 +17,8 @@
         <result column="quote_count" property="quoteCount" jdbcType="INTEGER" />
     </resultMap>
     <select id="selectByFtsIdAndFaId" resultMap="BaseResultMap">
-        select fts_id, fa_id
+        select *
         from quote_record, product_information
-        where product_information.id = quote_record.product_id and fa_id = {faId,jdbcType=BIGINT} and fts_id = {ftsId,jdbcType=BIGINT}
+        where product_information.id = quote_record.product_id and quote_record.fa_id = #{faId,jdbcType=BIGINT} and product_information.fts_id = #{ftsId,jdbcType=BIGINT}
     </select>
 </mapper>

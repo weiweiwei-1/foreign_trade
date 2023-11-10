@@ -32,11 +32,9 @@ public class CustomizedAuthenticator extends ModularRealmAuthenticator {
         Collection<Realm> realms = getRealms();
         Collection<Realm> typeRealms = new ArrayList<>();
         for (Realm realm : realms) {
-            System.out.println(realm.getName());
             if (realm.getName().contains(loginType)) {
                 typeRealms.add(realm);
             }
-
         }
         if (typeRealms.size() == 1) {
             return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);

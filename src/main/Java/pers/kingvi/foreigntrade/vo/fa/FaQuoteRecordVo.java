@@ -1,7 +1,14 @@
 package pers.kingvi.foreigntrade.vo.fa;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 public class FaQuoteRecordVo {
     private Integer id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId
+    private long ftsId;
     private String photo;
     private String productName;
     private String origin;
@@ -14,8 +21,9 @@ public class FaQuoteRecordVo {
 
     }
 
-    public FaQuoteRecordVo(Integer id, String photo, String productName, String origin, String destinationCountry, String sendTime, double weight, String realOrder) {
+    public FaQuoteRecordVo(Integer id, long ftsId, String photo, String productName, String origin, String destinationCountry, String sendTime, double weight, String realOrder) {
         this.id = id;
+        this.ftsId = ftsId;
         this.photo = photo;
         this.productName = productName;
         this.origin = origin;
@@ -23,6 +31,14 @@ public class FaQuoteRecordVo {
         this.sendTime = sendTime;
         this.weight = weight;
         this.realOrder = realOrder;
+    }
+
+    public long getFtsId() {
+        return ftsId;
+    }
+
+    public void setFtsId(long ftsId) {
+        this.ftsId = ftsId;
     }
 
     public Integer getId() {

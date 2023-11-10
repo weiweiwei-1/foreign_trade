@@ -41,5 +41,5 @@ public class CustomizedAuthorizer extends ModularRealmAuthorizer {
             }
         }
         return false;
-        }
+    }
 }

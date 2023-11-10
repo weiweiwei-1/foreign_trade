@@ -1,5 +1,10 @@
 package pers.kingvi.foreigntrade.vo;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 
 public class UnReadMessageVo {
@@ -7,8 +12,12 @@ public class UnReadMessageVo {
 
     private int unReadMessageCount;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long friendId;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long receiverId;
 
     private String friendPhoto;

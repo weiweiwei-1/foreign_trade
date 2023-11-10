@@ -1,6 +1,5 @@
 package pers.kingvi.foreigntrade.util;
 
-import org.apache.commons.lang3.StringUtils;
 
 public final class ResultInfo {
     public static final String DBS_ERROR = "数据库操作错误, 错误码：";
@@ -12,6 +11,9 @@ public final class ResultInfo {
     public static final String NULL_PASSWORD = "密码不能为空";
     public static final String PASSWORD_LENGTH = "密码长度为6-15位";
     public static final String PASSWORD_ERROR = "密码错误";
+    public static final String FTS_LOGIN_ACCOUNT_REJECT = "该账号为外贸账号，请使用已有的货代账号或新注册一个货代账号登录";
+    public static final String FA_LOGIN_ACCOUNT_REJECT = "该账号为货代账号，请使用已有的外贸账号或新注册一个外贸账号登录";
+    public static final String FA_ACCOUNT_REJECT = "密码错误";
     public static final String NULL_CODE = "验证码不能为空";
     public static final String CONFIRM_CODE_ERROR = "验证码错误";
     public static final String PAGE_COUNT_ERROR = "页面数错误";

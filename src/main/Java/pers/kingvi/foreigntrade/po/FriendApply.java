@@ -3,7 +3,9 @@ package pers.kingvi.foreigntrade.po;
 public class FriendApply {
     private Integer id;
 
+
     private Long senderId;
+
 
     private Long receiverId;
 

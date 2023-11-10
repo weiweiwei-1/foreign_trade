@@ -3,7 +3,7 @@
 <mapper namespace="pers.kingvi.foreigntrade.admin.dao.FriendMapper" >
   <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.Friend" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="faId" property="faId" jdbcType="BIGINT" />
+    <result column="user_id" property="faId" jdbcType="BIGINT" />
     <result column="friend_id" property="ftsId" jdbcType="BIGINT" />
     <result column="user_mark" property="faMark" jdbcType="VARCHAR" />
     <result column="friend_mark" property="ftsMark" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_Id, friend_id, user_mark, friend_mark, add_time
+    id, user_id, friend_id, user_mark, friend_mark, add_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FriendExample" >
     select
@@ -275,12 +275,12 @@
     <update id="updateUserMark" parameterType="pers.kingvi.foreigntrade.po.Friend">
         update friend
         <set>
-            <if test="ftsMark!=null">
-                user_mark = #{ftsMark,jdbcType=VARCHAR},
+            <if test="faMark!=null and faMark!=''">
+                user_mark = #{faMark,jdbcType=VARCHAR},
             </if>
         </set>
         where
-        user_id = #{ftsId,jdbcType=BIGINT} and friend_id = #{faId,jdbcType=BIGINT}
+        user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
     </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FriendExample" id="selectByExampleWithRowbounds" >
     select

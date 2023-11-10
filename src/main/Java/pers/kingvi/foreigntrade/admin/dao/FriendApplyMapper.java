@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.admin.dao;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.FriendApply;
 import pers.kingvi.foreigntrade.po.FriendApplyExample;
 
@@ -13,7 +14,7 @@ public interface FriendApplyMapper {
 
     int deleteByPrimaryKey(Integer id);   //根据主键删除
 
-    int deleteFriend(FriendApply friendApply);    //根据自身id和好友申请id拒绝好友申请同意
+    int deleteFriendApply(FriendApply friendApply);    //根据自身id和好友申请id拒绝好友申请同意
 
     int insert(FriendApply record);     //直接插入
 
@@ -26,6 +27,8 @@ public interface FriendApplyMapper {
     FriendApply selectByPrimaryKey(Integer id);       //根据主键查询
 
     FriendApply selectFriendApply(FriendApply friendApply);   //根据接收者id和发送者id查询
+
+    FriendApply selectFriendApplySingle(FriendApply friendApply);
 
     List<FriendApply> selectByReceiverId(Long receiverId);      //根据被申请者id查询好友申请信息
 

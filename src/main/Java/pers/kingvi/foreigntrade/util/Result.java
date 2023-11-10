@@ -75,7 +75,7 @@ public class Result<T> {
     }
 
     //请求成功返回接口数据
-    public Result success(T t) {
+    public Result<T> success(T t) {
         this.code = ResultCode.SUCCESS;
         this.msg = "success";
         this.data = t;
@@ -83,7 +83,7 @@ public class Result<T> {
     }
 
     //参数错误返回错误详细提示
-    public Result error(T t) {
+    public Result<T> error(T t) {
         this.code = ResultCode.ERROR;
         this.msg = "error";
         this.error = t;

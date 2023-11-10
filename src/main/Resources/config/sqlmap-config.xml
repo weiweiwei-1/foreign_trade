@@ -2,10 +2,10 @@
 <!--MyBatis全局配置文件-->
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "file:/E:/IDEA-workspace/mybatis-3-config.dtd">
-        <!--"http://mybatis.org/dtd/mybatis-3-config.dtd"-->
+                "file:/C:/imageSpace/mybatis-3-config.dtd">
+        <!--        "file:/D:/IDEAWorkSpace/mybatis-3-config.dtd">-->
+<!--        "http://mybatis.org/dtd/mybatis-3-config.dtd"-->
 <configuration>
-
     <!--给实体类设置别名-->
     <typeAliases>
         <package name="pers.kingvi.foreigntrade.po"></package>

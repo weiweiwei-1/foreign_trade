@@ -17,5 +17,4 @@ public class FaVoErrorUtils {
     public static final String WECHAT_ERROR = "微信号格式错误（6-20位）";
     public static final String PHONE_ERROR = "手机号格式错误";
     public static final String EMAIL_ERROR = "邮箱格式错误（6-30位）";
-
 }

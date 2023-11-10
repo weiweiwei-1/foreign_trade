@@ -8,7 +8,10 @@ import pers.kingvi.foreigntrade.admin.service.FreightAgencyRecommendVerifyServic
 import pers.kingvi.foreigntrade.freightagency.dao.FreightAgencyRecommendMapper;
 import pers.kingvi.foreigntrade.po.FreightAgencyRecommend;
 import pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify;
+import pers.kingvi.foreigntrade.util.FileSet;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
+
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -22,11 +25,7 @@ public class FreightAgencyRecommendVerifyServiceImpl implements FreightAgencyRec
 
     @Override
     public int insertSelective(FreightAgencyRecommendVerify farv) {
-        FreightAgencyRecommend freightAgencyRecommend = new FreightAgencyRecommend();
-        freightAgencyRecommendVerifyMapper.deleteByPrimaryKey(farv.getId());
-        BeanUtils.copyProperties(farv,freightAgencyRecommend);
-        freightAgencyRecommend.setVerifyStatus("1");
-        return freightAgencyRecommendMapper.insertSelective(freightAgencyRecommend);
+        return freightAgencyRecommendVerifyMapper.insertSelective(farv);
     }
 
     @Override
@@ -37,6 +36,21 @@ public class FreightAgencyRecommendVerifyServiceImpl implements FreightAgencyRec
     @Override
     public List<FreightAgencyRecommendVerify> selectByFaId(Long faId) {
         return freightAgencyRecommendVerifyMapper.selectByFaId(faId);
+    }
+
+    @Override
+    public FreightAgencyRecommendVerify selectByFaIdSingle(Long faId) {
+        return freightAgencyRecommendVerifyMapper.selectByFaIdSingle(faId);
+    }
+
+    @Override
+    public List<FreightAgencyRecommendVerify> selectAll() {
+        return freightAgencyRecommendVerifyMapper.selectAll();
+    }
+
+    @Override
+    public int updateByFaId(FreightAgencyRecommendVerify freightAgencyRecommendVerify) {
+        return freightAgencyRecommendVerifyMapper.updateByFaIdSelective(freightAgencyRecommendVerify);
     }
 
     @Override
@@ -78,11 +92,68 @@ public class FreightAgencyRecommendVerifyServiceImpl implements FreightAgencyRec
     }
 
     @Override
+    public int permitFaRecommend(Integer id, Long faId) {
+        FreightAgencyRecommendVerify freightAgencyRecommendVerify = freightAgencyRecommendVerifyMapper.selectByPrimaryKey(id);
+        if (freightAgencyRecommendVerify == null) {
+            return 0;
+        } else {
+            FreightAgencyRecommend freightAgencyRecommend = freightAgencyRecommendMapper.selectByFaIdSingle(faId);
+//            通过审核的记录为空
+            String fileName = freightAgencyRecommendVerify.getActivityPhoto();
+            File originFile = new File(FileSet.RECOMMEND_VERIFY_PATH + fileName);
+            File aimFile = new File(FileSet.RECOMMEND_PATH + fileName);
+            if (freightAgencyRecommend == null) {
+                freightAgencyRecommend = new FreightAgencyRecommend();
+                BeanUtils.copyProperties(freightAgencyRecommendVerify, freightAgencyRecommend);
+                freightAgencyRecommend.setVerifyStatus("1");
+                freightAgencyRecommend.setId(null);
+                freightAgencyRecommendMapper.insertSelective(freightAgencyRecommend);
+                freightAgencyRecommendVerifyMapper.deleteByPrimaryKey(freightAgencyRecommendVerify.getId());
+                originFile.renameTo(aimFile);
+                return 1;
+            } else {
+                Integer formerId = freightAgencyRecommend.getId();
+                String oldFileName = freightAgencyRecommend.getActivityPhoto();
+                BeanUtils.copyProperties(freightAgencyRecommendVerify, freightAgencyRecommend);
+                freightAgencyRecommend.setId(formerId);
+                freightAgencyRecommendMapper.updateByPrimaryKeySelective(freightAgencyRecommend);
+                freightAgencyRecommendVerifyMapper.deleteByPrimaryKey(freightAgencyRecommendVerify.getId());
+//                    审核通过磁盘和审核磁盘有相同文件名，则只需删除审核中磁盘记录即可
+                if (aimFile.exists() && originFile.exists()) {
+                    originFile.delete();
+                } else {
+//                    将审核磁盘对应的文件移动到审核通过磁盘
+                    if (originFile.exists()) {
+                        originFile.renameTo(aimFile);
+                    }
+                    File oldFile = new File(FileSet.RECOMMEND_VERIFY_PATH + oldFileName);
+//                    将原审核通过的文件删除
+                    oldFile.delete();
+                }
+                return 1;
+            }
+        }
+    }
+
+    @Override
+    public int rejectRecommend(Integer id) {
+        FreightAgencyRecommendVerify freightAgencyRecommendVerify = freightAgencyRecommendVerifyMapper.selectByPrimaryKey(id);
+        if (freightAgencyRecommendVerify == null) {
+            return 0;
+        }
+        String photo = freightAgencyRecommendVerify.getActivityPhoto();
+        File file = new File(FileSet.RECOMMEND_VERIFY_PATH + photo);
+        freightAgencyRecommendVerifyMapper.deleteByPrimaryKey(id);
+        file.delete();
+        return 1;
+    }
+
+    @Override
     public PageBeanVo<FreightAgencyRecommendVerify> selectByCriteria(String condition, String text, Integer currentPage, Integer perPageRecord) {
         FreightAgencyRecommendVerify freightAgencyRecommendVerify = new FreightAgencyRecommendVerify();
         List<FreightAgencyRecommendVerify> freightAgencyRecommendVerifyList;
         int count;
-        int start = (currentPage-1)*perPageRecord;
+        int start = (currentPage-1) * perPageRecord;
         int end = perPageRecord;
         PageBeanVo<FreightAgencyRecommendVerify> pageBeanVo = new PageBeanVo<>();
         pageBeanVo.setCurrentPage(currentPage);

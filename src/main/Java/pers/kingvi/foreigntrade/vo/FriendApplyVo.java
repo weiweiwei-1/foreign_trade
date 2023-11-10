@@ -1,9 +1,18 @@
 package pers.kingvi.foreigntrade.vo;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 public class FriendApplyVo {
     private String photo;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long senderId;
+
+    private String name;
 
     private String senderName;
 
@@ -16,6 +25,22 @@ public class FriendApplyVo {
     private String city;
 
     private String mainBusiness;
+
+    public FriendApplyVo() {
+
+    }
+
+    public FriendApplyVo(String photo, Long senderId, String name, String senderName, String sendTime, String company, String companyLink, String city, String mainBusiness) {
+        this.photo = photo;
+        this.senderId = senderId;
+        this.name = name;
+        this.senderName = senderName;
+        this.sendTime = sendTime;
+        this.company = company;
+        this.companyLink = companyLink;
+        this.city = city;
+        this.mainBusiness = mainBusiness;
+    }
 
     public String getPhoto() {
         return photo;
@@ -31,6 +56,14 @@ public class FriendApplyVo {
 
     public void setSenderId(Long senderId) {
         this.senderId = senderId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSenderName() {

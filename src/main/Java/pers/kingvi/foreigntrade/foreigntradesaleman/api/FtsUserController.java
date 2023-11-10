@@ -1,9 +1,11 @@
 package pers.kingvi.foreigntrade.foreigntradesaleman.api;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +16,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.socket.TextMessage;
 import pers.kingvi.foreigntrade.admin.service.UserService;
 import pers.kingvi.foreigntrade.common.IdWorker;
+import pers.kingvi.foreigntrade.config.AccountNotMatchException;
+import pers.kingvi.foreigntrade.config.GlobalControlUtils;
+import pers.kingvi.foreigntrade.config.LoginUtils;
+import pers.kingvi.foreigntrade.config.WebSocketUtils;
 import pers.kingvi.foreigntrade.filter.CustomizedToken;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ForeignTradeSalemanService;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
+import pers.kingvi.foreigntrade.po.Message;
 import pers.kingvi.foreigntrade.po.User;
+import pers.kingvi.foreigntrade.util.FileSet;
 import pers.kingvi.foreigntrade.util.Result;
 import pers.kingvi.foreigntrade.util.ResultCode;
 import pers.kingvi.foreigntrade.util.ResultInfo;
+import pers.kingvi.foreigntrade.util.fa.FaUtils;
 import pers.kingvi.foreigntrade.util.fts.FtsUtils;
 import pers.kingvi.foreigntrade.util.fts.error.FtsVoErrorUtils;
 import pers.kingvi.foreigntrade.vo.AuthResult;
@@ -34,6 +44,7 @@ import pers.kingvi.foreigntrade.vo.fts.FtsUpdateVo;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -47,6 +58,18 @@ public class FtsUserController {
     @Autowired
     private UserService userService;
 
+
+    private String getRandomName() {
+        String[] randomName = new String[]{"邂逅", "遇见", "相遇"};
+        StringBuilder targetName = new StringBuilder(randomName[new Random().nextInt(randomName.length)]);
+        int randomInteger;
+        for (int i = 0; i < 4; i++) {
+            randomInteger = new Random().nextInt(10);
+            targetName.append(randomInteger);
+        }
+        return targetName.toString();
+    }
+
     /**
      *
      * @param email: 前端传入的邮箱
@@ -57,6 +80,9 @@ public class FtsUserController {
     @RequestMapping(value = "/register")
     @ResponseBody
     public Result register(@RequestParam("account") String email, @RequestParam("password") String password, @RequestParam("code") String code) {
+        if (!GlobalControlUtils.isRegisterStatus()) {
+            return new Result(-2, "为了安全，注册功能已关闭，请联系管理员开启");
+        }
         String emailError = null;
         String passwordError = null;
         if (StringUtils.isBlank(email)) {
@@ -88,10 +114,10 @@ public class FtsUserController {
                 Long id = idWorker.nextId();
                 fts.setId(id);
                 fts.setAccount(email);
-                fts.setPassword(password);
+                fts.setPassword(password.trim());
                 fts.setCompany(" ");
                 fts.setCity(" ");
-                fts.setName("邂逅");
+                fts.setName(getRandomName());
                 fts.setPhoto("default.jpg");
                 foreignTradeSalemanService.insertSelective(fts);
             } catch (DataAccessException e) {
@@ -108,8 +134,17 @@ public class FtsUserController {
             } catch (Exception e) {
                 return new Result(ResultCode.FAIL, "注册成功，登录失败，请点击登录按钮重新登录：" + e.toString());
             }
-            //将登录用户信息的密码置为空,防止误操作返回账号密码信息等给前端
-            FtsUtils.getUserVo().setPassword("");
+            Session session = subject.getSession();
+            Long ftsId = FtsUtils.getUserVo().getId();
+            if (LoginUtils.containsSessionId(String.valueOf(session.getId()))) {
+                Long id = LoginUtils.getId(String.valueOf(session.getId()));
+                LoginUtils.removeSession(id);
+            }
+            session.setAttribute("id", ftsId);
+            session.setAttribute("type", "fts");
+            //保存用户登录状态
+            LoginUtils.put(FtsUtils.getUserVo().getId(), session);
+            LoginUtils.putSessionId(String.valueOf(session.getId()), ftsId);
             AuthResult authResult = new AuthResult(1000, "fts", FtsUtils.getUserVo().getName(), "login");
             return new Result<AuthResult>().success(authResult);
         }
@@ -124,6 +159,9 @@ public class FtsUserController {
     @ResponseBody
     @RequestMapping(value = "/login")
     public Result login(@RequestParam("email") String email, @RequestParam("password") String password) {
+        if (!GlobalControlUtils.isLoginStatus()) {
+            return new Result(-2, "登录功能已关闭，请联系管理员开启");
+        }
         String emailError = null;
         String passwordError = null;
         if (StringUtils.isBlank(email)) {
@@ -147,17 +185,45 @@ public class FtsUserController {
             CustomizedToken token = new CustomizedToken(email, password, "fts");
             token.setRememberMe(false);
             Subject subject = SecurityUtils.getSubject();
+            if (subject.isAuthenticated() && subject.hasRole("fts")) {
+                if (FtsUtils.getUserVo().getEmail().equals(email.trim()) && FtsUtils.getUserVo().getPassword().equals(password.trim())) {
+                    AuthResult authResult = new AuthResult(1000, "fts", FaUtils.getUserVo().getName(), "login");
+                    return new Result<AuthResult>().success(authResult);
+                }
+            }
             try {
                 subject.login(token);
             } catch (UnknownAccountException uae) {
                 return new Result<>().error(new LoginError(ResultInfo.EMAIL_NOT_EXIST, null));
+            }  catch (AccountNotMatchException uae) {
+                return new Result<>().error(new LoginError(ResultInfo.FA_LOGIN_ACCOUNT_REJECT, null));
             } catch (IncorrectCredentialsException ice) {
                 return new Result<>().error(new LoginError(null, ResultInfo.PASSWORD_ERROR));
             }
-            System.out.println("登录用户角色为：" + subject.getPrincipal());
             Session session = subject.getSession();
-            FtsUtils.getUserVo().setPassword("");
+            Long ftsId = FtsUtils.getUserVo().getId();
+            Message message = new Message("sessionDestroyed");
+            if (LoginUtils.containsKey(ftsId) && session.getId() != LoginUtils.get(ftsId).getId()) {
+                try {
+                    if (WebSocketUtils.hasConnection(ftsId)) {
+                        WebSocketUtils.getWebsocketSession().get(ftsId).sendMessage(new TextMessage(JSONObject.toJSONString(message)));
+                    }
+                    LoginUtils.getWebsocketSession().get(ftsId).stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+//                同一平台不同账号在同一浏览器登录，存在登录的id，且登录的sessionId与当前的sessionId相同，则LoginUtils删除已保存的登录的session
+            if (!LoginUtils.containsKey(ftsId) && LoginUtils.containsSessionId(String.valueOf(session.getId()))) {
+                Long id = LoginUtils.getId(String.valueOf(session.getId()));
+                LoginUtils.removeSession(id);
+                WebSocketUtils.removeSession(id);
+            }
             session.setAttribute("id", FtsUtils.getUserVo().getId());
+            session.setAttribute("type", "fts");
+//            保存用户登录状态
+            LoginUtils.put(FtsUtils.getUserVo().getId(), session);
+            LoginUtils.putSessionId(String.valueOf(session.getId()), ftsId);
             AuthResult authResult = new AuthResult(1000, "fts", FtsUtils.getUserVo().getName(), "login");
             return new Result<AuthResult>().success(authResult);
         }
@@ -169,7 +235,8 @@ public class FtsUserController {
     @ResponseBody
     @RequestMapping(value = "/user-info")
     public Result getUserInfo() {
-        ForeignTradeSaleman fts = FtsUtils.getUserVo();
+        Long ftsId = FtsUtils.getUserVo().getId();
+        ForeignTradeSaleman fts = foreignTradeSalemanService.selectByPrimaryKey(ftsId);
         if (fts != null) {
             ForeignTradeSalemanInfoVo foreignTradeSalemanInfoVo = new ForeignTradeSalemanInfoVo(
                     fts.getPhoto(),
@@ -349,7 +416,7 @@ public class FtsUserController {
         if (photo != null) {
             String originalFileName = photo.getOriginalFilename();
             if (originalFileName != null && originalFileName.length() > 0) {
-                String savePath = "E:\\IDEA-workspace\\fts-image\\";
+                String savePath = FileSet.FTS_IMAGE_PATH;
                 String newFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf("."));
                 File newFile = new File(savePath + newFileName);
                 try {
@@ -370,6 +437,10 @@ public class FtsUserController {
                             }
                         }
                     }
+                } else {
+                    FtsVoError ftsVoError = new FtsVoError();
+                    ftsVoError.setPhotoError(photoError);
+                    return new Result<>().error(ftsVoError);
                 }
             }
         }
@@ -428,6 +499,31 @@ public class FtsUserController {
             return new Result<>().success(ftsMessageVo);
         } catch (Exception e) {
             return Result.fail;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/pwd/update")
+    public Integer updataPassword(String originPwd, String newPwd) {
+        Long ftsId = FtsUtils.getUserVo().getId();
+        ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanService.selectByPrimaryKey(ftsId);
+        if (!foreignTradeSaleman.getPassword().equals(originPwd)) {
+//            原密码错误，返回0
+            return -2;
+        } else if (StringUtils.isBlank(newPwd) || newPwd.trim().length() < 6 || newPwd.trim().length() > 15) {
+//            新密码格式不符合需求，返回0
+            return 0;
+        } else {
+            foreignTradeSaleman = new ForeignTradeSaleman();
+            foreignTradeSaleman.setPassword(newPwd.trim());
+            foreignTradeSaleman.setId(ftsId);
+            try {
+//                更新密码
+                foreignTradeSalemanService.updateByPrimaryKeySelective(foreignTradeSaleman);
+                return 1;
+            } catch (Exception e) {
+                return -1;
+            }
         }
     }
 

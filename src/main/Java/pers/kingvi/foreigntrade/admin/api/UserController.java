@@ -32,7 +32,8 @@ public class UserController {
                 return new AuthResult(ResultCode.AUTH_SUCCESS, "admin", "weiweiwei", "login");
             }
         }
-        return new AuthResult(ResultCode.AUTH_FAIL, "", "");
+//        interceptType为pass，不需要拦截，窗口不提示
+        return new AuthResult(ResultCode.AUTH_FAIL, "", "", "pass");
     }
 
 }

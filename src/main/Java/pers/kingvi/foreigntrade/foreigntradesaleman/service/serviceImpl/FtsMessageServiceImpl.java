@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kingvi.foreigntrade.admin.dao.FriendMapper;
 import pers.kingvi.foreigntrade.admin.dao.MessageMapper;
-import pers.kingvi.foreigntrade.admin.service.MessageService;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.FtsMessageService;
 import pers.kingvi.foreigntrade.freightagency.dao.FreightAgencyMapper;
-import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.Message;
@@ -107,6 +105,7 @@ public class FtsMessageServiceImpl implements FtsMessageService {
                     message.getSendTime()
             );
             //已读消息列表中，获取最后一条消息的faId，同时添加到faIdList中
+            readAndUnReadMessageVo.setUnReadMessageCount(0);
             if (message.getSenderId().equals(userId)) {
                 readAndUnReadMessageVo.setFriendId(message.getReceiverId());
                 faIdList.add(message.getReceiverId());
@@ -138,6 +137,16 @@ public class FtsMessageServiceImpl implements FtsMessageService {
         }
         System.out.println(messageVoList);
         return messageVoList;
+    }
+
+    @Override
+    public int getUnReadMsgCount(Long receiverId) {
+        List<UnReadMessageVo> unReadMessageVoList = messageMapper.selectUnReadMessage(receiverId);
+        int unReadCount = 0;
+        for (UnReadMessageVo unReadMessageVo : unReadMessageVoList) {
+            unReadCount += unReadMessageVo.getUnReadMessageCount();
+        }
+        return unReadCount;
     }
 
     @Override

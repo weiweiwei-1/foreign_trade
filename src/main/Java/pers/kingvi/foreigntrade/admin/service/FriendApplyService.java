@@ -13,9 +13,13 @@ public interface FriendApplyService {
 
     int permitApply(FriendApply friendApply);
 
+    int sendFriendApply(FriendApply friendApply);
+
     FriendApplyVo selectBySenderId(FriendApply friendApply);
 
     FriendApply selectFriendApply(FriendApply friendApply);
+
+    FriendApply selectFriendApplySingle(FriendApply friendApply);
 
     List<FriendApplyVo> selectByReceiverId(Long receiverId);
 

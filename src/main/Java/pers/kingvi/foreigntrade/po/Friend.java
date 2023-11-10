@@ -5,9 +5,10 @@ import pers.kingvi.foreigntrade.vo.LoginInfo;
 public class Friend {
     private Integer id;
 
-    //约定userId为
+    //约定userId为faId
     private Long faId;
 
+    //约定friendId为ftsId
     private Long ftsId;
 
     private String faMark;
@@ -73,69 +74,4 @@ public class Friend {
         this.addTime = addTime;
     }
 
-    /*public Friend(Long userId, Long friendId) {
-        this.userId = userId;
-        this.friendId = friendId;
-    }
-
-    public String getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
-    }
-
-    public Integer getId() {
-        return id;
-
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getFriendId() {
-        return friendId;
-    }
-
-    public void setFriendId(Long friendId) {
-        this.friendId = friendId;
-    }
-
-    public String getUserMark() {
-        return userMark;
-    }
-
-    public void setUserMark(String userMark) {
-        this.userMark = userMark == null ? null : userMark.trim();
-    }
-
-    public String getFriendMark() {
-        return friendMark;
-    }
-
-    public void setFriendMark(String friendMark) {
-        this.friendMark = friendMark == null ? null : friendMark.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "FriendVo{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", friendId=" + friendId +
-                ", userMark='" + userMark + '\'' +
-                ", friendMark='" + friendMark + '\'' +
-                ", addTime='" + addTime + '\'' +
-                '}';
-    }*/
 }

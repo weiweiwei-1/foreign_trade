@@ -110,6 +110,17 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectQuoteListByFtsId" resultType="pers.kingvi.foreigntrade.vo.fa.QuoteProductVo">
+    SELECT product_information.photo,
+           product_information.product_name as productName,
+           product_information.weight, product_information.origin,
+           product_information.destination_country AS destinationCountry,
+           product_information.send_time as sendTime,
+           quote_record.price,
+           quote_record.shipping_way as shippingWay,
+           quote_record.deliver_time as deliverTime
+    FROM product_information, quote_record WHERE product_information.fts_id = #{ftsId,jdbcType=BIGINT} AND quote_record.product_id=product_information.id and quote_record.fa_id = #{faId,jdbcType=BIGINT}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -224,6 +235,17 @@
     (select product_id from quote_record where fa_id = #{faId,jdbcType=BIGINT})
     order by id desc
   </select>
+  <select id="selectByProductId" parameterType="integer" resultMap="BaseResultMap">
+    select * from quote_record
+    where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPidList" parameterType="list" resultType="long">
+    select product_id from quote_record
+      where fa_id = #{faId,jdbcType=BIGINT}
+    order by id desc
+  </select>
+
   <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.QuoteRecordExample" resultType="java.lang.Integer" >
     select count(*) from quote_record
     <if test="_parameter != null" >

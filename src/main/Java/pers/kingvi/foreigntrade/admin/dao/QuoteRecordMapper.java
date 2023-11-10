@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.QuoteRecord;
 import pers.kingvi.foreigntrade.po.QuoteRecordExample;
+import pers.kingvi.foreigntrade.vo.fa.QuoteProductVo;
 
 public interface QuoteRecordMapper {
     int countByExample(QuoteRecordExample example);
@@ -18,15 +19,19 @@ public interface QuoteRecordMapper {
 
     int insertSelective(QuoteRecord record);       //选择插入
 
-//    Long selectFtsIdByFaId(@Param("faId") Long faId);
-
     List<QuoteRecord> selectByProductIdAndFtsId(@Param("productId") Integer productId, @Param("ftsId") Long ftsId);  //根据产品id和外贸员id查询报价记录，面向的是外贸员,有faId
 
     List<ProductInformation> selectByFaId(Long faId);      //根据货代id查询产品信息，面向的是货代
 
+    List<QuoteRecord> selectByProductId(Integer productId);
+
+    List<Long> selectByPidList(Long faId);
+
     List<QuoteRecord> selectByExampleWithRowbounds(QuoteRecordExample example, RowBounds rowBounds);
 
     List<QuoteRecord> selectByExample(QuoteRecordExample example);
+
+    List<QuoteProductVo> selectQuoteListByFtsId(@Param("faId") Long faId, @Param("ftsId") Long ftsId);
 
     QuoteRecord selectByPrimaryKey(Integer id);       //根据主键查询
 

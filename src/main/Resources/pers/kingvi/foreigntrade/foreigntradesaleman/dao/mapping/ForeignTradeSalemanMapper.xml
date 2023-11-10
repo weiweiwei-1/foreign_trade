@@ -271,12 +271,24 @@
         </foreach>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from foreign_trade_saleman
+        order by register_time desc;
+    </select>
+
   <select id="selectByAccount" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from foreign_trade_saleman
     where account = #{account,jdbcType=VARCHAR}
   </select>
+    <select id="selectAllCount" resultType="integer">
+        select count(*)
+        from foreign_trade_saleman;
+    </select>
     <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -289,10 +301,16 @@
         from foreign_trade_saleman
         desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from foreign_trade_saleman
     where id = #{id,jdbcType=BIGINT}
   </delete>
+    <select id="selectByIdList" resultType="long">
+        select id
+        from foreign_trade_saleman
+    </select>
   <delete id="deleteByExample" parameterType="pers.kingvi.foreigntrade.po.ForeignTradeSalemanExample" >
     delete from foreign_trade_saleman
     <if test="_parameter != null" >

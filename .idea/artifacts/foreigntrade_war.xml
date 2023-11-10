@@ -1,7 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="war" name="foreigntrade:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="first_web.war">
+    <properties id="maven-jee-properties">
+      <options>
+        <module>foreigntrade</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="foreign_trade.war">
       <element id="artifact" artifact-name="foreigntrade:war exploded" />
     </root>
   </artifact>

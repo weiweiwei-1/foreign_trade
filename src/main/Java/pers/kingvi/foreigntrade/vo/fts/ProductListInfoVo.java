@@ -2,7 +2,7 @@ package pers.kingvi.foreigntrade.vo.fts;
 
 import java.util.List;
 
-public class ProductInfoVo {
+public class ProductListInfoVo {
 //    产品id
     private Integer id;
 //    产品名
@@ -64,7 +64,7 @@ public class ProductInfoVo {
         this.quoteList = quoteList;
     }
 
-    public ProductInfoVo(Integer id, String productName, String photo, String sendTime, Integer quoteCount, List<QuoteRecordVo> quoteList) {
+    public ProductListInfoVo(Integer id, String productName, String photo, String sendTime, Integer quoteCount, List<QuoteRecordVo> quoteList) {
         this.id = id;
         this.productName = productName;
         this.photo = photo;

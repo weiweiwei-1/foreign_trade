@@ -1,17 +1,23 @@
 package pers.kingvi.foreigntrade.foreigntradesaleman.api;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
 import pers.kingvi.foreigntrade.bo.fts.FtsMsgListBo;
+import pers.kingvi.foreigntrade.config.WebSocketUtils;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.FtsFriendService;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.FtsMessageService;
 import pers.kingvi.foreigntrade.freightagency.service.FreightAgencyService;
+import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.Friend;
 import pers.kingvi.foreigntrade.po.Message;
 import pers.kingvi.foreigntrade.util.Result;
+import pers.kingvi.foreigntrade.util.fa.FaUtils;
 import pers.kingvi.foreigntrade.util.fts.FtsUtils;
 import pers.kingvi.foreigntrade.vo.ReadAndUnReadMessageVo;
 import pers.kingvi.foreigntrade.vo.fa.FaMessageVo;
@@ -38,12 +44,30 @@ public class FtsMessageController {
         Long receiverId = FtsUtils.getUserVo().getId();
         try {
             List<ReadAndUnReadMessageVo> readAndUnReadMessageVoList = ftsMessageService.getMessageList(receiverId);
-            if (readAndUnReadMessageVoList == null) {
-                return Result.fail;
-            }
             return new Result<>().success(readAndUnReadMessageVoList);
         } catch (Exception e) {
+            System.out.println(e.toString());
             return Result.fail;
+        }
+    }
+
+    @RequestMapping(value = "/count", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public int getUnReadMsgCount() {
+        ForeignTradeSaleman foreignTradeSaleman;
+        try {
+            foreignTradeSaleman = FtsUtils.getUserVo();
+        } catch (Exception e) {
+            return 0;
+        }
+        if (foreignTradeSaleman == null) {
+            return 0;
+        }
+        try {
+            return ftsMessageService.getUnReadMsgCount(foreignTradeSaleman.getId());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return -1;
         }
     }
 
@@ -63,6 +87,17 @@ public class FtsMessageController {
         Message message = new Message(senderId, ftsId);
         try {
             ftsMessageService.readAllMessages(message);
+            if (WebSocketUtils.hasConnection(senderId)) {
+                message.setMessageType("readMessage");
+                message.setStatus("1");
+                WebSocketUtils.get(senderId).sendMessage(new TextMessage(JSONObject.toJSONString(message)));
+            }
+            if (WebSocketUtils.hasConnection(ftsId)) {
+//                发给自己
+                message.setMessageType("hasRead");
+                message.setSenderId(senderId);
+                WebSocketUtils.get(ftsId).sendMessage(new TextMessage(JSONObject.toJSONString(message)));
+            }
             return Result.success;
         } catch (Exception e) {
             return Result.fail;

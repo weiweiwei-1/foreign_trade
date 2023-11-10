@@ -1,6 +1,8 @@
 package pers.kingvi.foreigntrade.vo;
 
 //import com.alibaba.fastjson.serializer.ToStringSerializer;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -10,6 +12,7 @@ public class ReadAndUnReadMessageVo {
     private Integer id;
 
     @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long friendId;
 
     private String friendPhoto;
@@ -28,6 +31,15 @@ public class ReadAndUnReadMessageVo {
 
     public ReadAndUnReadMessageVo(Integer id, String content, String sendTime) {
         this.id = id;
+        this.content = content;
+        this.sendTime = sendTime;
+    }
+
+    public ReadAndUnReadMessageVo(Long friendId, String friendPhoto, String friendMark, Integer unReadMessageCount, String content, String sendTime) {
+        this.friendId = friendId;
+        this.friendPhoto = friendPhoto;
+        this.friendMark = friendMark;
+        this.unReadMessageCount = unReadMessageCount;
         this.content = content;
         this.sendTime = sendTime;
     }

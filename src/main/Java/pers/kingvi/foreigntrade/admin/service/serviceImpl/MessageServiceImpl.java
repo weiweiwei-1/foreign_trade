@@ -65,20 +65,20 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
-    //发消息的是外贸，那么senderId为ftsId.
+    //发消息的是货代，那么senderId为faId
     @Override
     public int insertFtsMessage(Message message) {
         Friend friend = new Friend();
-        friend.setFaId(message.getSenderId());
-        friend.setFtsId(message.getReceiverId());
+        friend.setFtsId(message.getSenderId());
+        friend.setFaId(message.getReceiverId());
         friend = friendMapper.selectFriend(friend);
         if (friend != null) {
-            messageMapper.insert(message);
+            messageMapper.insertSelective(message);
             return 1;
         } else {
             List<QuoteRecordProductVo> quoteRecordProductVoList = productQuoteMapper.selectByFtsIdAndFaId(message.getSenderId(), message.getReceiverId());
-            if (quoteRecordProductVoList != null) {
-                messageMapper.insert(message);
+            if (quoteRecordProductVoList.size() != 0) {
+                messageMapper.insertSelective(message);
                 return 1;
             } else {
                 return 0;
@@ -86,20 +86,20 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
-    //发消息的是货代，那么senderId为faId
+    //发消息的是外贸，那么senderId为ftsId.
     @Override
     public int insertFaMessage(Message message) {
         Friend friend = new Friend();
-        friend.setFtsId(message.getSenderId());
-        friend.setFaId(message.getReceiverId());
+        friend.setFaId(message.getSenderId());
+        friend.setFtsId(message.getReceiverId());
         friend = friendMapper.selectByKey(friend);
         if (friend != null) {
-            messageMapper.insert(message);
+            messageMapper.insertSelective(message);
             return 1;
         } else {
             List<QuoteRecordProductVo> quoteRecordProductVoList = productQuoteMapper.selectByFtsIdAndFaId(message.getReceiverId(), message.getSenderId());
-            if (quoteRecordProductVoList != null) {
-                messageMapper.insert(message);
+            if (quoteRecordProductVoList.size() != 0) {
+                messageMapper.insertSelective(message);
                 return 1;
             } else {
                 return 0;

@@ -134,6 +134,11 @@
     </foreach>
   </select>
 
+  <select id="selectByIdList" resultType="long">
+    select id
+    from freight_agency
+  </select>
+
     <select id="selectByAccountAndPassword" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -301,6 +306,15 @@
       </if>
     </trim>
   </insert>
+  <select id="selectAllCount" resultType="integer">
+    select count(*) from freight_agency
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from freight_agency order by register_time desc
+  </select>
   <select id="countByExample" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyExample" resultType="java.lang.Integer" >
     select count(*) from freight_agency
     <if test="_parameter != null" >

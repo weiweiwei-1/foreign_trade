@@ -43,7 +43,7 @@ public class FreightAgencyRecommendVerifyTest {
         freightAgencyRecommendVerify.setPhone("13430171");
         freightAgencyRecommendVerify.setWeChat("Kingvi_optimus");
         freightAgencyRecommendVerify.setEmail("2198626335@qq.com");
-        freightAgencyRecommendVerify.setSendTime("2012-1-21");
+//        freightAgencyRecommendVerify.setSendTime("2012-1-21");
         freightAgencyRecommendVerify.setVerifyStatus("0");
         freightAgencyRecommendVerifyMapper.insert(freightAgencyRecommendVerify);
         sqlSession.commit();

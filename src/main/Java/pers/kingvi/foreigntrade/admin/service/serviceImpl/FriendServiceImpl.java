@@ -171,4 +171,9 @@ public class FriendServiceImpl implements FriendService {
         }
         return 0;
     }
+
+    @Override
+    public int insertFriend(Friend friend) {
+        return friendMapper.insertSelective(friend);
+    }
 }

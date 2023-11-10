@@ -6,16 +6,16 @@
     <result column="fa_id" property="faId" jdbcType="INTEGER" />
     <result column="fa_name" property="faName" jdbcType="VARCHAR" />
     <result column="fa_company" property="faCompany" jdbcType="VARCHAR" />
-    <result column="companyLink" property="companyLink" jdbcType="VARCHAR" />
+    <result column="company_link" property="companyLink" jdbcType="VARCHAR" />
     <result column="fa_city" property="faCity" jdbcType="VARCHAR" />
     <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
     <result column="main_business" property="mainBusiness" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="activity_photo" property="activityPhoto" jdbcType="CHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
-    <result column="weChat" property="weChat" jdbcType="VARCHAR" />
+    <result column="wechat" property="weChat" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="send_time" property="time" jdbcType="TIMESTAMP" />
     <result column="verify_status" property="verifyStatus" jdbcType="CHAR" />
 
   </resultMap>
@@ -79,9 +79,9 @@
   </sql>
   <sql id="Base_Column_List" >
     id, fa_id, fa_name, fa_company,
-    companyLink, fa_city, key_words,
+    company_link, fa_city, key_words,
     main_business, description, activity_photo,
-    phone, weChat, email,
+    phone, wechat, email,
     send_time, verify_status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerifyExample" >
@@ -98,6 +98,12 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend_verify
+    order by send_time
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -105,6 +111,11 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByFaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from fa_recommend_verify where fa_id = #{faId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByFaIdSingle" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from fa_recommend_verify where fa_id = #{faId,jdbcType=BIGINT}
@@ -226,9 +237,9 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into fa_recommend_verify (fa_id, fa_name, fa_company,
-      companyLink, fa_city, key_words,
+      company_link, fa_city, key_words,
       main_business, description, activity_photo,
-      phone, weChat, email,
+      phone, wechat, email,
       send_time, verify_status)
     values (#{faId,jdbcType=BIGINT}, #{faName,jdbcType=VARCHAR}, #{faCompany,jdbcType=VARCHAR},
       #{companyLink,jdbcType=VARCHAR}, #{faCity,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR},
@@ -252,7 +263,7 @@
         fa_company,
       </if>
       <if test="companyLink != null" >
-        companyLink,
+        company_link,
       </if>
       <if test="faCity != null" >
         fa_city,
@@ -273,7 +284,7 @@
         phone,
       </if>
       <if test="weChat != null" >
-        weChat,
+        wechat,
       </if>
       <if test="email != null" >
         email,
@@ -352,7 +363,7 @@
         fa_company = #{record.faCompany,jdbcType=VARCHAR},
       </if>
       <if test="record.companyLink != null" >
-        companyLink = #{record.companyLink,jdbcType=VARCHAR},
+        company_link = #{record.companyLink,jdbcType=VARCHAR},
       </if>
       <if test="record.faCity != null" >
         fa_city = #{record.faCity,jdbcType=VARCHAR},
@@ -373,7 +384,7 @@
         phone = #{record.phone,jdbcType=CHAR},
       </if>
       <if test="record.weChat != null" >
-        weChat = #{record.weChat,jdbcType=VARCHAR},
+        wechat = #{record.weChat,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
@@ -396,14 +407,14 @@
       fa_id = #{record.faId,jdbcType=BIGINT},
       fa_name = #{record.faName,jdbcType=VARCHAR},
       fa_company = #{record.faCompany,jdbcType=VARCHAR},
-      companyLink = #{record.companyLink,jdbcType=VARCHAR},
+      company_link = #{record.companyLink,jdbcType=VARCHAR},
       fa_city = #{record.faCity,jdbcType=VARCHAR},
       key_words = #{record.keyWords,jdbcType=VARCHAR},
       main_business = #{record.mainBusiness,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       activity_photo = #{record.activityPhoto,jdbcType=CHAR},
       phone = #{record.phone,jdbcType=CHAR},
-      weChat = #{record.weChat,jdbcType=VARCHAR},
+      wechat = #{record.weChat,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       send_time = #{record.sendTime,jdbcType=TIMESTAMP},
       verify_status = #{record.verifyStatus,jdbcType=CHAR}
@@ -424,7 +435,7 @@
         fa_company = #{faCompany,jdbcType=VARCHAR},
       </if>
       <if test="companyLink != null" >
-        companyLink = #{companyLink,jdbcType=VARCHAR},
+        company_link = #{companyLink,jdbcType=VARCHAR},
       </if>
       <if test="faCity != null" >
         fa_city = #{faCity,jdbcType=VARCHAR},
@@ -445,7 +456,7 @@
         phone = #{phone,jdbcType=CHAR},
       </if>
       <if test="weChat != null" >
-        weChat = #{weChat,jdbcType=VARCHAR},
+        wechat = #{weChat,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -459,19 +470,67 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByFaIdSelective" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify">
+    update fa_recommend_verify
+    <set >
+      <if test="faId != null" >
+        fa_id = #{faId,jdbcType=BIGINT},
+      </if>
+      <if test="faName != null" >
+        fa_name = #{faName,jdbcType=VARCHAR},
+      </if>
+      <if test="faCompany != null" >
+        fa_company = #{faCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLink != null" >
+        company_link = #{companyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="faCity != null" >
+        fa_city = #{faCity,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        key_words = #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="mainBusiness != null" >
+        main_business = #{mainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="activityPhoto != null" >
+        activity_photo = #{activityPhoto,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="weChat != null" >
+        wechat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where fa_id = #{faId,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKey" parameterType="pers.kingvi.foreigntrade.po.FreightAgencyRecommendVerify" >
     update fa_recommend_verify
     set fa_id = #{faId,jdbcType=BIGINT},
       fa_name = #{faName,jdbcType=VARCHAR},
       fa_company = #{faCompany,jdbcType=VARCHAR},
-      companyLink = #{companyLink,jdbcType=VARCHAR},
+      company_link = #{companyLink,jdbcType=VARCHAR},
       fa_city = #{faCity,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
       main_business = #{mainBusiness,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       activity_photo = #{activityPhoto,jdbcType=CHAR},
       phone = #{phone,jdbcType=CHAR},
-      weChat = #{weChat,jdbcType=VARCHAR},
+      wechat = #{weChat,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       send_time = #{sendTime,jdbcType=TIMESTAMP},
       verify_status = #{verifyStatus,jdbcType=CHAR}

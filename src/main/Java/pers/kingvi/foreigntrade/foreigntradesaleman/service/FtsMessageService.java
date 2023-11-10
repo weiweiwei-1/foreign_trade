@@ -13,6 +13,8 @@ public interface FtsMessageService {
 
     List<ReadAndUnReadMessageVo> getMessageList(Long receiverId);
 
+    int getUnReadMsgCount(Long receiverId);
+
     List<Message> selectMessageContent(Message message);
 
     int readAllMessages(Message message);

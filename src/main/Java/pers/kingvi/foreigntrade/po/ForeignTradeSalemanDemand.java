@@ -3,6 +3,7 @@ package pers.kingvi.foreigntrade.po;
 public class ForeignTradeSalemanDemand {
     private Integer id;
 
+
     private Long ftsId;
 
     private String ftsName;

@@ -1,8 +1,14 @@
 package pers.kingvi.foreigntrade.po;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 public class ProductInformation {
     private Integer id;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId
     private Long ftsId;
 
     private String ftsName;

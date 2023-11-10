@@ -1,10 +1,22 @@
 package pers.kingvi.foreigntrade.po;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import pers.kingvi.foreigntrade.filter.LongJsonDeserializer;
+import pers.kingvi.foreigntrade.filter.LongJsonSerializer;
+
 public class Message {
     private Integer id;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long senderId;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(type = IdType.AUTO)
     private Long receiverId;
 
     private String content;
@@ -22,6 +34,12 @@ public class Message {
     public Message(Long senderId, Long receiverId) {
         this.senderId = senderId;
         this.receiverId = receiverId;
+    }
+
+    public Message(Long senderId, Long receiverId, String content) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.content = content;
     }
 
     public Message(Long senderId, Long receiverId, String content, String sendTime, String status, String messageType) {

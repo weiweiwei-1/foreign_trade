@@ -11,9 +11,36 @@ public class PageBeanVo<T> {
 
     private Integer pageCount;        //总记录数除以每页记录数后的总页数
 
+    private String pageType;      //页面类型
+
+    private boolean showStatus;     //页面显示状态
+
     private List<T> beanList;  //查询推荐结果列表
 
+    public String getPageType() {
+        return pageType;
+    }
 
+    public PageBeanVo() {
+
+    }
+
+    public PageBeanVo(String pageType, boolean showStatus) {
+        this.pageType = pageType;
+        this.showStatus = showStatus;
+    }
+
+    public void setPageType(String pageType) {
+        this.pageType = pageType;
+    }
+
+    public boolean isShowStatus() {
+        return showStatus;
+    }
+
+    public void setShowStatus(boolean showStatus) {
+        this.showStatus = showStatus;
+    }
 
     public Integer getCurrentPage() {
         return currentPage;
@@ -44,8 +71,11 @@ public class PageBeanVo<T> {
     }
 
     public void setPageCount(Integer perPageRecord, Integer totalRecord) {
+        this.perPageRecord = perPageRecord;
+        this.totalRecord = totalRecord;
         int result = totalRecord / perPageRecord;
         pageCount = totalRecord % perPageRecord == 0 ? result : result + 1;
+        pageCount = pageCount > 0 ? pageCount : 1;
     }
 
     public List<T> getBeanList() {

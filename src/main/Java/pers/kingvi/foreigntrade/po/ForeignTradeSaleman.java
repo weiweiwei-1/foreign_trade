@@ -2,10 +2,13 @@ package pers.kingvi.foreigntrade.po;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 public class ForeignTradeSaleman {
 
-    @TableId(type = IdType.AUTO)
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId
     private Long id;
 
     private String account;

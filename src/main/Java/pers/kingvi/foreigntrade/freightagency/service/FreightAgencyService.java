@@ -18,6 +18,10 @@ public interface FreightAgencyService {
 
     int updateByPrimaryKeySelective(FreightAgency fa);     //选择更新
 
+    int selectAllCount();    //查询所有的注册货代数
+
+    List<FreightAgency> selectAll();
+
     int updateByPrimaryKey(FaUpdateVo faUpdateVo);
 
     int resetAllSendQuoteCount(Integer count);
@@ -27,6 +31,8 @@ public interface FreightAgencyService {
     int deleteByPrimaryKey(Long id);     //通过id删除账号
 
     List<FreightAgency> selectByFaIdList(List<Long> faIdList);
+
+    List<Long> selectByIdList();
 
     PageBeanVo<FreightAgency> selectByParam(String condition, String text, Integer currentPage, Integer perPageRecord);    //好友查询页面
 

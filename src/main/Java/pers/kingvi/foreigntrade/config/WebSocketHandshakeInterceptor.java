@@ -22,10 +22,12 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
         ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
         HttpSession session=servletRequest.getServletRequest().getSession(false);
         Long id = (Long) session.getAttribute("id");
-        if (id == null) {
+        String type = (String) session.getAttribute("type");
+        if (id == null || type == null) {
             return false;  //将用户标识放入参数列表后，下一步的websocket处理器可以读取这里面的数据
         }
         attributes.put("id", id);
+        attributes.put("type", type);
         return true;
     }
 

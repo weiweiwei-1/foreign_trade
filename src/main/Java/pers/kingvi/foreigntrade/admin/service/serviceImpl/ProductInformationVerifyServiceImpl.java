@@ -10,11 +10,11 @@ import pers.kingvi.foreigntrade.foreigntradesaleman.dao.ProductInformationMapper
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
-import pers.kingvi.foreigntrade.util.FilePath;
+import pers.kingvi.foreigntrade.util.FileSet;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.io.File;
-import java.text.Format;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service
@@ -51,9 +51,9 @@ public class ProductInformationVerifyServiceImpl implements ProductInformationVe
             return 0;
         } else {
             String fileName = productInformationVerify.getPhoto();
-            File originFile = new File(FilePath.PRODUCT_VERIFY_IMAGE_PATH + fileName);
+            File originFile = new File(FileSet.PRODUCT_VERIFY_IMAGE_PATH + fileName);
             if (originFile.isFile()) {
-                File aimFile = new File(FilePath.PRODUCT_IMAGE_PATH + fileName);
+                File aimFile = new File(FileSet.PRODUCT_IMAGE_PATH + fileName);
                 if (aimFile.exists()) {
                     return 0;
                 } else {
@@ -79,7 +79,11 @@ public class ProductInformationVerifyServiceImpl implements ProductInformationVe
         if (productInformationVerify == null) {
             return 0;
         } else {
-            return productInformationVerifyMapper.deleteByPrimaryKey(id);
+            String photo = productInformationVerify.getPhoto();
+            File file = new File(FileSet.RECOMMEND_VERIFY_PATH + photo);
+            productInformationVerifyMapper.deleteByPrimaryKey(id);
+            file.delete();
+            return 1;
         }
     }
 

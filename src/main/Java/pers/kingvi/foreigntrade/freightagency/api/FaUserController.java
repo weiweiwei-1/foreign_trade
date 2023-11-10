@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import pers.kingvi.foreigntrade.freightagency.service.FreightAgencyService;
+import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
 import pers.kingvi.foreigntrade.po.FreightAgency;
+import pers.kingvi.foreigntrade.util.FileSet;
 import pers.kingvi.foreigntrade.util.Result;
 import pers.kingvi.foreigntrade.util.ResultCode;
 import pers.kingvi.foreigntrade.util.ResultInfo;
 import pers.kingvi.foreigntrade.util.fa.FaUtils;
 import pers.kingvi.foreigntrade.util.fa.error.FaVoErrorUtils;
+import pers.kingvi.foreigntrade.util.fts.FtsUtils;
 import pers.kingvi.foreigntrade.vo.error.fa.FaVoError;
 import pers.kingvi.foreigntrade.vo.fa.FaMessageVo;
 import pers.kingvi.foreigntrade.vo.fa.FaUpdateVo;
@@ -159,7 +162,7 @@ public class FaUserController {
         }
         //上传照片大小校验
         if (photo != null) {
-            if (photo.getSize() > 4194304) {
+            if (photo.getSize() > FileSet.MAX_PHOTO_SIZE) {
                 photoError = FaVoErrorUtils.PHOTO_ERROR;
             }
         }
@@ -184,12 +187,13 @@ public class FaUserController {
         if (photo != null) {
             String originalFileName = photo.getOriginalFilename();
             if (originalFileName != null && originalFileName.length() > 0) {
-                String savePath = "E:\\IDEA-workspace\\fa-image\\";
+                String savePath = FileSet.FA_IMAGE_PATH;
                 String newFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf("."));
                 File newFile = new File(savePath + newFileName);
                 try {
                     photo.transferTo(newFile);
                 } catch (Exception e) {
+                    System.out.println(e.toString());
                     photoError = ResultInfo.WRITE_PHOTO_ERROR;
                 }
                 String oldPhoto = FaUtils.getUserVo().getPhoto();
@@ -201,16 +205,18 @@ public class FaUserController {
                             oldFile.delete();
                         }
                     }
+                } else {
+                    FaVoError faVoError = new FaVoError();
+                    faVoError.setPhotoError(photoError);
+                    return new Result<>().error(faVoError);
                 }
             }
         }
-        if (photoError == null) {
-            FaUpdateVo faUpdateVo = new FaUpdateVo(FaUtils.getUserVo().getId(), newPhotoName != null ? newPhotoName : FaUtils.getUserVo().getPhoto(), name, city, company, companyLink, sex, !"".equals(age) ? Integer.parseInt(age) : null, !"".equals(workingTime) ? Integer.parseInt(workingTime) : null, mainBussinessScope, serviceAdvantage, weChat, phone, email);
-            try {
-                freightAgencyService.updateByPrimaryKey(faUpdateVo);
-            } catch (DataAccessException e) {
-                return new Result(ResultCode.FAIL, e.toString());
-            }
+        FaUpdateVo faUpdateVo = new FaUpdateVo(FaUtils.getUserVo().getId(), newPhotoName != null ? newPhotoName : FaUtils.getUserVo().getPhoto(), name, city, company, companyLink, sex, !"".equals(age) ? Integer.parseInt(age) : null, !"".equals(workingTime) ? Integer.parseInt(workingTime) : null, mainBussinessScope, serviceAdvantage, weChat, phone, email);
+        try {
+            freightAgencyService.updateByPrimaryKey(faUpdateVo);
+        } catch (DataAccessException e) {
+            return new Result(ResultCode.FAIL, e.toString());
         }
         FaUtils.getUserVo().setPhoto(!StringUtils.isBlank(newPhotoName) ? newPhotoName : FaUtils.getUserVo().getPhoto());
         FaUtils.getUserVo().setName(name);
@@ -242,4 +248,28 @@ public class FaUserController {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/pwd/update")
+    public Integer updatePassword(String originPwd, String newPwd) {
+        Long faId = FaUtils.getUserVo().getId();
+        FreightAgency freightAgency = freightAgencyService.selectByPrimaryKey(faId);
+        if (!freightAgency.getPassword().equals(originPwd)) {
+//            原密码错误，返回0
+            return -2;
+        } else if (StringUtils.isBlank(newPwd) || newPwd.trim().length() < 6 || newPwd.trim().length() > 15) {
+//            新密码格式不符合需求，返回0
+            return 0;
+        } else {
+            freightAgency = new FreightAgency();
+            freightAgency.setPassword(newPwd.trim());
+            freightAgency.setId(faId);
+            try {
+//                更新密码
+                freightAgencyService.updateByPrimaryKeySelective(freightAgency);
+                return 1;
+            } catch (Exception e) {
+                return -1;
+            }
+        }
+    }
 }

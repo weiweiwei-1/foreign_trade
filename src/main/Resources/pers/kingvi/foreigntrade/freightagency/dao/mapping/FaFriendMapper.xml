@@ -3,7 +3,7 @@
 <mapper namespace="pers.kingvi.foreigntrade.freightagency.dao.FaFriendMapper" >
     <resultMap id="BaseResultMap" type="pers.kingvi.foreigntrade.po.Friend" >
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="userId" property="faId" jdbcType="BIGINT" />
+        <result column="user_id" property="faId" jdbcType="BIGINT" />
         <result column="friend_id" property="ftsId" jdbcType="BIGINT" />
         <result column="user_mark" property="faMark" jdbcType="VARCHAR" />
         <result column="friend_mark" property="ftsMark" jdbcType="VARCHAR" />
@@ -11,13 +11,22 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-    id, user_Id, friend_id, user_mark, friend_mark, add_time
+    id, user_id, friend_id, user_mark, friend_mark, add_time
     </sql>
 
-    <select id="selectFriend" resultMap="BaseResultMap" resultType="Friend">
+    <select id="selectFriend" resultMap="BaseResultMap" parameterType="Friend">
         select
         <include refid="Base_Column_List"/>
         from friend where user_id = #{faId,jdbcType=BIGINT} and friend_id = #{ftsId,jdbcType=BIGINT}
     </select>
 
+    <select id="selectFriendList" resultMap="BaseResultMap" parameterType="long">
+        select
+        <include refid="Base_Column_List"></include>
+        from friend where user_id = #{faId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCondition" resultType="pers.kingvi.foreigntrade.po.ForeignTradeSaleman" parameterType="string">
+        select * from foreign_trade_saleman where account = #{condition, jdbcType=VARCHAR} or name like concat('%',#{condition,jdbcType=VARCHAR},'%')
+    </select>
 </mapper>

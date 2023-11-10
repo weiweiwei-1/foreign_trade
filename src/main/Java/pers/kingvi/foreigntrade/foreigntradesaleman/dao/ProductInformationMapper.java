@@ -25,13 +25,13 @@ public interface ProductInformationMapper {
 
     int insertSelective(ProductInformation record);   //选择插入记录
 
-    int selectAllCount();
+    int selectAllCount();     //查询总记录条数
 
     List<ProductInformation> selectByExampleWithRowbounds(ProductInformationExample example, RowBounds rowBounds);
 
     List<ProductInformation> selectByExample(ProductInformationExample example);
 
-    ProductInformation selectByPrimaryKey(Integer id);    //根据主键id 查询货物信息
+    ProductInformation selectByPrimaryKey(Integer id);    //根据主键id查询货物信息
 
 //    ProductInformation selectByPrimaryKeyAndFtsId(@Param("id") Integer id, @Param("ftsId") Long ftsId);   //根据id和货代id查询具体的货物记录
 
@@ -49,13 +49,15 @@ public interface ProductInformationMapper {
 
     int selectCountByCriteria(@Param("pi") ProductInformation pi);     //根据条件查询页面结果的所有记录数量
 
+    List<ProductInformation> selectByPidList(@Param("pIdList") List<Long> pIdList);
+
     List<ProductInformation> selectFullIndex(@Param("text") String text, @Param("start") Integer start, @Param("end") Integer end);    //全文索引某一页结果
 
     int selectCountByFullIndex(@Param("text") String text);    //全文索引某一页结果数量
 
     List<ProductInformation> selectByList(@Param("idList") List<Integer> idList, @Param("start") Integer start, @Param("end") Integer end);   //系统默认页面，随机选择id进行查询，返回对应页数的记录
 
-    List<ProductInformation> selectByNewestRecord(@Param("start") Integer start, @Param("end") Integer end);
+    List<ProductInformation> selectByNewestRecord(@Param("start") Integer start, @Param("end") Integer end);  //查询最新记录
 
     int updateByExampleSelective(@Param("record") ProductInformation record, @Param("example") ProductInformationExample example);
 

@@ -135,10 +135,16 @@
             <version>1.2</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.30</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
         </dependency>
 
         <dependency>
@@ -335,7 +341,6 @@
             <scope>provided</scope>
         </dependency>
 
-
         <!--邮箱发送需要的jar包-->
         <dependency>
             <groupId>javax.activation</groupId>
@@ -378,7 +383,6 @@
 
 
     <build>
-        <finalName>first_web</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
@@ -433,5 +437,6 @@
                 <filtering>false</filtering>
             </resource>
         </resources>
+        <finalName>foreign_trade</finalName>
     </build>
 </project>

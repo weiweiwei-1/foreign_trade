@@ -48,6 +48,16 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
     }
 
     @Override
+    public int selectAllCount() {
+        return freightAgencyMapper.selectAllCount();
+    }
+
+    @Override
+    public List<FreightAgency> selectAll() {
+        return freightAgencyMapper.selectAll();
+    }
+
+    @Override
     public int updateByPrimaryKey(FaUpdateVo faUpdateVo) {
         return freightAgencyMapper.updateByPrimaryKey(faUpdateVo);
     }
@@ -70,6 +80,11 @@ public class FreightAgencyServiceImpl implements FreightAgencyService {
     @Override
     public List<FreightAgency> selectByFaIdList(List<Long> faIdList) {
         return freightAgencyMapper.selectByFaIdList(faIdList);
+    }
+
+    @Override
+    public List<Long> selectByIdList() {
+        return freightAgencyMapper.selectByIdList();
     }
 
     @Override

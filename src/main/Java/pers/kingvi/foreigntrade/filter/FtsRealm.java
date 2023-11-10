@@ -3,16 +3,23 @@ package pers.kingvi.foreigntrade.filter;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pers.kingvi.foreigntrade.admin.service.UserService;
+import pers.kingvi.foreigntrade.config.AccountNotMatchException;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ForeignTradeSalemanService;
 import pers.kingvi.foreigntrade.po.ForeignTradeSaleman;
+import pers.kingvi.foreigntrade.po.User;
 import pers.kingvi.foreigntrade.util.ResultInfo;
 
 @Component
 public class FtsRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ForeignTradeSalemanService foreignTradeSalemanService;
@@ -28,8 +35,11 @@ public class FtsRealm extends AuthorizingRealm {
         String account = (String)token.getPrincipal();
         String password = String.valueOf(token.getPassword());
         ForeignTradeSaleman fts = foreignTradeSalemanService.selectByAccount(account);
-        if (fts == null) {
+        User user = userService.selectByUserAccount(account);
+        if (fts == null && user == null) {
             throw new UnknownAccountException(ResultInfo.EMAIL_NOT_EXIST);
+        } else if (fts == null) {
+            throw new AccountNotMatchException(ResultInfo.FA_LOGIN_ACCOUNT_REJECT);
         } else if (!password.equals(fts.getPassword())) {
             throw new IncorrectCredentialsException(ResultInfo.PASSWORD_ERROR);
         }

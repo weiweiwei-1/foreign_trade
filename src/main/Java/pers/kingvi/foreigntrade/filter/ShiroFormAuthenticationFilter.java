@@ -35,12 +35,6 @@ public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue){
-        /*if (request instanceof HttpServletRequest) {
-            if (((HttpServletRequest) request).getMethod().toUpperCase().equals("OPTIONS")) {
-                return true;
-            }
-        }*/
-
         if (super.isAccessAllowed(request, response, mappedValue)) {
             String[] roles =  (String[])mappedValue;
             if (roles == null || roles.length == 0) {
@@ -58,15 +52,16 @@ public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
                 HttpServletResponse resp = (HttpServletResponse) response;
                 setHeader(httpRequest, httpResponse);
                 AuthResult authResult = new AuthResult();
-                //如果因为fts角色或admin被拒绝访问，则提示登录fa账号
+                //如果因为fa角色或admin被拒绝访问，则提示登录fts账号
                 if (subject.hasRole("fts")) {
                     authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "fts", FtsUtils.getUserVo().getName(), "intercept");
                 }
                 //如果因为fts角色或admin被拒绝访问，则提示登录fa账号
                 else if (subject.hasRole("fa")) {
                     authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "fa", FaUtils.getUserVo().getName(), "intercept");
+                //如果因为fts或fa角色被拒绝访问，则提示登录admin账号
                 } else if (subject.hasRole("admin")){
-                    authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "admin", "weiweiwei");
+                    authResult = new AuthResult(ResultCode.AUTH_SUCCESS, "admin", "weiweiwei", "intercept");
                 }
                 PrintWriter out = resp.getWriter();
                 Gson gson = new Gson();
@@ -87,8 +82,8 @@ public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
         HttpServletResponse resp = (HttpServletResponse) response;
         setHeader(httpRequest, httpResponse);
         PrintWriter out = resp.getWriter();
-        //isAccessAllowed未返回，则说明用户未登录，返回未登录状态信息
-        AuthResult ar = new AuthResult(ResultCode.AUTH_FAIL, "", "");
+        //isAccessAllowed未返回，则说明用户未登录，返回未登录状态信息, interceptType为fail，则需要拦截，窗口提示
+        AuthResult ar = new AuthResult(ResultCode.AUTH_FAIL, "", "", "fail");
         Gson gson = new Gson();
         String json = gson.toJson(ar);
         out.write(json);

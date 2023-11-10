@@ -31,7 +31,7 @@ public interface MessageMapper {
 
     List<Message> selectLastAmount(@Param("message") Message message, @Param("amount") Integer amount);    //获取最后amount条消息记录
 
-    List<UnReadMessageVo> selectUnReadMessage(Long userId);   //主要获取未读消息的个数
+    List<UnReadMessageVo> selectUnReadMessage(Long userId);  //主要获取未读消息的个数
 
     List<ReadAndUnReadMessageVo> selectReadAndUnReadMessage(Long userId);    //消息列表显示详情
 

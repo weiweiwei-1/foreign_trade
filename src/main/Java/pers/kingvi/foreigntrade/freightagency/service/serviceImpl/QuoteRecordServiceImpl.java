@@ -12,6 +12,7 @@ import pers.kingvi.foreigntrade.po.FreightAgency;
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.QuoteRecord;
 import pers.kingvi.foreigntrade.vo.fa.FaQuoteRecordVo;
+import pers.kingvi.foreigntrade.vo.fa.QuoteProductVo;
 import pers.kingvi.foreigntrade.vo.fa.QuoteRecordProductVo;
 
 import java.util.ArrayList;
@@ -80,28 +81,32 @@ public class QuoteRecordServiceImpl implements QuoteRecordService {
         return quoteRecordMapper.selectByProductIdAndFaId(quoteRecord);
     }
 
-   /* @Override
-    public long selectFtsIdByFaId(Long faId) {
-        return quoteRecordMapper.selectFtsIdByFaId(faId);
-    }*/
-
     @Override
     public List<FaQuoteRecordVo> selectByFaId(Long faId) {
-        List<ProductInformation> productInformationList = quoteRecordMapper.selectByFaId(faId);
-        List<FaQuoteRecordVo> faQuoteRecordVoList = new ArrayList<>();
-        if (productInformationList != null) {
-            Iterator<ProductInformation> iterator = productInformationList.iterator();
-            /*for (ProductInformation productInformation : productInformationList) {
-                faQuoteRecordVoList.add(new FaQuoteRecordVo(productInformation.getPhoto(), productInformation.getProductName(), productInformation.getOrigin(), productInformation.getDestinationCountry(), productInformation.getSendTime(), productInformation.getWeight(), productInformation.getRealOrder()));
+        List<Long> productIdList = quoteRecordMapper.selectByPidList(faId);
+        if (productIdList.size() != 0) {
+            List<ProductInformation> productInformationList = productInformationMapper.selectByPidList(productIdList);
+            List<FaQuoteRecordVo> faQuoteRecordVoList = new ArrayList<>();
+            if (productInformationList.size() != 0) {
+                Iterator<ProductInformation> iterator = productInformationList.iterator();
+                while (iterator.hasNext()) {
+                    ProductInformation productInformation = iterator.next();
+                    faQuoteRecordVoList.add(new FaQuoteRecordVo(productInformation.getId(), productInformation.getFtsId(),productInformation.getPhoto(), productInformation.getProductName(), productInformation.getOrigin(), productInformation.getDestinationCountry(), productInformation.getSendTime(), productInformation.getWeight(), productInformation.getRealOrder()));
+                }
                 return faQuoteRecordVoList;
-            }*/
-            while (iterator.hasNext()) {
-                ProductInformation productInformation = iterator.next();
-                faQuoteRecordVoList.add(new FaQuoteRecordVo(productInformation.getId(), productInformation.getPhoto(), productInformation.getProductName(), productInformation.getOrigin(), productInformation.getDestinationCountry(), productInformation.getSendTime(), productInformation.getWeight(), productInformation.getRealOrder()));
             }
-            return faQuoteRecordVoList;
         }
         return null;
+    }
+
+    @Override
+    public List<QuoteRecord> selectByProductId(Integer productId) {
+        return quoteRecordMapper.selectByProductId(productId);
+    }
+
+    @Override
+    public List<QuoteProductVo> selectQuoteListByFtsId(Long faId, Long ftsId) {
+        return quoteRecordMapper.selectQuoteListByFtsId(faId, ftsId);
     }
 
     @Override

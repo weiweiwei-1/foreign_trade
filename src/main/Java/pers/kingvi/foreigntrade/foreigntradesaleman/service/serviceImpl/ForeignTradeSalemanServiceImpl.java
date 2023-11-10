@@ -37,8 +37,23 @@ public class ForeignTradeSalemanServiceImpl implements ForeignTradeSalemanServic
     }
 
     @Override
+    public List<Long> selectByIdList() {
+        return foreignTradeSalemanMapper.selectByIdList();
+    }
+
+    @Override
+    public List<ForeignTradeSaleman> selectAll() {
+        return foreignTradeSalemanMapper.selectAllUser();
+    }
+
+    @Override
     public ForeignTradeSaleman selectByAccount(String account) {
         return foreignTradeSalemanMapper.selectByAccount(account);
+    }
+
+    @Override
+    public int selectAllCount() {
+        return foreignTradeSalemanMapper.selectAllCount();
     }
 
     @Override

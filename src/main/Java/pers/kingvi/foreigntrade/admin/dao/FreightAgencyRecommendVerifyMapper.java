@@ -26,9 +26,13 @@ public interface FreightAgencyRecommendVerifyMapper {
 
     List<FreightAgencyRecommendVerify> selectByExample(FreightAgencyRecommendVerifyExample example);
 
+    List<FreightAgencyRecommendVerify> selectAll();      //查询待审核的所有优惠活动记录
+
     FreightAgencyRecommendVerify selectByPrimaryKey(Integer id);   //根据主键查询
 
     List<FreightAgencyRecommendVerify> selectByFaId(Long faId);       //根据货代id查询
+
+    FreightAgencyRecommendVerify selectByFaIdSingle(Long faId);
 
     int selectCountByFaId(Long faId);      //根据外贸id查询发布需求数量
 
@@ -51,6 +55,8 @@ public interface FreightAgencyRecommendVerifyMapper {
     int updateByExample(@Param("record") FreightAgencyRecommendVerify record, @Param("example") FreightAgencyRecommendVerifyExample example);
 
     int updateByPrimaryKeySelective(FreightAgencyRecommendVerify record);       //选择更新
+
+    int updateByFaIdSelective(FreightAgencyRecommendVerify record);
 
     int updateByPrimaryKey(FreightAgencyRecommendVerify record);          //直接更新
 }

@@ -11,6 +11,7 @@ import pers.kingvi.foreigntrade.foreigntradesaleman.service.ProductInformationSe
 import pers.kingvi.foreigntrade.po.ProductInformation;
 import pers.kingvi.foreigntrade.po.ProductInformationVerify;
 import pers.kingvi.foreigntrade.po.QuoteRecord;
+import pers.kingvi.foreigntrade.util.PageSet;
 import pers.kingvi.foreigntrade.vo.PageBeanVo;
 
 import java.util.*;
@@ -115,7 +116,10 @@ public class ProductInformationServiceImpl implements ProductInformationService 
     @Override
     public PageBeanVo<ProductInformation> selectByFullIndex(java.lang.String text, Integer currentPage, Integer perPageRecord) {
         int count = productInformationMapper.selectCountByFullIndex(text);
-        int start = (currentPage-1)*perPageRecord;
+        if (count > 0 && count % perPageRecord == 0 && currentPage > count / perPageRecord || count > 0 && count % perPageRecord != 0 && currentPage > count / perPageRecord + 1) {
+            return null;
+        }
+        int start = (currentPage - 1) * perPageRecord;
         int end = perPageRecord;
         List<ProductInformation> productInformationList = productInformationMapper.selectFullIndex(text, start, end);
         PageBeanVo<ProductInformation> pageBeanVo = new PageBeanVo<>();
@@ -139,7 +143,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
         //总记录数
         int totalCount = productInformationMapper.selectAllCount();
         PageBeanVo<ProductInformation> pageBeanVo = new PageBeanVo<>();
-        pageBeanVo.setPageCount(40, totalCount);
+        pageBeanVo.setPageCount(perPageRecord, totalCount);
         pageBeanVo.setCurrentPage(currentPage);
         if (currentPage > pageBeanVo.getPageCount()) {
             return null;
@@ -197,13 +201,13 @@ public class ProductInformationServiceImpl implements ProductInformationService 
                     res = productInformationList.subList(start, pageEnd);
                 }
                 pageBeanVo.setBeanList(res);
+//                pageBeanVo.setPageCount(perPageRecord, totalCount);
                 //返回页面数据
                 return pageBeanVo;
             }
         }
 
     }
-
 
     @Override
     public ProductInformation selectByPrimaryKey(Integer productId) {

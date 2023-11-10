@@ -1,8 +1,16 @@
 package pers.kingvi.foreigntrade.po;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import java.sql.Timestamp;
+
 public class FreightAgencyRecommendVerify {
     private Integer id;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId
     private Long faId;
 
     private String faName;
@@ -27,9 +35,47 @@ public class FreightAgencyRecommendVerify {
 
     private String email;
 
-    private String sendTime;
-
     private String verifyStatus;
+
+    private Timestamp sendTime;
+
+    private String time;
+
+    public FreightAgencyRecommendVerify() {
+
+    }
+
+    public FreightAgencyRecommendVerify(Long faId, String faName, String faCompany, String companyLink, String faCity, String keyWords, String mainBusiness, String description, String activityPhoto, String phone, String weChat, String email, Timestamp sendTime) {
+        this.faId = faId;
+        this.faName = faName;
+        this.faCompany = faCompany;
+        this.companyLink = companyLink;
+        this.faCity = faCity;
+        this.keyWords = keyWords;
+        this.mainBusiness = mainBusiness;
+        this.description = description;
+        this.activityPhoto = activityPhoto;
+        this.phone = phone;
+        this.weChat = weChat;
+        this.email = email;
+        this.sendTime = sendTime;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Timestamp getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(Timestamp sendTime) {
+        this.sendTime = sendTime;
+    }
 
     public Integer getId() {
         return id;
@@ -133,14 +179,6 @@ public class FreightAgencyRecommendVerify {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
-    }
-
-    public String getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(String sendTime) {
-        this.sendTime = sendTime;
     }
 
     public String getVerifyStatus() {

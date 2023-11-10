@@ -13,6 +13,12 @@ public interface ForeignTradeSalemanService {
 
     ForeignTradeSaleman selectByAccount(String account);   //根据账号查询信息
 
+    List<Long> selectByIdList();
+
+    List<ForeignTradeSaleman> selectAll();
+
+    int selectAllCount();   //查询所有注册的外贸员数量
+
     int updateByPrimaryKey(FtsUpdateVo ftsUpdateVo);       //直接更新
 
     int updateByPrimaryKeySelective(ForeignTradeSaleman fts);      //选择更新

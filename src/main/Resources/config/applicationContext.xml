@@ -89,6 +89,7 @@
             <tx:method name="decrease*" propagation="REQUIRED"></tx:method>
             <tx:method name="permit*" propagation="REQUIRED"></tx:method>
             <tx:method name="reject*" propagation="REQUIRED"></tx:method>
+            <tx:method name="get*" propagation="REQUIRED"></tx:method>
             <tx:method name="send*" propagation="REQUIRED"></tx:method>
             <tx:method name="**" propagation="REQUIRED"></tx:method>
         </tx:attributes>

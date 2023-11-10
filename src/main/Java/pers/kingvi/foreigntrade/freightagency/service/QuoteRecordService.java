@@ -2,6 +2,7 @@ package pers.kingvi.foreigntrade.freightagency.service;
 
 import pers.kingvi.foreigntrade.po.QuoteRecord;
 import pers.kingvi.foreigntrade.vo.fa.FaQuoteRecordVo;
+import pers.kingvi.foreigntrade.vo.fa.QuoteProductVo;
 import pers.kingvi.foreigntrade.vo.fa.QuoteRecordProductVo;
 
 import java.util.List;
@@ -14,14 +15,13 @@ public interface QuoteRecordService {
 
     List<FaQuoteRecordVo> selectByFaId(Long faId);
 
+    List<QuoteRecord> selectByProductId(Integer productId);
+
+    List<QuoteProductVo> selectQuoteListByFtsId(Long faId, Long ftsId);
+
     QuoteRecord selectByPrimaryKey(Integer faId);
 
     QuoteRecord selectByProductIdAndFaId(QuoteRecord quoteRecord);
-
-//    long selectFtsIdByFaId(Long faId);
-
-
-//    QuoteRecordProductVo selectByFaId(Integer faId);
 
     int deleteQuoteRecordById(Integer id, Integer faId);
 

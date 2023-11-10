@@ -9,11 +9,11 @@ import pers.kingvi.foreigntrade.vo.UserDetailVo;
 import java.util.List;
 
 public interface FriendService {
-    Friend selectByPrimaryKey(Integer id);        //根据主键查询好友信息
+    Friend selectByPrimaryKey(Integer id);       //根据主键查询好友信息
 
     Friend selectFriend(Friend friend);
 
-    List<FriendVo> selectById(Long id);       //好友列表显示
+    List<FriendVo> selectById(Long id);      //好友列表显示
 
     ForeignTradeSaleman showFtsDetailByFriendId(Long ftsId);      //判断类型，如果是货代，使用该方法，显示外贸员的信息
 
@@ -28,5 +28,7 @@ public interface FriendService {
     int updateFaMark(Friend friend);        //从外贸的角度出发，修改修改好友货代的备注，如果判断自身是外贸类型，
 
     int deleteFriend(Friend friend);       //判断自身类型，如果是外贸员，删除货代,如果是货代，删除外贸员。
+
+    int insertFriend(Friend friend);
 
 }

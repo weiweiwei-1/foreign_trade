@@ -1,5 +1,6 @@
 package pers.kingvi.foreigntrade.freightagency.api;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -8,20 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
 import pers.kingvi.foreigntrade.admin.service.FriendApplyService;
 import pers.kingvi.foreigntrade.admin.service.FriendService;
+import pers.kingvi.foreigntrade.admin.service.MessageService;
+import pers.kingvi.foreigntrade.config.GlobalControlUtils;
+import pers.kingvi.foreigntrade.config.WebSocketUtils;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ForeignTradeSalemanService;
 import pers.kingvi.foreigntrade.foreigntradesaleman.service.ProductInformationService;
+import pers.kingvi.foreigntrade.freightagency.service.FreightAgencyService;
 import pers.kingvi.foreigntrade.freightagency.service.QuoteRecordService;
 import pers.kingvi.foreigntrade.po.*;
 import pers.kingvi.foreigntrade.util.Result;
 import pers.kingvi.foreigntrade.util.fa.FaUtils;
+import pers.kingvi.foreigntrade.util.fts.FtsUtils;
+import pers.kingvi.foreigntrade.vo.ReadAndUnReadMessageVoImpl;
 import pers.kingvi.foreigntrade.vo.error.fa.QuoteRecordError;
 import pers.kingvi.foreigntrade.vo.fa.FaQuoteProductVo;
 import pers.kingvi.foreigntrade.vo.fa.FaQuoteRecordVo;
 import pers.kingvi.foreigntrade.vo.fa.FaQuoteVo;
+import pers.kingvi.foreigntrade.vo.fa.QuoteProductVo;
 import pers.kingvi.foreigntrade.vo.fts.QuoteFtsInfoVo;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -37,10 +49,10 @@ public class FaQuoteController {
     private ForeignTradeSalemanService foreignTradeSalemanService;
 
     @Autowired
-    private FriendService friendService;
+    private MessageService messageService;
 
     @Autowired
-    private FriendApplyService friendApplyService;
+    private FreightAgencyService freightAgencyService;
 
     @RequestMapping(value = "/send")
     @ResponseBody
@@ -49,26 +61,29 @@ public class FaQuoteController {
                             @RequestParam(value = "price") String price,
                             @RequestParam(value = "arrangeTime") String arrangeTime,
                             @RequestParam(value = "deliverTime") String deliverTime,
-                            @RequestParam(value = "reMark") String reMark) {
+                            @RequestParam(value = "reMark") String reMark) throws IOException {
+        if (!GlobalControlUtils.isQuoteStatus()) {
+            return new Result(-2, "报价功能已关闭，请联系管理员开启");
+        }
         String productIdError = null;
         String shippingWayError = null;
         String priceError = null;
         String arrangeTimeError = null;
         String deliverTimeError = null;
         String reMarkError = null;
-        if (!NumberUtils.isDigits(productId) || Integer.valueOf(productId) <= 0) {
+        if (!NumberUtils.isDigits(productId) || Integer.parseInt(productId) <= 0) {
             productIdError = "1";
         }
         if (!shippingWay.equals("海运") && !shippingWay.equals("空运") && !shippingWay.equals("陆运")) {
             shippingWayError = "1";
         }
-        if (!NumberUtils.isDigits(price) || Integer.valueOf(price) < 0) {
+        if (!NumberUtils.isDigits(price) || Integer.parseInt(price) < 0) {
             priceError = "1";
         }
-        if (!NumberUtils.isDigits(arrangeTime) || 15 < Integer.valueOf(arrangeTime) || Integer.valueOf(arrangeTime) < 0) {
+        if (!NumberUtils.isDigits(arrangeTime) || 15 < Integer.parseInt(arrangeTime) || Integer.parseInt(arrangeTime) < 0) {
             arrangeTimeError = "1";
         }
-        if (!NumberUtils.isDigits(arrangeTime) || 30 < Integer.valueOf(arrangeTime) || Integer.valueOf(arrangeTime) < 0) {
+        if (!NumberUtils.isDigits(arrangeTime) || 30 < Integer.parseInt(arrangeTime) || Integer.parseInt(arrangeTime) < 0) {
             deliverTimeError = "1";
         }
         if (reMark.trim().length() > 80) {
@@ -80,7 +95,6 @@ public class FaQuoteController {
         }
         try {
             Long faId = FaUtils.getUserVo().getId();
-            System.out.println(FaUtils.getUserVo());
             QuoteRecord quoteRecord = new QuoteRecord(Integer.valueOf(productId), faId, shippingWay.trim(), Integer.valueOf(price), arrangeTime, deliverTime, reMark.trim());
             int quoteResult = quoteRecordService.insertSelective(quoteRecord, faId);
             switch (quoteResult) {
@@ -88,7 +102,30 @@ public class FaQuoteController {
                 case -2: return new Result<>().fail("重复报价");
                 case -1: return new Result<>().fail("产品不存在");
                 case 0: return new Result<>().fail("产品已报完");
-                default: return Result.success;
+                default:
+                    ProductInformation productInformation = productInformationService.selectByPrimaryKey(Integer.valueOf(productId));
+                    Long ftsId = productInformation.getFtsId();
+                    String productName = productInformation.getProductName();
+                    String msgContent = "我刚给您的货物：" + productName + "，进行了运费报价，请点击左上角的三个点或左侧的产品列表查看详情吧";
+                    Message message = new Message(faId, ftsId, msgContent);
+                    message.setMessageType("addFriend");
+                    Date date = new Date();//获取当前的日期
+                    String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);//设置日期格式
+                    message.setSendTime(nowTime);
+                    message.setStatus("0");
+                    messageService.insertFaMessage(message);
+                    if (WebSocketUtils.hasConnection(ftsId)) {
+                        ReadAndUnReadMessageVoImpl readAndUnReadMessageVo = new ReadAndUnReadMessageVoImpl();
+                        readAndUnReadMessageVo.setMessageType ("addFriend");
+                        readAndUnReadMessageVo.setFriendId(faId);
+                        readAndUnReadMessageVo.setFriendMark(FaUtils.getUserVo().getName());
+                        readAndUnReadMessageVo.setFriendPhoto(FaUtils.getUserVo().getPhoto());
+                        readAndUnReadMessageVo.setUnReadMessageCount(1);
+                        readAndUnReadMessageVo.setContent(message.getContent());
+                        readAndUnReadMessageVo.setSendTime(nowTime);
+                        WebSocketUtils.get(ftsId).sendMessage(new TextMessage(JSONObject.toJSONString(readAndUnReadMessageVo)));
+                    }
+                    return Result.success;
             }
         } catch (DataAccessException e) {
             System.out.println(e.toString());
@@ -102,7 +139,24 @@ public class FaQuoteController {
         Long faId = FaUtils.getUserVo().getId();
         try {
             List<FaQuoteRecordVo> faQuoteRecordVoList = quoteRecordService.selectByFaId(faId);
-            return new Result<>().success(faQuoteRecordVoList);
+            if (faQuoteRecordVoList != null) {
+                return new Result<>().success(faQuoteRecordVoList);
+            } else {
+                return new Result<>().success(new FaQuoteRecordVo());
+            }
+        } catch (Exception e) {
+//            System.out.println("出现的错误是：" + e.toString());
+            return new Result<>().fail("dataBase query fail");
+        }
+    }
+
+    @RequestMapping(value = "/list/ftsid")
+    @ResponseBody
+    public Result getQuoteProductListByFtsId(Long ftsId) {
+        Long faId = FaUtils.getUserVo().getId();
+        try {
+            List<QuoteProductVo> quoteProductVoList = quoteRecordService.selectQuoteListByFtsId(faId, ftsId);
+            return new Result<>().success(quoteProductVoList);
         } catch (Exception e) {
             return new Result<>().fail("dataBase query fail");
         }
@@ -127,7 +181,7 @@ public class FaQuoteController {
 
     @RequestMapping(value = "/sent", method = {RequestMethod.GET})
     @ResponseBody
-    public Result getSendedQuote(Integer productId) {
+    public Result getSendQuote(Integer productId) {
         Long faId = FaUtils.getUserVo().getId();
         QuoteRecord quoteRecord = new QuoteRecord(productId, faId);
         try {
@@ -141,33 +195,49 @@ public class FaQuoteController {
 
     }
 
-    @RequestMapping(value = "/fts/info", method = {RequestMethod.GET})
+    @RequestMapping(value = "/fts/info/pid", method = {RequestMethod.GET})
     @ResponseBody
-    public Result getFtsInfo(Integer productId) {
+    public Result getFtsInfoByPid(Integer productId) {
         ProductInformation productInformation = productInformationService.selectByPrimaryKey(productId);
         if (productInformation != null) {
             ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanService.selectByPrimaryKey(productInformation.getFtsId());
             QuoteFtsInfoVo quoteFtsInfoVo = new QuoteFtsInfoVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getName(), foreignTradeSaleman.getPhoto(), foreignTradeSaleman.getCity(), foreignTradeSaleman.getCompany(), foreignTradeSaleman.getStoreLink(), foreignTradeSaleman.getIndustry(), foreignTradeSaleman.getMainProduct());
             return new Result<>().success(quoteFtsInfoVo);
         }
-        return new Result<>().fail("没有相关信息");
+        return new Result<>().fail("请输入正确信息");
     }
 
-
-    @RequestMapping(value = "/fts/status/friend", method = {RequestMethod.GET})
+    @RequestMapping(value = "/fts/info", method = {RequestMethod.GET})
     @ResponseBody
-    public Result getFriendStatus(Long ftsId) {
-        Long faId = FaUtils.getUserVo().getId();
-        Friend friend = new Friend(faId, ftsId);
-        Friend friendRes = friendService.selectFriend(friend);
-        FriendApply friendApply = new FriendApply(friend.getFtsId(), friend.getFaId());
-        friendApply = friendApplyService.selectFriendApply(friendApply);
-        if (friendRes != null || friendApply != null) {
-            return new Result<>().success(1);
-        } else {
-            return new Result<>().success(0);
+    public Result getFtsInfoByFtsId(Long ftsId) {
+        ForeignTradeSaleman foreignTradeSaleman = foreignTradeSalemanService.selectByPrimaryKey(ftsId);
+        if (foreignTradeSaleman != null) {
+            QuoteFtsInfoVo quoteFtsInfoVo = new QuoteFtsInfoVo(foreignTradeSaleman.getId(), foreignTradeSaleman.getName(), foreignTradeSaleman.getPhoto(), foreignTradeSaleman.getCity(), foreignTradeSaleman.getCompany(), foreignTradeSaleman.getStoreLink(), foreignTradeSaleman.getIndustry(), foreignTradeSaleman.getMainProduct());
+            return new Result<>().success(quoteFtsInfoVo);
+        }
+        return new Result<>().fail("请输入正确信息");
+    }
+
+    @RequestMapping(value = "/count", method = {RequestMethod.GET})
+    @ResponseBody
+    public int getQuoteCount() {
+        FreightAgency freightAgency;
+        try {
+            freightAgency = FaUtils.getUserVo();
+        } catch (Exception e) {
+//           此时为fts登录状态，返回-2
+            return -2;
+        }
+        if (freightAgency == null) {
+//            未登录状态
+            return -2;
+        }
+        try {
+            freightAgency = freightAgencyService.selectByPrimaryKey(freightAgency.getId());
+            return freightAgency.getSendQuoteCount();
+        } catch (Exception e) {
+            return -1;
         }
     }
-
 
 }

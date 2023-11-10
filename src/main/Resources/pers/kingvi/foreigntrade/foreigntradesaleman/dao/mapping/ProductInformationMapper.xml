@@ -208,6 +208,21 @@
             </if>
         </where>
     </select>
+
+  <select id="selectByPidList" parameterType="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from product_information
+    where id in
+    <foreach collection="pIdList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    ORDER BY field(id,
+    <foreach collection="pIdList" item="item" index="index" separator="," close=")" >
+      ${item}
+    </foreach>
+  </select>
+
     <select id="selectFullIndex" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -222,7 +237,7 @@
         </where>
         order by id desc limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
     </select>
-    <select id="selectCountByFullIndex" resultMap="BaseResultMap">
+    <select id="selectCountByFullIndex" parameterType="string" resultType="integer">
         select count(*)
         from product_information
         <where>
@@ -255,7 +270,7 @@
         select
         <include refid="Base_Column_List"/>
         from product_information
-        where fts_id = #{ftsId,jdbcType=BIGINT}
+        where fts_id = #{ftsId,jdbcType=BIGINT} order by id desc
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from product_information
@@ -594,7 +609,7 @@
   </update>
   <update id="decreaseQuoteCount" parameterType="integer">
     update product_information set quote_count = quote_count - 1
-    where id = id and quote_count >= 1
+    where id = #{id,jdbcType=INTEGER} and quote_count >= 1
   </update>
   <select resultMap="BaseResultMap" parameterType="pers.kingvi.foreigntrade.po.ProductInformationExample" id="selectByExampleWithRowbounds" >
     select

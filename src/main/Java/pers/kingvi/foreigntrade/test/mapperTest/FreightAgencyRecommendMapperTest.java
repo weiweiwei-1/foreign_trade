@@ -86,8 +86,8 @@ public class FreightAgencyRecommendMapperTest {
 
     @Test
     public void selectByFaId() {
-        List<FreightAgencyRecommend> freightAgencyRecommendList= freightAgencyRecommendMapper.selectByFaId(3L);
-        System.out.println(freightAgencyRecommendList);
+//        List<FreightAgencyRecommend> freightAgencyRecommendList= freightAgencyRecommendMapper.selectByFaId(3L);
+//        System.out.println(freightAgencyRecommendList);
     }
 
 

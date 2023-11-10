@@ -13,6 +13,8 @@ public interface FaMessageService {
 
     Long getFtsIdByProductId(Integer productId);
 
+    int getUnReadMsgCount(Long receiverId);
+
     ForeignTradeSaleman getFtsInfoByProductId(Integer productId);
 
     List<ReadAndUnReadMessageVo> getMessageList(Long receiverId);

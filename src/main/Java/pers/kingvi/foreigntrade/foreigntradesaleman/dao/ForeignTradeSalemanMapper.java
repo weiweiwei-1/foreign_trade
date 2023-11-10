@@ -13,6 +13,8 @@ public interface ForeignTradeSalemanMapper {
 
     int deleteByExample(ForeignTradeSalemanExample example);
 
+    List<Long> selectByIdList();
+
     int deleteByPrimaryKey(Long id);   //主键删除
 
     int insert(ForeignTradeSaleman record);    //直接插入
@@ -24,6 +26,8 @@ public interface ForeignTradeSalemanMapper {
     List<ForeignTradeSaleman> selectByExample(ForeignTradeSalemanExample example);
 
     ForeignTradeSaleman selectByPrimaryKey(Long id);     //主键查询
+
+    List<ForeignTradeSaleman> selectAllUser();
 
     List<ForeignTradeSaleman> selectById(Long id);
 
@@ -44,6 +48,8 @@ public interface ForeignTradeSalemanMapper {
     List<ForeignTradeSaleman> selectByList(@Param("idList") List<Long> idList, @Param("start") Integer start, @Param("end") Integer end);   //随机选择某一页数量，系统随机匹配
 
     ForeignTradeSaleman selectByAccount(String account);    //通过账号精确搜索
+
+    int selectAllCount();
 
     ForeignTradeSaleman selectByName(String name);       //通过名字精确搜索
 
